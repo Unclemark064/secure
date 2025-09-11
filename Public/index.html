@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureBank - Modern Banking</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar" style="display: none;">
+        <div class="navbar-content">
+            <a href="index.html" class="navbar-brand">SecureBank</a>
+            <button class="hamburger" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="navbar-nav">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>SecureBank</h3>
+            <p>Welcome back!</p>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+            <a href="transactions.html"><i class="fas fa-exchange-alt"></i> Transactions</a>
+            <a href="cards.html"><i class="fas fa-credit-card"></i> Cards</a>
+            <a href="transfer.html"><i class="fas fa-paper-plane"></i> Transfer</a>
+            <a href="international-wire.html"><i class="fas fa-globe"></i> International Wire</a>
+            <a href="deposit.html"><i class="fas fa-plus-circle"></i> Deposit</a>
+            <a href="loan.html"><i class="fas fa-hand-holding-usd"></i> Loan</a>
+            <a href="tax-refund.html"><i class="fas fa-file-invoice-dollar"></i> IRS Tax Refund</a>
+            <a href="loan-history.html"><i class="fas fa-history"></i> Loan History</a>
+            <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+            <a href="support.html"><i class="fas fa-support"></i> Support Ticket</a>
+            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </nav>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="dashboard.html" class="mobile-nav-item">
+                <i class="fas fa-home"></i>
+                Home
+            </a>
+            <a href="transactions.html" class="mobile-nav-item">
+                <i class="fas fa-chart-bar"></i>
+                Stats
+            </a>
+            <a href="cards.html" class="mobile-nav-item">
+                <i class="fas fa-credit-card"></i>
+                Cards
+            </a>
+            <a href="profile.html" class="mobile-nav-item">
+                <i class="fas fa-user"></i>
+                Profile
+            </a>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div class="page active" id="login-page">
+        <div class="auth-container">
+            <div class="logo">
+                <h1><i class="fas fa-university"></i> SecureBank</h1>
+                <p>Modern Banking Solutions</p>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email/Username</label>
+                    <input type="email" id="login-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="register.html" style="color: var(--primary-blue);">Don't have an account? Register</a><br>
+                    <a href="#" onclick="showForgotPassword()" style="color: var(--secondary-teal); margin-top: 10px; display: inline-block;">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2FA Modal -->
+    <div class="modal" id="twofa-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-shield-alt"></i> Two-Factor Authentication</h3>
+                <button class="modal-close" onclick="closeModal('twofa-modal')">&times;</button>
+            </div>
+            <p>Enter the 6-digit code sent to your phone:</p>
+            <form id="twofa-form">
+                <div class="form-group">
+                    <input type="text" id="twofa-code" class="form-control" maxlength="6" placeholder="123456" style="text-align: center; font-size: 24px; letter-spacing: 10px;" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-check"></i> Verify Code
+                </button>
+            </form>
+            <p style="text-align: center; margin-top: 15px;">
+                <a href="#" onclick="resend2FA()">Didn't receive code? Resend</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', function() {
+            setupFormHandlers();
+        });
+
+        // Form Handlers
+        function setupFormHandlers() {
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                handleLogin();
+            });
+
+            document.getElementById('twofa-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                handle2FA();
+            });
+        }
+
+        // UI Functions
+        function handleLogin() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            if (!validateEmail(email)) {
+                document.getElementById('login-email').classList.add('invalid');
+                showAlert('Please enter a valid email address', 'danger');
+                return;
+            }
+
+            if (!password) {
+                document.getElementById('login-password').classList.add('invalid');
+                showAlert('Please enter a password', 'danger');
+                return;
+            }
+
+            show2FAModal();
+        }
+
+        function show2FAModal() {
+            document.getElementById('twofa-modal').classList.add('active');
+        }
+
+        function handle2FA() {
+            const code = document.getElementById('twofa-code').value;
+
+            if (code.length !== 6 || !/^\d+$/.test(code)) {
+                showAlert('Please enter a valid 6-digit code', 'danger');
+                return;
+            }
+
+            closeModal('twofa-modal');
+            document.getElementById('navbar').style.display = 'block';
+            window.location.href = 'dashboard.html';
+        }
+
+        function resend2FA() {
+            showAlert('Verification code resent', 'info');
+        }
+
+        function showForgotPassword() {
+            showAlert('Password reset link sent to your email', 'info');
+        }
+
+        // Navigation Functions
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        function logout() {
+            document.getElementById('navbar').style.display = 'none';
+            window.location.href = 'index.html';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Utility Functions
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : type === 'danger' ? 'times' : 'info'}-circle"></i> ${message}`;
+            
+            const container = document.querySelector('.auth-container');
+            if (container) {
+                container.insertBefore(alertDiv, container.firstChild);
+                setTimeout(() => {
+                    if (alertDiv.parentNode) {
+                        alertDiv.parentNode.removeChild(alertDiv);
+                    }
+                }, 3000);
+            }
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Input Validation
+        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('form-control')) {
+                e.target.classList.remove('invalid');
+            }
+        });
+
+        // Click outside modal to close
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+                closeSidebar();
+            }
+        });
+
+        // Responsive sidebar handling
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeSidebar();
+            }
+        });
+    </script>
+</body>
+</html>

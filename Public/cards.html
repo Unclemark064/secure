@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SecureBank - Cards</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/general.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="navbar-content">
+        <a href="index.html" class="navbar-brand">SecureBank</a>
+        <button class="hamburger" onclick="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="navbar-nav">
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="profile-avatar">
+          <i class="fas fa-user"></i>
+          <div class="avatar-upload">
+            <i class="fas fa-camera" style="font-size: 10px"></i>
+          </div>
+        </div>
+        <h2>John Doe</h2>
+        <p>Account: 48187344800</p>
+        <button class="btn-verify" onclick="verifyAccount()">Verify Account</button>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="transactions.html"><i class="fas fa-exchange-alt"></i> Transactions</a>
+        <a href="cards.html" class="active"><i class="fas fa-credit-card"></i> Cards</a>
+        <a href="transfer.html"><i class="fas fa-paper-plane"></i> Transfer</a>
+        <a href="international-wire.html"><i class="fas fa-globe"></i> International Wire</a>
+        <a href="deposit.html"><i class="fas fa-plus-circle"></i> Deposit</a>
+        <a href="loan.html"><i class="fas fa-hand-holding-usd"></i> Loan</a>
+        <a href="tax-refund.html"><i class="fas fa-file-invoice-dollar"></i> IRS Tax Refund</a>
+        <a href="loan-history.html"><i class="fas fa-history"></i> Loan History</a>
+        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+        <a href="support.html"><i class="fas fa-support"></i> Support Ticket</a>
+        <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+        <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </nav>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+    <!-- Mobile Banking Menu Modal -->
+    <div id="banking-menu" class="banking-menu">
+      <div class="banking-menu-content">
+        <div class="profile-header">
+          <div class="profile-avatar">
+            <i class="fas fa-user"></i>
+            <div class="avatar-upload">
+              <i class="fas fa-camera" style="font-size: 10px"></i>
+            </div>
+          </div>
+          <h2>John Doe</h2>
+          <p>Account: 48187344800</p>
+          <button class="btn-verify" onclick="verifyAccount()">Verify Account</button>
+        </div>
+        <h3>Banking Menu</h3>
+        <p>Select an option to continue</p>
+        <div class="menu-grid">
+          <a href="dashboard.html" class="menu-item"><i class="fas fa-home"></i><span>Dashboard</span></a>
+          <a href="transactions.html" class="menu-item"><i class="fas fa-exchange-alt"></i><span>Transactions</span></a>
+          <a href="cards.html" class="menu-item"><i class="fas fa-credit-card"></i><span>Cards</span></a>
+          <a href="transfer.html" class="menu-item"><i class="fas fa-paper-plane"></i><span>Transfer</span></a>
+          <a href="international-wire.html" class="menu-item"><i class="fas fa-globe"></i><span>International Wire</span></a>
+          <a href="deposit.html" class="menu-item"><i class="fas fa-plus-circle"></i><span>Deposit</span></a>
+          <a href="loan.html" class="menu-item"><i class="fas fa-hand-holding-usd"></i><span>Loan</span></a>
+          <a href="tax-refund.html" class="menu-item"><i class="fas fa-file-invoice-dollar"></i><span>IRS Tax Refund</span></a>
+          <a href="loan-history.html" class="menu-item"><i class="fas fa-history"></i><span>Loan History</span></a>
+          <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i><span>Settings</span></a>
+          <a href="support.html" class="menu-item"><i class="fas fa-support"></i><span>Support Ticket</span></a>
+          <a href="profile.html" class="menu-item"><i class="fas fa-user"></i><span>Profile</span></a>
+          <a href="#" class="menu-item logout-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+        </div>
+        <button class="close-btn" onclick="closeSidebar()"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+      <div class="mobile-nav-items">
+        <a href="dashboard.html" class="mobile-nav-item">
+          <i class="fas fa-home"></i>
+          Home
+        </a>
+        <a href="transactions.html" class="mobile-nav-item">
+          <i class="fas fa-chart-bar"></i>
+          Stats
+        </a>
+        <a href="cards.html" class="mobile-nav-item">
+          <i class="fas fa-credit-card"></i>
+          Cards
+        </a>
+        <a href="profile.html" class="mobile-nav-item">
+          <i class="fas fa-user"></i>
+          Profile
+        </a>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="container">
+        <div class="page-header">
+          <h1><i class="fas fa-credit-card"></i> My Cards</h1>
+          <p>Manage your credit and debit cards</p>
+        </div>
+
+        <div id="alert-container"></div>
+
+        <!-- Cards Section -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Active Cards</h2>
+            <button
+              class="btn btn-primary"
+              onclick="showModal('card-application-modal')"
+            >
+              <i class="fas fa-plus"></i> Apply for Card
+            </button>
+          </div>
+
+          <div class="cards-grid" id="cards-container">
+            <!-- Sample Cards -->
+            <div class="credit-card-container">
+              <div class="credit-card card-classic" onclick="showCardDetails(1)">
+                <div class="status-badge">Active</div>
+                <div class="card-front">
+                  <div class="card-header-info">
+                    <div class="card-type">Premium Credit</div>
+                    <div class="card-logo">
+                      <i class="fab fa-cc-visa"></i>
+                    </div>
+                  </div>
+                  <div class="card-number">•••• •••• •••• 1234</div>
+                  <div class="card-footer">
+                    <div class="cardholder-info">
+                      <h4>JOHN DOE</h4>
+                      <p>CARDHOLDER</p>
+                    </div>
+                    <div class="card-expiry">
+                      <p>EXPIRES</p>
+                      <h4>12/28</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-details">
+                <div class="detail-row">
+                  <span class="detail-label">Available Credit:</span>
+                  <span class="detail-value">$4,750 / $5,000</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Minimum Payment:</span>
+                  <span class="detail-value">$125.00</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Due Date:</span>
+                  <span class="detail-value">Jan 25, 2024</span>
+                </div>
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-secondary" onclick="viewTransactions(1)">
+                  <i class="fas fa-list"></i> Transactions
+                </button>
+                <button class="btn btn-primary" onclick="makePayment(1)">
+                  <i class="fas fa-dollar-sign"></i> Pay Bill
+                </button>
+                <button class="btn btn-secondary" onclick="cardSettings(1)">
+                  <i class="fas fa-cog"></i> Settings
+                </button>
+              </div>
+            </div>
+
+            <div class="credit-card-container">
+              <div class="credit-card card-debit" onclick="showCardDetails(2)">
+                <div class="status-badge">Active</div>
+                <div class="card-front">
+                  <div class="card-header-info">
+                    <div class="card-type">Debit Card</div>
+                    <div class="card-logo">
+                      <i class="fab fa-cc-mastercard"></i>
+                    </div>
+                  </div>
+                  <div class="card-number">•••• •••• •••• 5678</div>
+                  <div class="card-footer">
+                    <div class="cardholder-info">
+                      <h4>JOHN DOE</h4>
+                      <p>CARDHOLDER</p>
+                    </div>
+                    <div class="card-expiry">
+                      <p>EXPIRES</p>
+                      <h4>08/27</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-details">
+                <div class="detail-row">
+                  <span class="detail-label">Daily ATM Limit:</span>
+                  <span class="detail-value">$500</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Purchase Limit:</span>
+                  <span class="detail-value">$2,500</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Available Balance:</span>
+                  <span class="detail-value">$12,543.67</span>
+                </div>
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-secondary" onclick="viewTransactions(2)">
+                  <i class="fas fa-list"></i> Transactions
+                </button>
+                <button class="btn btn-primary" onclick="setLimits(2)">
+                  <i class="fas fa-shield-alt"></i> Set Limits
+                </button>
+                <button class="btn btn-secondary" onclick="cardSettings(2)">
+                  <i class="fas fa-cog"></i> Settings
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Benefits -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Card Benefits</h2>
+          </div>
+          <div class="card-benefits">
+            <h4 style="margin-bottom: 10px; color: var(--primary-blue)">
+              Premium Card Benefits
+            </h4>
+            <div class="benefits-grid">
+              <div class="benefit-item">
+                <i class="fas fa-plane"></i>
+                <span>Travel Rewards</span>
+              </div>
+              <div class="benefit-item">
+                <i class="fas fa-shield-alt"></i>
+                <span>Fraud Protection</span>
+              </div>
+              <div class="benefit-item">
+                <i class="fas fa-headset"></i>
+                <span>24/7 Support</span>
+              </div>
+              <div class="benefit-item">
+                <i class="fas fa-percentage"></i>
+                <span>Cashback Rewards</span>
+              </div>
+              <div class="benefit-item">
+                <i class="fas fa-mobile-alt"></i>
+                <span>Mobile Payments</span>
+              </div>
+              <div class="benefit-item">
+                <i class="fas fa-lock"></i>
+                <span>Chip Security</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card Application Modal -->
+    <div class="modal" id="card-application-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3><i class="fas fa-credit-card"></i> Apply for New Card</h3>
+          <button
+            class="modal-close"
+            onclick="closeModal('card-application-modal')"
+          >
+            &times;
+          </button>
+        </div>
+        <form id="card-application-form">
+          <div class="form-group">
+            <label for="card-type">Card Type</label>
+            <select
+              id="card-type"
+              class="form-control"
+              required
+              onchange="updateCardInfo()"
+            >
+              <option value="">Select Card Type</option>
+              <option value="credit-classic">Classic Credit Card</option>
+              <option value="credit-premium">Premium Credit Card</option>
+              <option value="debit">Debit Card</option>
+              <option value="virtual">Virtual Card</option>
+            </select>
+          </div>
+
+          <div id="card-info" style="display: none">
+            <div class="alert alert-info">
+              <i class="fas fa-info-circle"></i>
+              <span id="card-description"
+                >Select a card type to see details</span
+              >
+            </div>
+          </div>
+
+          <div
+            class="form-group"
+            id="shipping-address-group"
+            style="display: none"
+          >
+            <label for="shipping-address">Shipping Address</label>
+            <textarea
+              id="shipping-address"
+              class="form-control"
+              rows="3"
+              placeholder="Enter shipping address for physical card"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="card-design">Card Design</label>
+            <select id="card-design" class="form-control">
+              <option value="classic">Classic Blue</option>
+              <option value="premium">Premium Black</option>
+              <option value="eco">Eco Green</option>
+              <option value="custom">Custom Design</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="monthly-income">Monthly Income</label>
+              <input
+                type="number"
+                id="monthly-income"
+                class="form-control"
+                min="0"
+                placeholder="Enter monthly income"
+              />
+            </div>
+            <div class="form-group">
+              <label for="employment-status">Employment Status</label>
+              <select id="employment-status" class="form-control">
+                <option value="employed">Employed</option>
+                <option value="self-employed">Self-Employed</option>
+                <option value="student">Student</option>
+                <option value="retired">Retired</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 15px; margin-top: 25px">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="closeModal('card-application-modal')"
+            >
+              <i class="fas fa-times"></i> Cancel
+            </button>
+            <button type="submit" class="btn btn-primary" style="flex: 1">
+              <i class="fas fa-paper-plane"></i> Submit Application
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        setupEventListeners();
+        updateNavigationDisplay();
+      });
+
+      function setupEventListeners() {
+        document
+          .getElementById("card-application-form")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            handleCardApplication();
+          });
+      }
+
+      function updateCardInfo() {
+        const cardType = document.getElementById("card-type").value;
+        const cardInfo = document.getElementById("card-info");
+        const shippingGroup = document.getElementById("shipping-address-group");
+        const description = document.getElementById("card-description");
+
+        const cardDescriptions = {
+          "credit-classic":
+            "Classic Credit Card with 1% cashback on all purchases. No annual fee.",
+          "credit-premium":
+            "Premium Credit Card with 2% cashback, travel insurance, and concierge service. $95 annual fee.",
+          debit:
+            "Debit Card linked to your checking account. No fees for ATM withdrawals.",
+          virtual:
+            "Virtual Card for online purchases. Instant approval and activation.",
+        };
+
+        if (cardType && cardDescriptions[cardType]) {
+          description.textContent = cardDescriptions[cardType];
+          cardInfo.style.display = "block";
+
+          if (cardType === "virtual") {
+            shippingGroup.style.display = "none";
+            document.getElementById("shipping-address").required = false;
+          } else {
+            shippingGroup.style.display = "block";
+            document.getElementById("shipping-address").required = true;
+          }
+        } else {
+          cardInfo.style.display = "none";
+          shippingGroup.style.display = "none";
+        }
+      }
+
+      function handleCardApplication() {
+        const cardType = document.getElementById("card-type").value;
+        const cardDesign = document.getElementById("card-design").value;
+
+        if (!cardType) {
+          showAlert("Please select a card type", "danger");
+          return;
+        }
+
+        // Simulate application processing
+        const btn = document.querySelector(
+          '#card-application-form button[type="submit"]'
+        );
+        const originalText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+
+        setTimeout(() => {
+          showAlert(
+            "Card application submitted successfully! You will receive a decision within 2-3 business days.",
+            "success"
+          );
+          closeModal("card-application-modal");
+          document.getElementById("card-application-form").reset();
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+          updateCardInfo(); // Reset card info display
+        }, 3000);
+      }
+
+      function showCardDetails(cardId) {
+        const cardDetails = {
+          1: {
+            type: "Premium Credit Card",
+            number: "**** **** **** 1234",
+            balance: "$250.00",
+            limit: "$5,000.00",
+            available: "$4,750.00",
+          },
+          2: {
+            type: "Debit Card",
+            number: "**** **** **** 5678",
+            balance: "$12,543.67",
+            dailyLimit: "$500.00",
+            purchaseLimit: "$2,500.00",
+          },
+        };
+
+        const card = cardDetails[cardId];
+        if (card) {
+          alert(
+            `${card.type}\nCard Number: ${card.number}\n\nNote: Full card details modal would be implemented here with transaction history, statements, and settings.`
+          );
+        }
+      }
+
+      function viewTransactions(cardId) {
+        showAlert("Redirecting to card transactions...", "info");
+        setTimeout(() => {
+          window.location.href = "transactions.html?card=" + cardId;
+        }, 1000);
+      }
+
+      function makePayment(cardId) {
+        showAlert("Redirecting to payment portal...", "info");
+        // In a real app, this would show a payment form or redirect
+      }
+
+      function setLimits(cardId) {
+        const newLimit = prompt("Enter new daily ATM limit (current: $500):");
+        if (newLimit && !isNaN(newLimit)) {
+          showAlert(
+            `ATM limit updated to ${parseFloat(newLimit).toFixed(2)}`,
+            "success"
+          );
+        }
+      }
+
+      function cardSettings(cardId) {
+        showAlert(
+          "Card settings would include: Lock/Unlock card, Change PIN, Update contact info, Set alerts",
+          "info"
+        );
+      }
+
+      function showModal(modalId) {
+        document.getElementById(modalId).classList.add("active");
+      }
+
+      function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove("active");
+      }
+
+      function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+          window.location.href = "login.html";
+        }
+      }
+
+      function showAlert(message, type) {
+        const alertContainer = document.getElementById("alert-container");
+        const alertDiv = document.createElement("div");
+        alertDiv.className = `alert alert-${type}`;
+        alertDiv.innerHTML = `<i class="fas fa-${getAlertIcon(
+          type
+        )}"></i> ${message}`;
+
+        alertContainer.innerHTML = "";
+        alertContainer.appendChild(alertDiv);
+
+        setTimeout(() => {
+          if (alertDiv.parentNode) {
+            alertDiv.remove();
+          }
+        }, 5000);
+      }
+
+      function getAlertIcon(type) {
+        const icons = {
+          success: "check-circle",
+          danger: "exclamation-triangle",
+          info: "info-circle",
+        };
+        return icons[type] || "info-circle";
+      }
+
+      // Close modal when clicking outside
+      document.addEventListener("click", function (e) {
+        if (e.target.classList.contains("modal")) {
+          e.target.classList.remove("active");
+        }
+      });
+
+      // Navigation Functions
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
+        const bankingMenu = document.getElementById("banking-menu");
+        if (window.innerWidth <= 768) {
+          bankingMenu.classList.toggle("active");
+        } else {
+          sidebar.classList.toggle("active");
+        }
+        overlay.classList.toggle("active");
+      }
+
+      function closeSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
+        const bankingMenu = document.getElementById("banking-menu");
+        if (window.innerWidth <= 768) {
+          bankingMenu.classList.remove("active");
+        } else {
+          sidebar.classList.remove("active");
+        }
+        overlay.classList.remove("active");
+      }
+
+      function verifyAccount() {
+        alert("Please complete the verification process.");
+      }
+
+      // Responsive Navigation Display
+      function updateNavigationDisplay() {
+        const sidebar = document.getElementById("sidebar");
+        const bankingMenu = document.getElementById("banking-menu");
+        const overlay = document.getElementById("overlay");
+
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove("active");
+          bankingMenu.classList.add("active");
+          overlay.classList.add("active");
+        } else {
+          bankingMenu.classList.remove("active");
+          sidebar.classList.add("active");
+          overlay.classList.remove("active");
+        }
+      }
+
+      // Keyboard Navigation
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeSidebar();
+        }
+      });
+
+      // Responsive Handling
+      window.addEventListener("resize", function () {
+        updateNavigationDisplay();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SecureBank - Profile</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/general.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="navbar-content">
+        <a href="index.html" class="navbar-brand">SecureBank</a>
+        <button class="hamburger" onclick="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="navbar-nav">
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="profile.html" style="background-color: rgba(255, 255, 255, 0.1)">Profile</a></li>
+          <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="profile-avatar">
+          <i class="fas fa-user"></i>
+          <div class="avatar-upload">
+            <i class="fas fa-camera" style="font-size: 10px"></i>
+          </div>
+        </div>
+        <h2>John Doe</h2>
+        <p>Account: 48187344800</p>
+        <button class="btn-verify" onclick="verifyAccount()">Verify Account</button>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="transactions.html"><i class="fas fa-exchange-alt"></i> Transactions</a>
+        <a href="cards.html"><i class="fas fa-credit-card"></i> Cards</a>
+        <a href="transfer.html"><i class="fas fa-paper-plane"></i> Transfer</a>
+        <a href="international-wire.html"><i class="fas fa-globe"></i> International Wire</a>
+        <a href="deposit.html"><i class="fas fa-plus-circle"></i> Deposit</a>
+        <a href="loan.html"><i class="fas fa-hand-holding-usd"></i> Loan</a>
+        <a href="tax-refund.html"><i class="fas fa-file-invoice-dollar"></i> IRS Tax Refund</a>
+        <a href="loan-history.html"><i class="fas fa-history"></i> Loan History</a>
+        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+        <a href="support.html"><i class="fas fa-support"></i> Support Ticket</a>
+        <a href="profile.html" class="active"><i class="fas fa-user"></i> Profile</a>
+        <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </nav>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+    <!-- Mobile Banking Menu Modal -->
+    <div id="banking-menu" class="banking-menu">
+      <div class="banking-menu-content">
+        <div class="profile-header">
+          <div class="profile-avatar">
+            <i class="fas fa-user"></i>
+            <div class="avatar-upload">
+              <i class="fas fa-camera" style="font-size: 10px"></i>
+            </div>
+          </div>
+          <h2>John Doe</h2>
+          <p>Account: 48187344800</p>
+          <button class="btn-verify" onclick="verifyAccount()">Verify Account</button>
+        </div>
+        <h3>Banking Menu</h3>
+        <p>Select an option to continue</p>
+        <div class="menu-grid">
+          <a href="dashboard.html" class="menu-item"><i class="fas fa-home"></i><span>Dashboard</span></a>
+          <a href="transactions.html" class="menu-item"><i class="fas fa-exchange-alt"></i><span>Transactions</span></a>
+          <a href="cards.html" class="menu-item"><i class="fas fa-credit-card"></i><span>Cards</span></a>
+          <a href="transfer.html" class="menu-item"><i class="fas fa-paper-plane"></i><span>Transfer</span></a>
+          <a href="international-wire.html" class="menu-item"><i class="fas fa-globe"></i><span>International Wire</span></a>
+          <a href="deposit.html" class="menu-item"><i class="fas fa-plus-circle"></i><span>Deposit</span></a>
+          <a href="loan.html" class="menu-item"><i class="fas fa-hand-holding-usd"></i><span>Loan</span></a>
+          <a href="tax-refund.html" class="menu-item"><i class="fas fa-file-invoice-dollar"></i><span>IRS Tax Refund</span></a>
+          <a href="loan-history.html" class="menu-item"><i class="fas fa-history"></i><span>Loan History</span></a>
+          <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i><span>Settings</span></a>
+          <a href="support.html" class="menu-item"><i class="fas fa-support"></i><span>Support Ticket</span></a>
+          <a href="profile.html" class="menu-item"><i class="fas fa-user"></i><span>Profile</span></a>
+          <a href="#" class="menu-item logout-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+        </div>
+        <button class="close-btn" onclick="closeSidebar()"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+      <div class="mobile-nav-items">
+        <a href="dashboard.html" class="mobile-nav-item">
+          <i class="fas fa-home"></i>
+          Home
+        </a>
+        <a href="transactions.html" class="mobile-nav-item">
+          <i class="fas fa-chart-bar"></i>
+          Stats
+        </a>
+        <a href="cards.html" class="mobile-nav-item">
+          <i class="fas fa-credit-card"></i>
+          Cards
+        </a>
+        <a href="profile.html" class="mobile-nav-item">
+          <i class="fas fa-user"></i>
+          Profile
+        </a>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="container">
+        <div id="alert-container"></div>
+
+        <!-- Profile Header -->
+        <div class="profile-header">
+          <div
+            class="profile-avatar"
+            onclick="document.getElementById('avatar-upload').click()"
+          >
+            <i class="fas fa-user"></i>
+            <div class="avatar-upload">
+              <i class="fas fa-camera" style="font-size: 14px"></i>
+            </div>
+          </div>
+          <input
+            type="file"
+            id="avatar-upload"
+            accept="image/*"
+            style="display: none"
+          />
+          <h2 id="profile-name">John Doe</h2>
+          <p>Member since December 2023</p>
+        </div>
+
+        <div class="profile-grid">
+          <!-- Personal Information -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Personal Information</h3>
+              <button
+                class="btn btn-secondary"
+                onclick="toggleEditMode('personal')"
+              >
+                <i class="fas fa-edit"></i> Edit
+              </button>
+            </div>
+
+            <div class="view-mode" id="personal-view">
+              <div class="info-table">
+                <div class="info-row">
+                  <span class="info-label">Full Name:</span>
+                  <span class="info-value">John Doe</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">Email:</span>
+                  <span class="info-value">john.doe@example.com</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">Phone:</span>
+                  <span class="info-value">(555) 123-4567</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">Address:</span>
+                  <span class="info-value">123 Main St, Anytown, ST 12345</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">Date of Birth:</span>
+                  <span class="info-value">January 15, 1985</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="edit-mode" id="personal-edit">
+              <form id="personal-form">
+                <div class="form-group">
+                  <label for="edit-name">Full Name</label>
+                  <input
+                    type="text"
+                    id="edit-name"
+                    class="form-control"
+                    value="John Doe"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="edit-email">Email</label>
+                  <input
+                    type="email"
+                    id="edit-email"
+                    class="form-control"
+                    value="john.doe@example.com"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="edit-phone">Phone</label>
+                  <input
+                    type="tel"
+                    id="edit-phone"
+                    class="form-control"
+                    value="(555) 123-4567"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="edit-address">Address</label>
+                  <textarea id="edit-address" class="form-control" rows="3">
+123 Main St, Anytown, ST 12345</textarea
+                  >
+                </div>
+                <div style="display: flex; gap: 10px">
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    onclick="savePersonalInfo()"
+                  >
+                    <i class="fas fa-save"></i> Save Changes
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="cancelEdit('personal')"
+                  >
+                    <i class="fas fa-times"></i> Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Account Information -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Account Information</h3>
+            </div>
+            <div class="info-table">
+              <div class="info-row">
+                <span class="info-label">Account Number:</span>
+                <span class="info-value">
+                  <span id="account-display">****1234</span>
+                  <button
+                    onclick="toggleAccountNumber()"
+                    style="
+                      background: none;
+                      border: none;
+                      color: var(--primary-blue);
+                      margin-left: 10px;
+                      cursor: pointer;
+                    "
+                  >
+                    <i class="fas fa-eye" id="account-toggle"></i>
+                  </button>
+                </span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Account Type:</span>
+                <span class="info-value">Premium Checking</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Routing Number:</span>
+                <span class="info-value">021000021</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Status:</span>
+                <span class="info-value">
+                  <span class="status-badge status-active">Active</span>
+                </span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Opened:</span>
+                <span class="info-value">December 15, 2023</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Security Settings -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Security Settings</h3>
+          </div>
+
+          <div class="security-item">
+            <div class="security-info">
+              <h5>Two-Factor Authentication</h5>
+              <p>Add an extra layer of security to your account</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="2fa-toggle" onchange="toggle2FA()" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="security-item">
+            <div class="security-info">
+              <h5>Login Notifications</h5>
+              <p>Get notified when someone logs into your account</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked id="login-notifications" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="security-item">
+            <div class="security-info">
+              <h5>Transaction Alerts</h5>
+              <p>Receive alerts for all account transactions</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked id="transaction-alerts" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div style="margin-top: 20px; display: flex; gap: 15px">
+            <button class="btn btn-primary" onclick="showPasswordModal()">
+              <i class="fas fa-key"></i> Change Password
+            </button>
+            <button class="btn btn-secondary" onclick="showPinModal()">
+              <i class="fas fa-shield-alt"></i> Update PIN
+            </button>
+          </div>
+        </div>
+
+        <!-- Verification Status -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Verification Status</h3>
+          </div>
+
+          <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            Complete your identity verification to unlock all account features.
+          </div>
+
+          <ul class="verification-steps">
+            <li class="verification-step">
+              <div class="step-icon step-completed">
+                <i class="fas fa-check"></i>
+              </div>
+              <div>
+                <strong>Email Verification</strong>
+                <p style="margin: 0; color: var(--dark-gray); font-size: 14px">
+                  Your email has been verified
+                </p>
+              </div>
+            </li>
+            <li class="verification-step">
+              <div class="step-icon step-completed">
+                <i class="fas fa-check"></i>
+              </div>
+              <div>
+                <strong>Phone Verification</strong>
+                <p style="margin: 0; color: var(--dark-gray); font-size: 14px">
+                  Your phone number has been verified
+                </p>
+              </div>
+            </li>
+            <li class="verification-step">
+              <div class="step-icon step-pending">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div>
+                <strong>Identity Verification</strong>
+                <p style="margin: 0; color: var(--dark-gray); font-size: 14px">
+                  Upload government ID and selfie
+                </p>
+              </div>
+            </li>
+          </ul>
+
+          <button
+            class="btn btn-primary"
+            onclick="startVerification()"
+            style="margin-top: 20px"
+          >
+            <i class="fas fa-upload"></i> Complete Verification
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Password Change Modal -->
+    <div
+      id="password-modal"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: none;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div
+        style="
+          background: white;
+          padding: 30px;
+          border-radius: var(--border-radius);
+          max-width: 400px;
+          width: 90%;
+        "
+      >
+        <h3 style="margin-bottom: 20px; color: var(--primary-blue)">
+          Change Password
+        </h3>
+        <form id="password-form">
+          <div class="form-group">
+            <label for="current-password">Current Password</label>
+            <input
+              type="password"
+              id="current-password"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="new-password">New Password</label>
+            <input
+              type="password"
+              id="new-password"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Confirm New Password</label>
+            <input
+              type="password"
+              id="confirm-password"
+              class="form-control"
+              required
+            />
+          </div>
+          <div style="display: flex; gap: 10px">
+            <button type="submit" class="btn btn-primary">
+              Update Password
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="closeModal('password-modal')"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      let accountVisible = false;
+
+      document.addEventListener("DOMContentLoaded", function () {
+        setupEventListeners();
+        updateNavigationDisplay();
+      });
+
+      function setupEventListeners() {
+        // Avatar upload
+        document
+          .getElementById("avatar-upload")
+          .addEventListener("change", handleAvatarUpload);
+
+        // Password form
+        document
+          .getElementById("password-form")
+          .addEventListener("submit", handlePasswordChange);
+      }
+
+      function toggleEditMode(section) {
+        const viewMode = document.getElementById(section + "-view");
+        const editMode = document.getElementById(section + "-edit");
+
+        viewMode.classList.add("editing");
+        editMode.classList.add("active");
+      }
+
+      function cancelEdit(section) {
+        const viewMode = document.getElementById(section + "-view");
+        const editMode = document.getElementById(section + "-edit");
+
+        viewMode.classList.remove("editing");
+        editMode.classList.remove("active");
+      }
+
+      function savePersonalInfo() {
+        const name = document.getElementById("edit-name").value;
+        const email = document.getElementById("edit-email").value;
+        const phone = document.getElementById("edit-phone").value;
+        const address = document.getElementById("edit-address").value;
+
+        // Update view mode with new values
+        const infoRows = document.querySelectorAll(
+          "#personal-view .info-value"
+        );
+        infoRows[0].textContent = name;
+        infoRows[1].textContent = email;
+        infoRows[2].textContent = phone;
+        infoRows[3].textContent = address;
+
+        // Update header name
+        document.getElementById("profile-name").textContent = name;
+
+        cancelEdit("personal");
+        showAlert("Personal information updated successfully!", "success");
+      }
+
+      function toggleAccountNumber() {
+        const display = document.getElementById("account-display");
+        const toggle = document.getElementById("account-toggle");
+
+        if (accountVisible) {
+          display.textContent = "****1234";
+          toggle.className = "fas fa-eye";
+          accountVisible = false;
+        } else {
+          display.textContent = "1234567890";
+          toggle.className = "fas fa-eye-slash";
+          accountVisible = true;
+        }
+      }
+
+      function toggle2FA() {
+        const toggle = document.getElementById("2fa-toggle");
+
+        if (toggle.checked) {
+          showAlert(
+            "Two-factor authentication setup would be initiated here",
+            "success"
+          );
+        } else {
+          if (
+            confirm(
+              "Are you sure you want to disable two-factor authentication?"
+            )
+          ) {
+            showAlert("Two-factor authentication disabled", "warning");
+          } else {
+            toggle.checked = true;
+          }
+        }
+      }
+
+      function showPasswordModal() {
+        document.getElementById("password-modal").style.display = "flex";
+      }
+
+      function showPinModal() {
+        showAlert("PIN update functionality would be implemented here", "info");
+      }
+
+      function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+      }
+
+      function handlePasswordChange(e) {
+        e.preventDefault();
+
+        const currentPassword =
+          document.getElementById("current-password").value;
+        const newPassword = document.getElementById("new-password").value;
+        const confirmPassword =
+          document.getElementById("confirm-password").value;
+
+        if (newPassword !== confirmPassword) {
+          showAlert("New passwords do not match", "danger");
+          return;
+        }
+
+        if (newPassword.length < 8) {
+          showAlert("Password must be at least 8 characters long", "danger");
+          return;
+        }
+
+        // Simulate password change
+        setTimeout(() => {
+          showAlert("Password updated successfully!", "success");
+          closeModal("password-modal");
+          document.getElementById("password-form").reset();
+        }, 1000);
+      }
+
+      function handleAvatarUpload(e) {
+        const file = e.target.files[0];
+        if (file) {
+          if (file.size > 5 * 1024 * 1024) {
+            // 5MB limit
+            showAlert("File size must be less than 5MB", "danger");
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const avatar = document.querySelector(".profile-avatar");
+            avatar.innerHTML = `
+                        <img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                        <div class="avatar-upload">
+                            <i class="fas fa-camera" style="font-size: 14px;"></i>
+                        </div>
+                    `;
+            showAlert("Profile picture updated successfully!", "success");
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+
+      function startVerification() {
+        showAlert("Redirecting to identity verification process...", "info");
+        setTimeout(() => {
+          window.location.href = "verification.html";
+        }, 1500);
+      }
+
+      function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+          window.location.href = "login.html";
+        }
+      }
+
+      function showAlert(message, type) {
+        const alertContainer = document.getElementById("alert-container");
+        const alertDiv = document.createElement("div");
+        alertDiv.className = `alert alert-${type}`;
+        alertDiv.innerHTML = `<i class="fas fa-${getAlertIcon(
+          type
+        )}"></i> ${message}`;
+
+        alertContainer.innerHTML = "";
+        alertContainer.appendChild(alertDiv);
+
+        setTimeout(() => {
+          if (alertDiv.parentNode) {
+            alertDiv.remove();
+          }
+        }, 5000);
+      }
+
+      function getAlertIcon(type) {
+        const icons = {
+          success: "check-circle",
+          danger: "exclamation-triangle",
+          warning: "exclamation-triangle",
+          info: "info-circle",
+        };
+        return icons[type] || "info-circle";
+      }
+
+      // Phone number formatting
+      document
+        .getElementById("edit-phone")
+        .addEventListener("input", function (e) {
+          let value = e.target.value.replace(/\D/g, "");
+          if (value.length >= 6) {
+            value = value.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
+          } else if (value.length >= 3) {
+            value = value.replace(/(\d{3})(\d{0,3})/, "($1) $2");
+          }
+          e.target.value = value;
+        });
+
+      // Close modal when clicking outside
+      document.addEventListener("click", function (e) {
+        if (e.target.style && e.target.style.position === "fixed") {
+          closeModal(e.target.id);
+        }
+      });
+
+      // Navigation Functions
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
+        const bankingMenu = document.getElementById("banking-menu");
+        if (window.innerWidth <= 768) {
+          bankingMenu.classList.toggle("active");
+        } else {
+          sidebar.classList.toggle("active");
+        }
+        overlay.classList.toggle("active");
+      }
+
+      function closeSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
+        const bankingMenu = document.getElementById("banking-menu");
+        if (window.innerWidth <= 768) {
+          bankingMenu.classList.remove("active");
+        } else {
+          sidebar.classList.remove("active");
+        }
+        overlay.classList.remove("active");
+      }
+
+      function verifyAccount() {
+        alert("Please complete the verification process.");
+      }
+
+      // Responsive Navigation Display
+      function updateNavigationDisplay() {
+        const sidebar = document.getElementById("sidebar");
+        const bankingMenu = document.getElementById("banking-menu");
+        const overlay = document.getElementById("overlay");
+
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove("active");
+          bankingMenu.classList.add("active");
+          overlay.classList.add("active");
+        } else {
+          bankingMenu.classList.remove("active");
+          sidebar.classList.add("active");
+          overlay.classList.remove("active");
+        }
+      }
+
+      // Responsive Handling
+      window.addEventListener("resize", function () {
+        updateNavigationDisplay();
+      });
+
+      console.log("SecureBank Profile page loaded successfully!");
+    </script>
+  </body>
+</html>

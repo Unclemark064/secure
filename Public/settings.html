@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SecureBank - Settings</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/general.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="navbar-content">
+        <a href="index.html" class="navbar-brand">SecureBank</a>
+        <button class="hamburger" onclick="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="navbar-nav">
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="profile-avatar">
+          <i class="fas fa-user"></i>
+          <div class="avatar-upload">
+            <i class="fas fa-camera" style="font-size: 10px"></i>
+          </div>
+        </div>
+        <h2>John Doe</h2>
+        <p>Account: 48187344800</p>
+        <button class="btn-verify" onclick="verifyAccount()">
+          Verify Account
+        </button>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="transactions.html"
+          ><i class="fas fa-exchange-alt"></i> Transactions</a
+        >
+        <a href="cards.html"><i class="fas fa-credit-card"></i> Cards</a>
+        <a href="transfer.html"><i class="fas fa-paper-plane"></i> Transfer</a>
+        <a href="international-wire.html"
+          ><i class="fas fa-globe"></i> International Wire</a
+        >
+        <a href="deposit.html"><i class="fas fa-plus-circle"></i> Deposit</a>
+        <a href="loan.html"><i class="fas fa-hand-holding-usd"></i> Loan</a>
+        <a href="tax-refund.html"
+          ><i class="fas fa-file-invoice-dollar"></i> IRS Tax Refund</a
+        >
+        <a href="loan-history.html"
+          ><i class="fas fa-history"></i> Loan History</a
+        >
+        <a href="settings.html" class="active"
+          ><i class="fas fa-cog"></i> Settings</a
+        >
+        <a href="support.html"
+          ><i class="fas fa-life-ring"></i> Support Ticket</a
+        >
+        <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+        <a href="#" onclick="logout()"
+          ><i class="fas fa-sign-out-alt"></i> Logout</a
+        >
+      </nav>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+    <!-- Mobile Banking Menu Modal -->
+    <div id="banking-menu" class="banking-menu">
+      <div class="banking-menu-content">
+        <div class="profile-header">
+          <div class="profile-avatar">
+            <i class="fas fa-user"></i>
+            <div class="avatar-upload">
+              <i class="fas fa-camera" style="font-size: 10px"></i>
+            </div>
+          </div>
+          <h2>John Doe</h2>
+          <p>Account: 48187344800</p>
+          <button class="btn-verify" onclick="verifyAccount()">
+            Verify Account
+          </button>
+        </div>
+        <h3>Banking Menu</h3>
+        <p>Select an option to continue</p>
+        <div class="menu-grid">
+          <a href="dashboard.html" class="menu-item"
+            ><i class="fas fa-home"></i><span>Dashboard</span></a
+          >
+          <a href="transactions.html" class="menu-item"
+            ><i class="fas fa-exchange-alt"></i><span>Transactions</span></a
+          >
+          <a href="cards.html" class="menu-item"
+            ><i class="fas fa-credit-card"></i><span>Cards</span></a
+          >
+          <a href="transfer.html" class="menu-item"
+            ><i class="fas fa-paper-plane"></i><span>Transfer</span></a
+          >
+          <a href="international-wire.html" class="menu-item"
+            ><i class="fas fa-globe"></i><span>International Wire</span></a
+          >
+          <a href="deposit.html" class="menu-item"
+            ><i class="fas fa-plus-circle"></i><span>Deposit</span></a
+          >
+          <a href="loan.html" class="menu-item"
+            ><i class="fas fa-hand-holding-usd"></i><span>Loan</span></a
+          >
+          <a href="tax-refund.html" class="menu-item"
+            ><i class="fas fa-file-invoice-dollar"></i
+            ><span>IRS Tax Refund</span></a
+          >
+          <a href="loan-history.html" class="menu-item"
+            ><i class="fas fa-history"></i><span>Loan History</span></a
+          >
+          <a href="settings.html" class="menu-item"
+            ><i class="fas fa-cog"></i><span>Settings</span></a
+          >
+          <a href="support.html" class="menu-item"
+            ><i class="fas fa-life-ring"></i><span>Support Ticket</span></a
+          >
+          <a href="profile.html" class="menu-item"
+            ><i class="fas fa-user"></i><span>Profile</span></a
+          >
+          <a href="#" class="menu-item logout-item" onclick="logout()"
+            ><i class="fas fa-sign-out-alt"></i><span>Logout</span></a
+          >
+        </div>
+        <button class="close-btn" onclick="closeSidebar()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+      <div class="mobile-nav-items">
+        <a href="dashboard.html" class="mobile-nav-item">
+          <i class="fas fa-home"></i>
+          Home
+        </a>
+        <a href="transactions.html" class="mobile-nav-item">
+          <i class="fas fa-chart-bar"></i>
+          Stats
+        </a>
+        <a href="cards.html" class="mobile-nav-item">
+          <i class="fas fa-credit-card"></i>
+          Cards
+        </a>
+        <a href="profile.html" class="mobile-nav-item">
+          <i class="fas fa-user"></i>
+          Profile
+        </a>
+      </div>
+    </div>
+
+    <!-- Settings Page -->
+    <div class="main-content">
+      <div class="container">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">
+              <i class="fas fa-cog"></i> Account Settings
+            </h4>
+          </div>
+          <form id="settings-form">
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                placeholder="Enter email"
+                required
+              />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="password">New Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  class="form-control"
+                  placeholder="Enter new password"
+                />
+              </div>
+              <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input
+                  type="password"
+                  id="confirm-password"
+                  class="form-control"
+                  placeholder="Confirm new password"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Notification Preferences</label>
+              <div class="checkbox-group">
+                <label
+                  ><input type="checkbox" id="email-notifications" /> Email
+                  Notifications</label
+                >
+                <label
+                  ><input type="checkbox" id="sms-notifications" /> SMS
+                  Notifications</label
+                >
+                <label
+                  ><input type="checkbox" id="push-notifications" /> Push
+                  Notifications</label
+                >
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Save Changes
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="resetForm()"
+              >
+                <i class="fas fa-undo"></i> Reset
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      // Initialize App
+      document.addEventListener("DOMContentLoaded", function () {
+        setupFormHandlers();
+        updateNavigationDisplay();
+      });
+
+      // Form Handlers
+      function setupFormHandlers() {
+        document
+          .getElementById("settings-form")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            handleSettingsUpdate();
+          });
+
+        document
+          .getElementById("email")
+          .addEventListener("input", validateEmail);
+        document
+          .getElementById("password")
+          .addEventListener("input", validatePassword);
+        document
+          .getElementById("confirm-password")
+          .addEventListener("input", validateConfirmPassword);
+      }
+
+      // UI Functions
+      function handleSettingsUpdate() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const confirmPassword =
+          document.getElementById("confirm-password").value;
+        const emailNotifications = document.getElementById(
+          "email-notifications"
+        ).checked;
+        const smsNotifications =
+          document.getElementById("sms-notifications").checked;
+        const pushNotifications =
+          document.getElementById("push-notifications").checked;
+
+        if (!validateEmail(email)) {
+          showAlert("Please enter a valid email address", "danger");
+          document.getElementById("email").classList.add("invalid");
+          return;
+        }
+
+        if (password && !validatePassword(password)) {
+          showAlert("Password must be at least 8 characters long", "danger");
+          document.getElementById("password").classList.add("invalid");
+          return;
+        }
+
+        if (password && password !== confirmPassword) {
+          showAlert("Passwords do not match", "danger");
+          document.getElementById("confirm-password").classList.add("invalid");
+          return;
+        }
+
+        const updates = [];
+        if (email) updates.push("email");
+        if (password) updates.push("password");
+        if (emailNotifications || smsNotifications || pushNotifications) {
+          updates.push("notification preferences");
+        }
+
+        showAlert(`Settings updated: ${updates.join(", ")}`, "success");
+        document.getElementById("settings-form").reset();
+      }
+
+      function resetForm() {
+        document.getElementById("settings-form").reset();
+        document
+          .querySelectorAll(".form-control")
+          .forEach((input) => input.classList.remove("invalid"));
+        showAlert("Form reset", "success");
+      }
+
+      // Validation Functions
+      function validateEmail(email) {
+        const input = typeof email === "string" ? email : email.target.value;
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const isValid = re.test(input);
+        if (typeof email !== "string") {
+          email.target.classList.toggle("invalid", input && !isValid);
+        }
+        return isValid;
+      }
+
+      function validatePassword(password) {
+        const input =
+          typeof password === "string" ? password : password.target.value;
+        const isValid = input.length >= 8;
+        if (typeof password !== "string") {
+          password.target.classList.toggle("invalid", input && !isValid);
+        }
+        return isValid;
+      }
+
+      function validateConfirmPassword() {
+        const password = document.getElementById("password").value;
+        const confirmPassword =
+          document.getElementById("confirm-password").value;
+        const isValid = password === confirmPassword;
+        document
+          .getElementById("confirm-password")
+          .classList.toggle("invalid", confirmPassword && !isValid);
+        return isValid;
+      }
+
+      // Utility Functions
+      function showAlert(message, type) {
+        const alertDiv = document.createElement("div");
+        alertDiv.className = `alert alert-${type}`;
+        alertDiv.innerHTML = `<i class="fas fa-${
+          type === "success" ? "check" : "times"
+        }-circle"></i> ${message}`;
+
+        const container = document.querySelector(".container");
+        if (container) {
+          container.insertBefore(alertDiv, container.firstChild);
+          setTimeout(() => {
+            if (alertDiv.parentNode) {
+              alertDiv.parentNode.removeChild(alertDiv);
+            }
+          }, 3000);
+        }
+      }
+
+      // Navigation Functions
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
+        const bankingMenu = document.getElementById("banking-menu");
+        if (window.innerWidth <= 768) {
+          bankingMenu.classList.toggle("active");
+        } else {
+          sidebar.classList.toggle("active");
+        }
+        overlay.classList.toggle("active");
+      }
+
+      function closeSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
+        const bankingMenu = document.getElementById("banking-menu");
+        if (window.innerWidth <= 768) {
+          bankingMenu.classList.remove("active");
+        } else {
+          sidebar.classList.remove("active");
+        }
+        overlay.classList.remove("active");
+      }
+
+      function verifyAccount() {
+        alert("Please complete the verification process.");
+      }
+
+      function logout() {
+        window.location.href = "index.html";
+      }
+
+      // Responsive Navigation Display
+      function updateNavigationDisplay() {
+        const sidebar = document.getElementById("sidebar");
+        const bankingMenu = document.getElementById("banking-menu");
+        const overlay = document.getElementById("overlay");
+
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove("active");
+          bankingMenu.classList.add("active");
+          overlay.classList.add("active");
+        } else {
+          bankingMenu.classList.remove("active");
+          sidebar.classList.add("active");
+          overlay.classList.remove("active");
+        }
+      }
+
+      // Keyboard Navigation
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeSidebar();
+        }
+      });
+
+      // Responsive Handling
+      window.addEventListener("resize", function () {
+        updateNavigationDisplay();
+      });
+    </script>
+  </body>
+</html>

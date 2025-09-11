@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SecureBank - Transactions</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/general.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="navbar-content">
+        <a href="index.html" class="navbar-brand">SecureBank</a>
+        <button class="hamburger" onclick="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="navbar-nav">
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="profile-avatar">
+          <i class="fas fa-user"></i>
+          <div class="avatar-upload">
+            <i class="fas fa-camera" style="font-size: 10px"></i>
+          </div>
+        </div>
+        <h2>John Doe</h2>
+        <p>Account: 48187344800</p>
+        <button class="btn-verify" onclick="verifyAccount()">
+          Verify Account
+        </button>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="transactions.html" class="active"
+          ><i class="fas fa-exchange-alt"></i> Transactions</a
+        >
+        <a href="cards.html"><i class="fas fa-credit-card"></i> Cards</a>
+        <a href="transfer.html"><i class="fas fa-paper-plane"></i> Transfer</a>
+        <a href="international-wire.html"
+          ><i class="fas fa-globe"></i> International Wire</a
+        >
+        <a href="deposit.html"><i class="fas fa-plus-circle"></i> Deposit</a>
+        <a href="loan.html"><i class="fas fa-hand-holding-usd"></i> Loan</a>
+        <a href="tax-refund.html"
+          ><i class="fas fa-file-invoice-dollar"></i> IRS Tax Refund</a
+        >
+        <a href="loan-history.html"
+          ><i class="fas fa-history"></i> Loan History</a
+        >
+        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+        <a href="support.html"><i class="fas fa-support"></i> Support Ticket</a>
+        <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+        <a href="#" onclick="logout()"
+          ><i class="fas fa-sign-out-alt"></i> Logout</a
+        >
+      </nav>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+    <!-- Mobile Banking Menu Modal -->
+    <div id="banking-menu" class="banking-menu">
+      <div class="banking-menu-content">
+        <div class="profile-header">
+          <div class="profile-avatar">
+            <i class="fas fa-user"></i>
+            <div class="avatar-upload">
+              <i class="fas fa-camera" style="font-size: 10px"></i>
+            </div>
+          </div>
+          <h2>John Doe</h2>
+          <p>Account: 48187344800</p>
+          <button class="btn-verify" onclick="verifyAccount()">
+            Verify Account
+          </button>
+        </div>
+        <h3>Banking Menu</h3>
+        <p>Select an option to continue</p>
+        <div class="menu-grid">
+          <a href="dashboard.html" class="menu-item"
+            ><i class="fas fa-home"></i><span>Dashboard</span></a
+          >
+          <a href="transactions.html" class="menu-item"
+            ><i class="fas fa-exchange-alt"></i><span>Transactions</span></a
+          >
+          <a href="cards.html" class="menu-item"
+            ><i class="fas fa-credit-card"></i><span>Cards</span></a
+          >
+          <a href="transfer.html" class="menu-item"
+            ><i class="fas fa-paper-plane"></i><span>Transfer</span></a
+          >
+          <a href="international-wire.html" class="menu-item"
+            ><i class="fas fa-globe"></i><span>International Wire</span></a
+          >
+          <a href="deposit.html" class="menu-item"
+            ><i class="fas fa-plus-circle"></i><span>Deposit</span></a
+          >
+          <a href="loan.html" class="menu-item"
+            ><i class="fas fa-hand-holding-usd"></i><span>Loan</span></a
+          >
+          <a href="tax-refund.html" class="menu-item"
+            ><i class="fas fa-file-invoice-dollar"></i
+            ><span>IRS Tax Refund</span></a
+          >
+          <a href="loan-history.html" class="menu-item"
+            ><i class="fas fa-history"></i><span>Loan History</span></a
+          >
+          <a href="settings.html" class="menu-item"
+            ><i class="fas fa-cog"></i><span>Settings</span></a
+          >
+          <a href="support.html" class="menu-item"
+            ><i class="fas fa-support"></i><span>Support Ticket</span></a
+          >
+          <a href="profile.html" class="menu-item"
+            ><i class="fas fa-user"></i><span>Profile</span></a
+          >
+          <a href="#" class="menu-item logout-item" onclick="logout()"
+            ><i class="fas fa-sign-out-alt"></i><span>Logout</span></a
+          >
+        </div>
+        <button class="close-btn" onclick="closeSidebar()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+      <div class="mobile-nav-items">
+        <a href="dashboard.html" class="mobile-nav-item">
+          <i class="fas fa-home"></i>
+          Home
+        </a>
+        <a href="transactions.html" class="mobile-nav-item">
+          <i class="fas fa-chart-bar"></i>
+          Stats
+        </a>
+        <a href="cards.html" class="mobile-nav-item">
+          <i class="fas fa-credit-card"></i>
+          Cards
+        </a>
+        <a href="profile.html" class="mobile-nav-item">
+          <i class="fas fa-user"></i>
+          Profile
+        </a>
+      </div>
+    </div>
+
+    <!-- Transactions Page -->
+    <div class="main-content">
+      <div class="container">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">
+              <i class="fas fa-exchange-alt"></i> Recent Transactions
+            </h4>
+          </div>
+          <div class="filter-bar">
+            <div class="form-group">
+              <label for="filter-type">Filter by Type</label>
+              <select id="filter-type" class="form-control">
+                <option value="all">All</option>
+                <option value="deposit">Deposit</option>
+                <option value="withdrawal">Withdrawal</option>
+                <option value="transfer">Transfer</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="filter-date">Sort by Date</label>
+              <select id="filter-date" class="form-control">
+                <option value="desc">Newest First</option>
+                <option value="asc">Oldest First</option>
+              </select>
+            </div>
+          </div>
+          <table class="table" id="transaction-table">
+            <thead>
+              <tr>
+                <th onclick="sortTable('date')">Date</th>
+                <th onclick="sortTable('type')">Type</th>
+                <th onclick="sortTable('amount')">Amount</th>
+                <th onclick="sortTable('status')">Status</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2025-09-07</td>
+                <td>Deposit</td>
+                <td>$1,000.00</td>
+                <td>
+                  <span class="status-badge status-completed">Completed</span>
+                </td>
+                <td><a href="#" onclick="viewTransaction('1')">View</a></td>
+              </tr>
+              <tr>
+                <td>2025-09-06</td>
+                <td>Transfer</td>
+                <td>$500.00</td>
+                <td>
+                  <span class="status-badge status-pending">Pending</span>
+                </td>
+                <td><a href="#" onclick="viewTransaction('2')">View</a></td>
+              </tr>
+              <tr>
+                <td>2025-09-05</td>
+                <td>Withdrawal</td>
+                <td>$200.00</td>
+                <td>
+                  <span class="status-badge status-completed">Completed</span>
+                </td>
+                <td><a href="#" onclick="viewTransaction('3')">View</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      // Initialize App
+      document.addEventListener("DOMContentLoaded", function () {
+        setupFilters();
+        if (
+          window.innerWidth <= 768 &&
+          !document.getElementById("banking-menu").classList.contains("active")
+        ) {
+          toggleSidebar();
+        }
+      });
+
+      // Filter and Sort Handlers
+      function setupFilters() {
+        document
+          .getElementById("filter-type")
+          .addEventListener("change", filterTransactions);
+        document
+          .getElementById("filter-date")
+          .addEventListener("change", filterTransactions);
+      }
+
+      function filterTransactions() {
+        const typeFilter = document.getElementById("filter-type").value;
+        const dateSort = document.getElementById("filter-date").value;
+        const tbody = document
+          .getElementById("transaction-table")
+          .querySelector("tbody");
+        const rows = Array.from(tbody.getElementsByTagName("tr"));
+
+        // Filter by type
+        rows.forEach((row) => {
+          const type = row.cells[1].textContent.toLowerCase();
+          row.style.display =
+            typeFilter === "all" || type === typeFilter ? "" : "none";
+        });
+
+        // Sort by date
+        const sortedRows = rows.sort((a, b) => {
+          const dateA = new Date(a.cells[0].textContent);
+          const dateB = new Date(b.cells[0].textContent);
+          return dateSort === "asc" ? dateA - dateB : dateB - dateA;
+        });
+
+        // Clear and repopulate table
+        while (tbody.firstChild) {
+          tbody.removeChild(tbody.firstChild);
+        }
+        sortedRows.forEach((row) => tbody.appendChild(row));
+      }
+
+      function sortTable(column) {
+        const dateSort = document.getElementById("filter-date").value;
+        const tbody = document
+          .getElementById("transaction-table")
+          .querySelector("tbody");
+        const rows = Array.from(tbody.getElementsByTagName("tr"));
+
+        const index = { date: 0, type: 1, amount: 2, status: 3 }[column];
+        const sortedRows = rows.sort((a, b) => {
+          let valA = a.cells[index].textContent;
+          let valB = b.cells[index].textContent;
+          if (column === "date") {
+            valA = new Date(valA);
+            valB = new Date(valB);
+          } else if (column === "amount") {
+            valA = parseFloat(valA.replace("$", "").replace(",", ""));
+            valB = parseFloat(valB.replace("$", "").replace(",", ""));
+          }
+          return dateSort === "asc"
+            ? valA > valB
+              ? 1
+              : -1
+            : valA < valB
+            ? 1
+            : -1;
+        });
+
+        while (tbody.firstChild) {
+          tbody.removeChild(tbody.firstChild);
+        }
+        sortedRows.forEach((row) => tbody.appendChild(row));
+      }
+
+      function viewTransaction(id) {
+        showAlert(`Viewing transaction #${id} details`, "success");
+      }
+
+      // Utility Functions
+      function showAlert(message, type) {
+        const alertDiv = document.createElement("div");
+        alertDiv.className = `alert alert-${type}`;
+        alertDiv.innerHTML = `<i class="fas fa-${
+          type === "success" ? "check" : "times"
+        }-circle"></i> ${message}`;
+
+        const container = document.querySelector(".container");
+        if (container) {
+          container.insertBefore(alertDiv, container.firstChild);
+          setTimeout(() => {
+            if (alertDiv.parentNode) {
+              alertDiv.parentNode.removeChild(alertDiv);
+            }
+          }, 3000);
+        }
+      }
+
+      // Navigation Functions
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
+        const bankingMenu = document.getElementById("banking-menu");
+        if (window.innerWidth <= 768) {
+          bankingMenu.classList.toggle("active");
+        } else {
+          sidebar.classList.toggle("active");
+        }
+        overlay.classList.toggle("active");
+      }
+
+      function closeSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
+        const bankingMenu = document.getElementById("banking-menu");
+        if (window.innerWidth <= 768) {
+          bankingMenu.classList.remove("active");
+        } else {
+          sidebar.classList.remove("active");
+        }
+        overlay.classList.remove("active");
+      }
+
+      function verifyAccount() {
+        alert("Please complete the verification process.");
+      }
+
+      function logout() {
+        window.location.href = "index.html";
+      }
+
+      // Keyboard Navigation
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeSidebar();
+        }
+      });
+
+      // Responsive Handling
+      window.addEventListener("resize", function () {
+        closeSidebar();
+        if (
+          window.innerWidth > 768 &&
+          !document.getElementById("banking-menu").classList.contains("active")
+        ) {
+          toggleSidebar();
+        }
+      });
+    </script>
+  </body>
+</html>

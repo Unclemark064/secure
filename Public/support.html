@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureBank - Support Ticket</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/general.css" />
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="index.html" class="navbar-brand">SecureBank</a>
+            <button class="hamburger" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="navbar-nav">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="profile-avatar">
+                <i class="fas fa-user"></i>
+                <div class="avatar-upload">
+                    <i class="fas fa-camera" style="font-size: 10px"></i>
+                </div>
+            </div>
+            <h2>John Doe</h2>
+            <p>Account: 48187344800</p>
+            <button class="btn-verify" onclick="verifyAccount()">Verify Account</button>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+            <a href="transactions.html"><i class="fas fa-exchange-alt"></i> Transactions</a>
+            <a href="cards.html"><i class="fas fa-credit-card"></i> Cards</a>
+            <a href="transfer.html"><i class="fas fa-paper-plane"></i> Transfer</a>
+            <a href="international-wire.html"><i class="fas fa-globe"></i> International Wire</a>
+            <a href="deposit.html"><i class="fas fa-plus-circle"></i> Deposit</a>
+            <a href="loan.html"><i class="fas fa-hand-holding-usd"></i> Loan</a>
+            <a href="tax-refund.html"><i class="fas fa-file-invoice-dollar"></i> IRS Tax Refund</a>
+            <a href="loan-history.html"><i class="fas fa-history"></i> Loan History</a>
+            <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+            <a href="support.html" class="active"><i class="fas fa-life-ring"></i> Support Ticket</a>
+            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </nav>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+    <!-- Mobile Banking Menu Modal -->
+    <div id="banking-menu" class="banking-menu">
+        <div class="banking-menu-content">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <i class="fas fa-user"></i>
+                    <div class="avatar-upload">
+                        <i class="fas fa-camera" style="font-size: 10px"></i>
+                    </div>
+                </div>
+                <h2>John Doe</h2>
+                <p>Account: 48187344800</p>
+                <button class="btn-verify" onclick="verifyAccount()">Verify Account</button>
+            </div>
+            <h3>Banking Menu</h3>
+            <p>Select an option to continue</p>
+            <div class="menu-grid">
+                <a href="dashboard.html" class="menu-item"><i class="fas fa-home"></i><span>Dashboard</span></a>
+                <a href="transactions.html" class="menu-item"><i class="fas fa-exchange-alt"></i><span>Transactions</span></a>
+                <a href="cards.html" class="menu-item"><i class="fas fa-credit-card"></i><span>Cards</span></a>
+                <a href="transfer.html" class="menu-item"><i class="fas fa-paper-plane"></i><span>Transfer</span></a>
+                <a href="international-wire.html" class="menu-item"><i class="fas fa-globe"></i><span>International Wire</span></a>
+                <a href="deposit.html" class="menu-item"><i class="fas fa-plus-circle"></i><span>Deposit</span></a>
+                <a href="loan.html" class="menu-item"><i class="fas fa-hand-holding-usd"></i><span>Loan</span></a>
+                <a href="tax-refund.html" class="menu-item"><i class="fas fa-file-invoice-dollar"></i><span>IRS Tax Refund</span></a>
+                <a href="loan-history.html" class="menu-item"><i class="fas fa-history"></i><span>Loan History</span></a>
+                <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i><span>Settings</span></a>
+                <a href="support.html" class="menu-item"><i class="fas fa-life-ring"></i><span>Support Ticket</span></a>
+                <a href="profile.html" class="menu-item"><i class="fas fa-user"></i><span>Profile</span></a>
+                <a href="#" class="menu-item logout-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+            </div>
+            <button class="close-btn" onclick="closeSidebar()"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="dashboard.html" class="mobile-nav-item">
+                <i class="fas fa-home"></i>
+                Home
+            </a>
+            <a href="transactions.html" class="mobile-nav-item">
+                <i class="fas fa-chart-bar"></i>
+                Stats
+            </a>
+            <a href="cards.html" class="mobile-nav-item">
+                <i class="fas fa-credit-card"></i>
+                Cards
+            </a>
+            <a href="profile.html" class="mobile-nav-item">
+                <i class="fas fa-user"></i>
+                Profile
+            </a>
+        </div>
+    </div>
+
+    <!-- Support Ticket Page -->
+    <div class="main-content">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title"><i class="fas fa-life-ring"></i> Submit Support Ticket</h4>
+                </div>
+                <form id="support-form">
+                    <div class="form-group">
+                        <label for="issue-type">Issue Type</label>
+                        <select id="issue-type" class="form-control" required>
+                            <option value="">Select Issue Type</option>
+                            <option value="account">Account Issue</option>
+                            <option value="transaction">Transaction Issue</option>
+                            <option value="card">Card Issue</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" class="form-control" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-ticket-alt"></i> Submit Ticket
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                            <i class="fas fa-undo"></i> Reset
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', function() {
+            setupFormHandlers();
+            updateNavigationDisplay(); // Set initial display based on viewport
+        });
+
+        // Form Handlers
+        function setupFormHandlers() {
+            document.getElementById('support-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                handleSupportTicket();
+            });
+
+            document.getElementById('description').addEventListener('input', validateDescription);
+        }
+
+        // UI Functions
+        function handleSupportTicket() {
+            const issueType = document.getElementById('issue-type').value;
+            const description = document.getElementById('description').value;
+
+            if (!issueType) {
+                showAlert('Please select an issue type', 'danger');
+                document.getElementById('issue-type').classList.add('invalid');
+                return;
+            }
+
+            if (!validateDescription(description)) {
+                showAlert('Description must be at least 10 characters long', 'danger');
+                document.getElementById('description').classList.add('invalid');
+                return;
+            }
+
+            showAlert(`Support ticket for ${issueType} submitted!`, 'success');
+            document.getElementById('support-form').reset();
+        }
+
+        function resetForm() {
+            document.getElementById('support-form').reset();
+            document.querySelectorAll('.form-control').forEach(input => input.classList.remove('invalid'));
+            showAlert('Form reset', 'success');
+        }
+
+        // Validation Functions
+        function validateDescription(description) {
+            const input = typeof description === 'string' ? description : description.target.value;
+            const isValid = input.length >= 10;
+            if (typeof description !== 'string') {
+                description.target.classList.toggle('invalid', input && !isValid);
+            }
+            return isValid;
+        }
+
+        // Utility Functions
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : 'times'}-circle"></i> ${message}`;
+            
+            const container = document.querySelector('.container');
+            if (container) {
+                container.insertBefore(alertDiv, container.firstChild);
+                setTimeout(() => {
+                    if (alertDiv.parentNode) {
+                        alertDiv.parentNode.removeChild(alertDiv);
+                    }
+                }, 3000);
+            }
+        }
+
+        // Navigation Functions
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const bankingMenu = document.getElementById('banking-menu');
+            if (window.innerWidth <= 768) {
+                bankingMenu.classList.toggle('active');
+            } else {
+                sidebar.classList.toggle('active');
+            }
+            overlay.classList.toggle('active');
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const bankingMenu = document.getElementById('banking-menu');
+            if (window.innerWidth <= 768) {
+                bankingMenu.classList.remove('active');
+            } else {
+                sidebar.classList.remove('active');
+            }
+            overlay.classList.remove('active');
+        }
+
+        function verifyAccount() {
+            alert('Please complete the verification process.');
+        }
+
+        function logout() {
+            window.location.href = 'index.html';
+        }
+
+        // Responsive Navigation Display
+        function updateNavigationDisplay() {
+            const sidebar = document.getElementById('sidebar');
+            const bankingMenu = document.getElementById('banking-menu');
+            const overlay = document.getElementById('overlay');
+
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('active');
+                bankingMenu.classList.add('active');
+                overlay.classList.add('active');
+            } else {
+                bankingMenu.classList.remove('active');
+                sidebar.classList.add('active');
+                overlay.classList.remove('active');
+            }
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeSidebar();
+            }
+        });
+
+        // Responsive Handling
+        window.addEventListener('resize', function() {
+            updateNavigationDisplay();
+        });
+    </script>
+</body>
+</html>

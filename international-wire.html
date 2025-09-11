@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SecureBank - Transactions</title>
+    <title>SecureBank - International Wire</title>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/general.css" />
+     <link rel="stylesheet" href="public/css/general.css" />
   </head>
   <body>
     <!-- Navigation -->
@@ -43,12 +43,12 @@
       </div>
       <nav class="sidebar-menu">
         <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
-        <a href="transactions.html" class="active"
+        <a href="transactions.html"
           ><i class="fas fa-exchange-alt"></i> Transactions</a
         >
         <a href="cards.html"><i class="fas fa-credit-card"></i> Cards</a>
         <a href="transfer.html"><i class="fas fa-paper-plane"></i> Transfer</a>
-        <a href="international-wire.html"
+        <a href="international-wire.html" class="active"
           ><i class="fas fa-globe"></i> International Wire</a
         >
         <a href="deposit.html"><i class="fas fa-plus-circle"></i> Deposit</a>
@@ -60,7 +60,9 @@
           ><i class="fas fa-history"></i> Loan History</a
         >
         <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
-        <a href="support.html"><i class="fas fa-support"></i> Support Ticket</a>
+        <a href="support.html"
+          ><i class="fas fa-life-ring"></i> Support Ticket</a
+        >
         <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
         <a href="#" onclick="logout()"
           ><i class="fas fa-sign-out-alt"></i> Logout</a
@@ -122,7 +124,7 @@
             ><i class="fas fa-cog"></i><span>Settings</span></a
           >
           <a href="support.html" class="menu-item"
-            ><i class="fas fa-support"></i><span>Support Ticket</span></a
+            ><i class="fas fa-life-ring"></i><span>Support Ticket</span></a
           >
           <a href="profile.html" class="menu-item"
             ><i class="fas fa-user"></i><span>Profile</span></a
@@ -159,73 +161,97 @@
       </div>
     </div>
 
-    <!-- Transactions Page -->
+    <!-- International Wire Page -->
     <div class="main-content">
       <div class="container">
         <div class="card">
           <div class="card-header">
             <h4 class="card-title">
-              <i class="fas fa-exchange-alt"></i> Recent Transactions
+              <i class="fas fa-globe"></i> International Wire Transfer
             </h4>
           </div>
-          <div class="filter-bar">
+          <form id="wire-form">
             <div class="form-group">
-              <label for="filter-type">Filter by Type</label>
-              <select id="filter-type" class="form-control">
-                <option value="all">All</option>
-                <option value="deposit">Deposit</option>
-                <option value="withdrawal">Withdrawal</option>
-                <option value="transfer">Transfer</option>
+              <label for="from-account">From Account</label>
+              <select id="from-account" class="form-control" required>
+                <option value="">Select Account</option>
+                <option value="checking">Checking (****1234)</option>
+                <option value="savings">Savings (****5678)</option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="filter-date">Sort by Date</label>
-              <select id="filter-date" class="form-control">
-                <option value="desc">Newest First</option>
-                <option value="asc">Oldest First</option>
-              </select>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="recipient-name">Recipient Name</label>
+                <input
+                  type="text"
+                  id="recipient-name"
+                  class="form-control"
+                  placeholder="Enter recipient name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="recipient-account">Recipient Account Number</label>
+                <input
+                  type="text"
+                  id="recipient-account"
+                  class="form-control"
+                  placeholder="Enter account number"
+                  required
+                />
+              </div>
             </div>
-          </div>
-          <table class="table" id="transaction-table">
-            <thead>
-              <tr>
-                <th onclick="sortTable('date')">Date</th>
-                <th onclick="sortTable('type')">Type</th>
-                <th onclick="sortTable('amount')">Amount</th>
-                <th onclick="sortTable('status')">Status</th>
-                <th>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>2025-09-07</td>
-                <td>Deposit</td>
-                <td>$1,000.00</td>
-                <td>
-                  <span class="status-badge status-completed">Completed</span>
-                </td>
-                <td><a href="#" onclick="viewTransaction('1')">View</a></td>
-              </tr>
-              <tr>
-                <td>2025-09-06</td>
-                <td>Transfer</td>
-                <td>$500.00</td>
-                <td>
-                  <span class="status-badge status-pending">Pending</span>
-                </td>
-                <td><a href="#" onclick="viewTransaction('2')">View</a></td>
-              </tr>
-              <tr>
-                <td>2025-09-05</td>
-                <td>Withdrawal</td>
-                <td>$200.00</td>
-                <td>
-                  <span class="status-badge status-completed">Completed</span>
-                </td>
-                <td><a href="#" onclick="viewTransaction('3')">View</a></td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="form-group">
+              <label for="swift-code">SWIFT/BIC Code</label>
+              <input
+                type="text"
+                id="swift-code"
+                class="form-control"
+                placeholder="Enter SWIFT/BIC code"
+                required
+              />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="amount">Amount</label>
+                <input
+                  type="number"
+                  id="amount"
+                  class="form-control"
+                  placeholder="0.00"
+                  step="0.01"
+                  min="0.01"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="currency">Currency</label>
+                <select id="currency" class="form-control" required>
+                  <option value="">Select Currency</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                  <option value="GBP">GBP</option>
+                  <option value="JPY">JPY</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="memo">Memo (Optional)</label>
+              <textarea id="memo" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i> Initiate Wire Transfer
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="resetForm()"
+              >
+                <i class="fas fa-undo"></i> Reset
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -234,89 +260,129 @@
     <script>
       // Initialize App
       document.addEventListener("DOMContentLoaded", function () {
-        setupFilters();
-        if (
-          window.innerWidth <= 768 &&
-          !document.getElementById("banking-menu").classList.contains("active")
-        ) {
-          toggleSidebar();
-        }
+        setupFormHandlers();
+        updateNavigationDisplay();
       });
 
-      // Filter and Sort Handlers
-      function setupFilters() {
+      // Form Handlers
+      function setupFormHandlers() {
         document
-          .getElementById("filter-type")
-          .addEventListener("change", filterTransactions);
+          .getElementById("wire-form")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            handleWireTransfer();
+          });
+
         document
-          .getElementById("filter-date")
-          .addEventListener("change", filterTransactions);
+          .getElementById("recipient-account")
+          .addEventListener("input", validateAccountNumber);
+        document
+          .getElementById("swift-code")
+          .addEventListener("input", validateSwiftCode);
+        document
+          .getElementById("amount")
+          .addEventListener("input", validateAmount);
       }
 
-      function filterTransactions() {
-        const typeFilter = document.getElementById("filter-type").value;
-        const dateSort = document.getElementById("filter-date").value;
-        const tbody = document
-          .getElementById("transaction-table")
-          .querySelector("tbody");
-        const rows = Array.from(tbody.getElementsByTagName("tr"));
+      // UI Functions
+      function handleWireTransfer() {
+        const fromAccount = document.getElementById("from-account").value;
+        const recipientName = document.getElementById("recipient-name").value;
+        const recipientAccount =
+          document.getElementById("recipient-account").value;
+        const swiftCode = document.getElementById("swift-code").value;
+        const amount = document.getElementById("amount").value;
+        const currency = document.getElementById("currency").value;
+        const memo = document.getElementById("memo").value;
 
-        // Filter by type
-        rows.forEach((row) => {
-          const type = row.cells[1].textContent.toLowerCase();
-          row.style.display =
-            typeFilter === "all" || type === typeFilter ? "" : "none";
-        });
-
-        // Sort by date
-        const sortedRows = rows.sort((a, b) => {
-          const dateA = new Date(a.cells[0].textContent);
-          const dateB = new Date(b.cells[0].textContent);
-          return dateSort === "asc" ? dateA - dateB : dateB - dateA;
-        });
-
-        // Clear and repopulate table
-        while (tbody.firstChild) {
-          tbody.removeChild(tbody.firstChild);
+        if (!fromAccount) {
+          showAlert("Please select a source account", "danger");
+          document.getElementById("from-account").classList.add("invalid");
+          return;
         }
-        sortedRows.forEach((row) => tbody.appendChild(row));
-      }
 
-      function sortTable(column) {
-        const dateSort = document.getElementById("filter-date").value;
-        const tbody = document
-          .getElementById("transaction-table")
-          .querySelector("tbody");
-        const rows = Array.from(tbody.getElementsByTagName("tr"));
-
-        const index = { date: 0, type: 1, amount: 2, status: 3 }[column];
-        const sortedRows = rows.sort((a, b) => {
-          let valA = a.cells[index].textContent;
-          let valB = b.cells[index].textContent;
-          if (column === "date") {
-            valA = new Date(valA);
-            valB = new Date(valB);
-          } else if (column === "amount") {
-            valA = parseFloat(valA.replace("$", "").replace(",", ""));
-            valB = parseFloat(valB.replace("$", "").replace(",", ""));
-          }
-          return dateSort === "asc"
-            ? valA > valB
-              ? 1
-              : -1
-            : valA < valB
-            ? 1
-            : -1;
-        });
-
-        while (tbody.firstChild) {
-          tbody.removeChild(tbody.firstChild);
+        if (!recipientName) {
+          showAlert("Please enter the recipient name", "danger");
+          document.getElementById("recipient-name").classList.add("invalid");
+          return;
         }
-        sortedRows.forEach((row) => tbody.appendChild(row));
+
+        if (!validateAccountNumber(recipientAccount)) {
+          showAlert(
+            "Please enter a valid account number (10-20 digits)",
+            "danger"
+          );
+          document.getElementById("recipient-account").classList.add("invalid");
+          return;
+        }
+
+        if (!validateSwiftCode(swiftCode)) {
+          showAlert(
+            "Please enter a valid SWIFT/BIC code (8 or 11 characters)",
+            "danger"
+          );
+          document.getElementById("swift-code").classList.add("invalid");
+          return;
+        }
+
+        if (!amount || amount <= 0) {
+          showAlert("Please enter a valid transfer amount", "danger");
+          document.getElementById("amount").classList.add("invalid");
+          return;
+        }
+
+        if (!currency) {
+          showAlert("Please select a currency", "danger");
+          document.getElementById("currency").classList.add("invalid");
+          return;
+        }
+
+        showAlert(
+          `International wire transfer of ${amount} ${currency} to ${recipientName} initiated${
+            memo ? " with memo: " + memo : ""
+          }!`,
+          "success"
+        );
+        document.getElementById("wire-form").reset();
       }
 
-      function viewTransaction(id) {
-        showAlert(`Viewing transaction #${id} details`, "success");
+      function resetForm() {
+        document.getElementById("wire-form").reset();
+        document
+          .querySelectorAll(".form-control")
+          .forEach((input) => input.classList.remove("invalid"));
+        showAlert("Form reset", "success");
+      }
+
+      // Validation Functions
+      function validateAccountNumber(account) {
+        const input =
+          typeof account === "string" ? account : account.target.value;
+        const re = /^\d{10,20}$/;
+        const isValid = re.test(input);
+        if (typeof account !== "string") {
+          account.target.classList.toggle("invalid", input && !isValid);
+        }
+        return isValid;
+      }
+
+      function validateSwiftCode(swift) {
+        const input = typeof swift === "string" ? swift : swift.target.value;
+        const re = /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/;
+        const isValid = re.test(input);
+        if (typeof swift !== "string") {
+          swift.target.classList.toggle("invalid", input && !isValid);
+        }
+        return isValid;
+      }
+
+      function validateAmount(e) {
+        const input = e.target;
+        const value = parseFloat(input.value);
+        input.classList.toggle(
+          "invalid",
+          input.value && (isNaN(value) || value <= 0)
+        );
       }
 
       // Utility Functions
@@ -371,6 +437,23 @@
         window.location.href = "index.html";
       }
 
+      // Responsive Navigation Display
+      function updateNavigationDisplay() {
+        const sidebar = document.getElementById("sidebar");
+        const bankingMenu = document.getElementById("banking-menu");
+        const overlay = document.getElementById("overlay");
+
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove("active");
+          bankingMenu.classList.add("active");
+          overlay.classList.add("active");
+        } else {
+          bankingMenu.classList.remove("active");
+          sidebar.classList.add("active");
+          overlay.classList.remove("active");
+        }
+      }
+
       // Keyboard Navigation
       document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") {
@@ -380,13 +463,7 @@
 
       // Responsive Handling
       window.addEventListener("resize", function () {
-        closeSidebar();
-        if (
-          window.innerWidth > 768 &&
-          !document.getElementById("banking-menu").classList.contains("active")
-        ) {
-          toggleSidebar();
-        }
+        updateNavigationDisplay();
       });
     </script>
   </body>

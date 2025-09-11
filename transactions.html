@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SecureBank - Transfer</title>
+    <title>SecureBank - Transactions</title>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/general.css" />
+       <link rel="stylesheet" href="public/css/general.css" />
   </head>
   <body>
     <!-- Navigation -->
@@ -43,13 +43,11 @@
       </div>
       <nav class="sidebar-menu">
         <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
-        <a href="transactions.html"
+        <a href="transactions.html" class="active"
           ><i class="fas fa-exchange-alt"></i> Transactions</a
         >
         <a href="cards.html"><i class="fas fa-credit-card"></i> Cards</a>
-        <a href="transfer.html" class="active"
-          ><i class="fas fa-paper-plane"></i> Transfer</a
-        >
+        <a href="transfer.html"><i class="fas fa-paper-plane"></i> Transfer</a>
         <a href="international-wire.html"
           ><i class="fas fa-globe"></i> International Wire</a
         >
@@ -161,63 +159,73 @@
       </div>
     </div>
 
-    <!-- Transfer Page -->
+    <!-- Transactions Page -->
     <div class="main-content">
       <div class="container">
         <div class="card">
           <div class="card-header">
             <h4 class="card-title">
-              <i class="fas fa-paper-plane"></i> Domestic Transfer
+              <i class="fas fa-exchange-alt"></i> Recent Transactions
             </h4>
           </div>
-          <form id="transfer-form">
+          <div class="filter-bar">
             <div class="form-group">
-              <label for="from-account">From Account</label>
-              <select id="from-account" class="form-control" required>
-                <option value="">Select Account</option>
-                <option value="checking">Checking (****1234)</option>
-                <option value="savings">Savings (****5678)</option>
+              <label for="filter-type">Filter by Type</label>
+              <select id="filter-type" class="form-control">
+                <option value="all">All</option>
+                <option value="deposit">Deposit</option>
+                <option value="withdrawal">Withdrawal</option>
+                <option value="transfer">Transfer</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="to-account">To Account Number</label>
-              <input
-                type="text"
-                id="to-account"
-                class="form-control"
-                placeholder="Enter account number"
-                required
-              />
+              <label for="filter-date">Sort by Date</label>
+              <select id="filter-date" class="form-control">
+                <option value="desc">Newest First</option>
+                <option value="asc">Oldest First</option>
+              </select>
             </div>
-            <div class="form-group">
-              <label for="amount">Amount ($)</label>
-              <input
-                type="number"
-                id="amount"
-                class="form-control"
-                placeholder="0.00"
-                step="0.01"
-                min="0.01"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="memo">Memo (Optional)</label>
-              <textarea id="memo" class="form-control" rows="3"></textarea>
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary">
-                <i class="fas fa-paper-plane"></i> Initiate Transfer
-              </button>
-              <button
-                type="button"
-                class="btn btn-secondary"
-                onclick="resetForm()"
-              >
-                <i class="fas fa-undo"></i> Reset
-              </button>
-            </div>
-          </form>
+          </div>
+          <table class="table" id="transaction-table">
+            <thead>
+              <tr>
+                <th onclick="sortTable('date')">Date</th>
+                <th onclick="sortTable('type')">Type</th>
+                <th onclick="sortTable('amount')">Amount</th>
+                <th onclick="sortTable('status')">Status</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2025-09-07</td>
+                <td>Deposit</td>
+                <td>$1,000.00</td>
+                <td>
+                  <span class="status-badge status-completed">Completed</span>
+                </td>
+                <td><a href="#" onclick="viewTransaction('1')">View</a></td>
+              </tr>
+              <tr>
+                <td>2025-09-06</td>
+                <td>Transfer</td>
+                <td>$500.00</td>
+                <td>
+                  <span class="status-badge status-pending">Pending</span>
+                </td>
+                <td><a href="#" onclick="viewTransaction('2')">View</a></td>
+              </tr>
+              <tr>
+                <td>2025-09-05</td>
+                <td>Withdrawal</td>
+                <td>$200.00</td>
+                <td>
+                  <span class="status-badge status-completed">Completed</span>
+                </td>
+                <td><a href="#" onclick="viewTransaction('3')">View</a></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -226,7 +234,7 @@
     <script>
       // Initialize App
       document.addEventListener("DOMContentLoaded", function () {
-        setupFormHandlers();
+        setupFilters();
         if (
           window.innerWidth <= 768 &&
           !document.getElementById("banking-menu").classList.contains("active")
@@ -235,87 +243,80 @@
         }
       });
 
-      // Form Handlers
-      function setupFormHandlers() {
+      // Filter and Sort Handlers
+      function setupFilters() {
         document
-          .getElementById("transfer-form")
-          .addEventListener("submit", function (e) {
-            e.preventDefault();
-            handleTransfer();
-          });
-
+          .getElementById("filter-type")
+          .addEventListener("change", filterTransactions);
         document
-          .getElementById("to-account")
-          .addEventListener("input", validateAccountNumber);
-        document
-          .getElementById("amount")
-          .addEventListener("input", validateAmount);
+          .getElementById("filter-date")
+          .addEventListener("change", filterTransactions);
       }
 
-      // UI Functions
-      function handleTransfer() {
-        const fromAccount = document.getElementById("from-account").value;
-        const toAccount = document.getElementById("to-account").value;
-        const amount = document.getElementById("amount").value;
-        const memo = document.getElementById("memo").value;
+      function filterTransactions() {
+        const typeFilter = document.getElementById("filter-type").value;
+        const dateSort = document.getElementById("filter-date").value;
+        const tbody = document
+          .getElementById("transaction-table")
+          .querySelector("tbody");
+        const rows = Array.from(tbody.getElementsByTagName("tr"));
 
-        if (!fromAccount) {
-          showAlert("Please select a source account", "danger");
-          document.getElementById("from-account").classList.add("invalid");
-          return;
+        // Filter by type
+        rows.forEach((row) => {
+          const type = row.cells[1].textContent.toLowerCase();
+          row.style.display =
+            typeFilter === "all" || type === typeFilter ? "" : "none";
+        });
+
+        // Sort by date
+        const sortedRows = rows.sort((a, b) => {
+          const dateA = new Date(a.cells[0].textContent);
+          const dateB = new Date(b.cells[0].textContent);
+          return dateSort === "asc" ? dateA - dateB : dateB - dateA;
+        });
+
+        // Clear and repopulate table
+        while (tbody.firstChild) {
+          tbody.removeChild(tbody.firstChild);
         }
-
-        if (!validateAccountNumber(toAccount)) {
-          showAlert(
-            "Please enter a valid account number (10 digits)",
-            "danger"
-          );
-          document.getElementById("to-account").classList.add("invalid");
-          return;
-        }
-
-        if (!amount || amount <= 0) {
-          showAlert("Please enter a valid transfer amount", "danger");
-          document.getElementById("amount").classList.add("invalid");
-          return;
-        }
-
-        showAlert(
-          `Transfer of $${amount} to account ${toAccount} initiated${
-            memo ? " with memo: " + memo : ""
-          }!`,
-          "success"
-        );
-        document.getElementById("transfer-form").reset();
+        sortedRows.forEach((row) => tbody.appendChild(row));
       }
 
-      function resetForm() {
-        document.getElementById("transfer-form").reset();
-        document
-          .querySelectorAll(".form-control")
-          .forEach((input) => input.classList.remove("invalid"));
-        showAlert("Form reset", "success");
-      }
+      function sortTable(column) {
+        const dateSort = document.getElementById("filter-date").value;
+        const tbody = document
+          .getElementById("transaction-table")
+          .querySelector("tbody");
+        const rows = Array.from(tbody.getElementsByTagName("tr"));
 
-      // Validation Functions
-      function validateAccountNumber(account) {
-        const input =
-          typeof account === "string" ? account : account.target.value;
-        const re = /^\d{10}$/;
-        const isValid = re.test(input);
-        if (typeof account !== "string") {
-          account.target.classList.toggle("invalid", input && !isValid);
+        const index = { date: 0, type: 1, amount: 2, status: 3 }[column];
+        const sortedRows = rows.sort((a, b) => {
+          let valA = a.cells[index].textContent;
+          let valB = b.cells[index].textContent;
+          if (column === "date") {
+            valA = new Date(valA);
+            valB = new Date(valB);
+          } else if (column === "amount") {
+            valA = parseFloat(valA.replace("$", "").replace(",", ""));
+            valB = parseFloat(valB.replace("$", "").replace(",", ""));
+          }
+          return dateSort === "asc"
+            ? valA > valB
+              ? 1
+              : -1
+            : valA < valB
+            ? 1
+            : -1;
+        });
+
+        while (tbody.firstChild) {
+          tbody.removeChild(tbody.firstChild);
         }
-        return isValid;
+        sortedRows.forEach((row) => tbody.appendChild(row));
       }
 
-      function validateAmount(e) {
-        const input = e.target;
-        const value = parseFloat(input.value);
-        input.classList.toggle(
-          "invalid",
-          input.value && (isNaN(value) || value <= 0)
-        );
+      function viewTransaction(id) {
+        showAlert(`Viewing transaction #${id} details`, "success");
       }
 
       // Utility Functions

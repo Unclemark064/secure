@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SecureBank - Deposit</title>
+    <title>SecureBank - Loan Application</title>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/general.css" />
+       <link rel="stylesheet" href="public/css/general.css" />
   </head>
   <body>
     <!-- Navigation -->
@@ -37,22 +37,38 @@
         </div>
         <h2>John Doe</h2>
         <p>Account: 48187344800</p>
-        <button class="btn-verify" onclick="verifyAccount()">Verify Account</button>
+        <button class="btn-verify" onclick="verifyAccount()">
+          Verify Account
+        </button>
       </div>
       <nav class="sidebar-menu">
         <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
-        <a href="transactions.html"><i class="fas fa-exchange-alt"></i> Transactions</a>
+        <a href="transactions.html"
+          ><i class="fas fa-exchange-alt"></i> Transactions</a
+        >
         <a href="cards.html"><i class="fas fa-credit-card"></i> Cards</a>
         <a href="transfer.html"><i class="fas fa-paper-plane"></i> Transfer</a>
-        <a href="international-wire.html"><i class="fas fa-globe"></i> International Wire</a>
-        <a href="deposit.html" class="active"><i class="fas fa-plus-circle"></i> Deposit</a>
-        <a href="loan.html"><i class="fas fa-hand-holding-usd"></i> Loan</a>
-        <a href="tax-refund.html"><i class="fas fa-file-invoice-dollar"></i> IRS Tax Refund</a>
-        <a href="loan-history.html"><i class="fas fa-history"></i> Loan History</a>
+        <a href="international-wire.html"
+          ><i class="fas fa-globe"></i> International Wire</a
+        >
+        <a href="deposit.html"><i class="fas fa-plus-circle"></i> Deposit</a>
+        <a href="loan.html" class="active"
+          ><i class="fas fa-hand-holding-usd"></i> Loan</a
+        >
+        <a href="tax-refund.html"
+          ><i class="fas fa-file-invoice-dollar"></i> IRS Tax Refund</a
+        >
+        <a href="loan-history.html"
+          ><i class="fas fa-history"></i> Loan History</a
+        >
         <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
-        <a href="support.html"><i class="fas fa-support"></i> Support Ticket</a>
+        <a href="support.html"
+          ><i class="fas fa-life-ring"></i> Support Ticket</a
+        >
         <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
-        <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        <a href="#" onclick="logout()"
+          ><i class="fas fa-sign-out-alt"></i> Logout</a
+        >
       </nav>
     </div>
 
@@ -71,26 +87,57 @@
           </div>
           <h2>John Doe</h2>
           <p>Account: 48187344800</p>
-          <button class="btn-verify" onclick="verifyAccount()">Verify Account</button>
+          <button class="btn-verify" onclick="verifyAccount()">
+            Verify Account
+          </button>
         </div>
         <h3>Banking Menu</h3>
         <p>Select an option to continue</p>
         <div class="menu-grid">
-          <a href="dashboard.html" class="menu-item"><i class="fas fa-home"></i><span>Dashboard</span></a>
-          <a href="transactions.html" class="menu-item"><i class="fas fa-exchange-alt"></i><span>Transactions</span></a>
-          <a href="cards.html" class="menu-item"><i class="fas fa-credit-card"></i><span>Cards</span></a>
-          <a href="transfer.html" class="menu-item"><i class="fas fa-paper-plane"></i><span>Transfer</span></a>
-          <a href="international-wire.html" class="menu-item"><i class="fas fa-globe"></i><span>International Wire</span></a>
-          <a href="deposit.html" class="menu-item"><i class="fas fa-plus-circle"></i><span>Deposit</span></a>
-          <a href="loan.html" class="menu-item"><i class="fas fa-hand-holding-usd"></i><span>Loan</span></a>
-          <a href="tax-refund.html" class="menu-item"><i class="fas fa-file-invoice-dollar"></i><span>IRS Tax Refund</span></a>
-          <a href="loan-history.html" class="menu-item"><i class="fas fa-history"></i><span>Loan History</span></a>
-          <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i><span>Settings</span></a>
-          <a href="support.html" class="menu-item"><i class="fas fa-support"></i><span>Support Ticket</span></a>
-          <a href="profile.html" class="menu-item"><i class="fas fa-user"></i><span>Profile</span></a>
-          <a href="#" class="menu-item logout-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+          <a href="dashboard.html" class="menu-item"
+            ><i class="fas fa-home"></i><span>Dashboard</span></a
+          >
+          <a href="transactions.html" class="menu-item"
+            ><i class="fas fa-exchange-alt"></i><span>Transactions</span></a
+          >
+          <a href="cards.html" class="menu-item"
+            ><i class="fas fa-credit-card"></i><span>Cards</span></a
+          >
+          <a href="transfer.html" class="menu-item"
+            ><i class="fas fa-paper-plane"></i><span>Transfer</span></a
+          >
+          <a href="international-wire.html" class="menu-item"
+            ><i class="fas fa-globe"></i><span>International Wire</span></a
+          >
+          <a href="deposit.html" class="menu-item"
+            ><i class="fas fa-plus-circle"></i><span>Deposit</span></a
+          >
+          <a href="loan.html" class="menu-item"
+            ><i class="fas fa-hand-holding-usd"></i><span>Loan</span></a
+          >
+          <a href="tax-refund.html" class="menu-item"
+            ><i class="fas fa-file-invoice-dollar"></i
+            ><span>IRS Tax Refund</span></a
+          >
+          <a href="loan-history.html" class="menu-item"
+            ><i class="fas fa-history"></i><span>Loan History</span></a
+          >
+          <a href="settings.html" class="menu-item"
+            ><i class="fas fa-cog"></i><span>Settings</span></a
+          >
+          <a href="support.html" class="menu-item"
+            ><i class="fas fa-life-ring"></i><span>Support Ticket</span></a
+          >
+          <a href="profile.html" class="menu-item"
+            ><i class="fas fa-user"></i><span>Profile</span></a
+          >
+          <a href="#" class="menu-item logout-item" onclick="logout()"
+            ><i class="fas fa-sign-out-alt"></i><span>Logout</span></a
+          >
         </div>
-        <button class="close-btn" onclick="closeSidebar()"><i class="fas fa-times"></i></button>
+        <button class="close-btn" onclick="closeSidebar()">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
     </div>
 
@@ -116,52 +163,61 @@
       </div>
     </div>
 
-    <!-- Deposit Page -->
+    <!-- Loan Application Page -->
     <div class="main-content">
       <div class="container">
         <div class="card">
           <div class="card-header">
             <h4 class="card-title">
-              <i class="fas fa-plus-circle"></i> Deposit Funds
+              <i class="fas fa-hand-holding-usd"></i> Loan Application
             </h4>
           </div>
-          <form id="deposit-form">
+          <form id="loan-form">
             <div class="form-group">
-              <label for="to-account">To Account</label>
-              <select id="to-account" class="form-control" required>
-                <option value="">Select Account</option>
-                <option value="checking">Checking (****1234)</option>
-                <option value="savings">Savings (****5678)</option>
+              <label for="loan-type">Loan Type</label>
+              <select id="loan-type" class="form-control" required>
+                <option value="">Select Loan Type</option>
+                <option value="personal">Personal Loan</option>
+                <option value="mortgage">Mortgage</option>
+                <option value="auto">Auto Loan</option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="deposit-method">Deposit Method</label>
-              <select id="deposit-method" class="form-control" required>
-                <option value="">Select Method</option>
-                <option value="bank-transfer">Bank Transfer</option>
-                <option value="check">Check</option>
-                <option value="cash">Cash</option>
-              </select>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="amount">Loan Amount ($)</label>
+                <input
+                  type="number"
+                  id="amount"
+                  class="form-control"
+                  placeholder="0.00"
+                  step="0.01"
+                  min="1000"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="term">Loan Term (Years)</label>
+                <select id="term" class="form-control" required>
+                  <option value="">Select Term</option>
+                  <option value="1">1 Year</option>
+                  <option value="3">3 Years</option>
+                  <option value="5">5 Years</option>
+                  <option value="10">10 Years</option>
+                </select>
+              </div>
             </div>
             <div class="form-group">
-              <label for="amount">Amount ($)</label>
-              <input
-                type="number"
-                id="amount"
+              <label for="purpose">Purpose of Loan</label>
+              <textarea
+                id="purpose"
                 class="form-control"
-                placeholder="0.00"
-                step="0.01"
-                min="0.01"
+                rows="3"
                 required
-              />
-            </div>
-            <div class="form-group">
-              <label for="memo">Memo (Optional)</label>
-              <textarea id="memo" class="form-control" rows="3"></textarea>
+              ></textarea>
             </div>
             <div class="form-group">
               <button type="submit" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Deposit
+                <i class="fas fa-file-alt"></i> Apply for Loan
               </button>
               <button
                 type="button"
@@ -187,10 +243,10 @@
       // Form Handlers
       function setupFormHandlers() {
         document
-          .getElementById("deposit-form")
+          .getElementById("loan-form")
           .addEventListener("submit", function (e) {
             e.preventDefault();
-            handleDeposit();
+            handleLoanApplication();
           });
 
         document
@@ -199,41 +255,45 @@
       }
 
       // UI Functions
-      function handleDeposit() {
-        const toAccount = document.getElementById("to-account").value;
-        const depositMethod = document.getElementById("deposit-method").value;
+      function handleLoanApplication() {
+        const loanType = document.getElementById("loan-type").value;
         const amount = document.getElementById("amount").value;
-        const memo = document.getElementById("memo").value;
+        const term = document.getElementById("term").value;
+        const purpose = document.getElementById("purpose").value;
 
-        if (!toAccount) {
-          showAlert("Please select a destination account", "danger");
-          document.getElementById("to-account").classList.add("invalid");
+        if (!loanType) {
+          showAlert("Please select a loan type", "danger");
+          document.getElementById("loan-type").classList.add("invalid");
           return;
         }
 
-        if (!depositMethod) {
-          showAlert("Please select a deposit method", "danger");
-          document.getElementById("deposit-method").classList.add("invalid");
-          return;
-        }
-
-        if (!amount || amount <= 0) {
-          showAlert("Please enter a valid deposit amount", "danger");
+        if (!amount || amount < 1000) {
+          showAlert("Please enter a loan amount of at least $1000", "danger");
           document.getElementById("amount").classList.add("invalid");
           return;
         }
 
+        if (!term) {
+          showAlert("Please select a loan term", "danger");
+          document.getElementById("term").classList.add("invalid");
+          return;
+        }
+
+        if (!purpose) {
+          showAlert("Please enter the purpose of the loan", "danger");
+          document.getElementById("purpose").classList.add("invalid");
+          return;
+        }
+
         showAlert(
-          `Deposit of $${amount} to ${toAccount} via ${depositMethod} initiated${
-            memo ? " with memo: " + memo : ""
-          }!`,
+          `Loan application for $${amount} ${loanType} over ${term} years submitted!`,
           "success"
         );
-        document.getElementById("deposit-form").reset();
+        document.getElementById("loan-form").reset();
       }
 
       function resetForm() {
-        document.getElementById("deposit-form").reset();
+        document.getElementById("loan-form").reset();
         document
           .querySelectorAll(".form-control")
           .forEach((input) => input.classList.remove("invalid"));
@@ -246,7 +306,7 @@
         const value = parseFloat(input.value);
         input.classList.toggle(
           "invalid",
-          input.value && (isNaN(value) || value <= 0)
+          input.value && (isNaN(value) || value < 1000)
         );
       }
 

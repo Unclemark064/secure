@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SecureBank - International Wire</title>
+    <title>SecureBank - Transfer</title>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/general.css" />
+       <link rel="stylesheet" href="public/css/general.css" />
   </head>
   <body>
     <!-- Navigation -->
@@ -47,8 +47,10 @@
           ><i class="fas fa-exchange-alt"></i> Transactions</a
         >
         <a href="cards.html"><i class="fas fa-credit-card"></i> Cards</a>
-        <a href="transfer.html"><i class="fas fa-paper-plane"></i> Transfer</a>
-        <a href="international-wire.html" class="active"
+        <a href="transfer.html" class="active"
+          ><i class="fas fa-paper-plane"></i> Transfer</a
+        >
+        <a href="international-wire.html"
           ><i class="fas fa-globe"></i> International Wire</a
         >
         <a href="deposit.html"><i class="fas fa-plus-circle"></i> Deposit</a>
@@ -60,9 +62,7 @@
           ><i class="fas fa-history"></i> Loan History</a
         >
         <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
-        <a href="support.html"
-          ><i class="fas fa-life-ring"></i> Support Ticket</a
-        >
+        <a href="support.html"><i class="fas fa-support"></i> Support Ticket</a>
         <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
         <a href="#" onclick="logout()"
           ><i class="fas fa-sign-out-alt"></i> Logout</a
@@ -124,7 +124,7 @@
             ><i class="fas fa-cog"></i><span>Settings</span></a
           >
           <a href="support.html" class="menu-item"
-            ><i class="fas fa-life-ring"></i><span>Support Ticket</span></a
+            ><i class="fas fa-support"></i><span>Support Ticket</span></a
           >
           <a href="profile.html" class="menu-item"
             ><i class="fas fa-user"></i><span>Profile</span></a
@@ -161,16 +161,16 @@
       </div>
     </div>
 
-    <!-- International Wire Page -->
+    <!-- Transfer Page -->
     <div class="main-content">
       <div class="container">
         <div class="card">
           <div class="card-header">
             <h4 class="card-title">
-              <i class="fas fa-globe"></i> International Wire Transfer
+              <i class="fas fa-paper-plane"></i> Domestic Transfer
             </h4>
           </div>
-          <form id="wire-form">
+          <form id="transfer-form">
             <div class="form-group">
               <label for="from-account">From Account</label>
               <select id="from-account" class="form-control" required>
@@ -179,61 +179,27 @@
                 <option value="savings">Savings (****5678)</option>
               </select>
             </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="recipient-name">Recipient Name</label>
-                <input
-                  type="text"
-                  id="recipient-name"
-                  class="form-control"
-                  placeholder="Enter recipient name"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="recipient-account">Recipient Account Number</label>
-                <input
-                  type="text"
-                  id="recipient-account"
-                  class="form-control"
-                  placeholder="Enter account number"
-                  required
-                />
-              </div>
-            </div>
             <div class="form-group">
-              <label for="swift-code">SWIFT/BIC Code</label>
+              <label for="to-account">To Account Number</label>
               <input
                 type="text"
-                id="swift-code"
+                id="to-account"
                 class="form-control"
-                placeholder="Enter SWIFT/BIC code"
+                placeholder="Enter account number"
                 required
               />
             </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="amount">Amount</label>
-                <input
-                  type="number"
-                  id="amount"
-                  class="form-control"
-                  placeholder="0.00"
-                  step="0.01"
-                  min="0.01"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="currency">Currency</label>
-                <select id="currency" class="form-control" required>
-                  <option value="">Select Currency</option>
-                  <option value="USD">USD</option>
-                  <option value="EUR">EUR</option>
-                  <option value="GBP">GBP</option>
-                  <option value="JPY">JPY</option>
-                </select>
-              </div>
+            <div class="form-group">
+              <label for="amount">Amount ($)</label>
+              <input
+                type="number"
+                id="amount"
+                class="form-control"
+                placeholder="0.00"
+                step="0.01"
+                min="0.01"
+                required
+              />
             </div>
             <div class="form-group">
               <label for="memo">Memo (Optional)</label>
@@ -241,7 +207,7 @@
             </div>
             <div class="form-group">
               <button type="submit" class="btn btn-primary">
-                <i class="fas fa-paper-plane"></i> Initiate Wire Transfer
+                <i class="fas fa-paper-plane"></i> Initiate Transfer
               </button>
               <button
                 type="button"
@@ -261,38 +227,36 @@
       // Initialize App
       document.addEventListener("DOMContentLoaded", function () {
         setupFormHandlers();
-        updateNavigationDisplay();
+        if (
+          window.innerWidth <= 768 &&
+          !document.getElementById("banking-menu").classList.contains("active")
+        ) {
+          toggleSidebar();
+        }
       });
 
       // Form Handlers
       function setupFormHandlers() {
         document
-          .getElementById("wire-form")
+          .getElementById("transfer-form")
           .addEventListener("submit", function (e) {
             e.preventDefault();
-            handleWireTransfer();
+            handleTransfer();
           });
 
         document
-          .getElementById("recipient-account")
+          .getElementById("to-account")
           .addEventListener("input", validateAccountNumber);
-        document
-          .getElementById("swift-code")
-          .addEventListener("input", validateSwiftCode);
         document
           .getElementById("amount")
           .addEventListener("input", validateAmount);
       }
 
       // UI Functions
-      function handleWireTransfer() {
+      function handleTransfer() {
         const fromAccount = document.getElementById("from-account").value;
-        const recipientName = document.getElementById("recipient-name").value;
-        const recipientAccount =
-          document.getElementById("recipient-account").value;
-        const swiftCode = document.getElementById("swift-code").value;
+        const toAccount = document.getElementById("to-account").value;
         const amount = document.getElementById("amount").value;
-        const currency = document.getElementById("currency").value;
         const memo = document.getElementById("memo").value;
 
         if (!fromAccount) {
@@ -301,27 +265,12 @@
           return;
         }
 
-        if (!recipientName) {
-          showAlert("Please enter the recipient name", "danger");
-          document.getElementById("recipient-name").classList.add("invalid");
-          return;
-        }
-
-        if (!validateAccountNumber(recipientAccount)) {
+        if (!validateAccountNumber(toAccount)) {
           showAlert(
-            "Please enter a valid account number (10-20 digits)",
+            "Please enter a valid account number (10 digits)",
             "danger"
           );
-          document.getElementById("recipient-account").classList.add("invalid");
-          return;
-        }
-
-        if (!validateSwiftCode(swiftCode)) {
-          showAlert(
-            "Please enter a valid SWIFT/BIC code (8 or 11 characters)",
-            "danger"
-          );
-          document.getElementById("swift-code").classList.add("invalid");
+          document.getElementById("to-account").classList.add("invalid");
           return;
         }
 
@@ -331,23 +280,17 @@
           return;
         }
 
-        if (!currency) {
-          showAlert("Please select a currency", "danger");
-          document.getElementById("currency").classList.add("invalid");
-          return;
-        }
-
         showAlert(
-          `International wire transfer of ${amount} ${currency} to ${recipientName} initiated${
+          `Transfer of $${amount} to account ${toAccount} initiated${
             memo ? " with memo: " + memo : ""
           }!`,
           "success"
         );
-        document.getElementById("wire-form").reset();
+        document.getElementById("transfer-form").reset();
       }
 
       function resetForm() {
-        document.getElementById("wire-form").reset();
+        document.getElementById("transfer-form").reset();
         document
           .querySelectorAll(".form-control")
           .forEach((input) => input.classList.remove("invalid"));
@@ -358,20 +301,10 @@
       function validateAccountNumber(account) {
         const input =
           typeof account === "string" ? account : account.target.value;
-        const re = /^\d{10,20}$/;
+        const re = /^\d{10}$/;
         const isValid = re.test(input);
         if (typeof account !== "string") {
           account.target.classList.toggle("invalid", input && !isValid);
-        }
-        return isValid;
-      }
-
-      function validateSwiftCode(swift) {
-        const input = typeof swift === "string" ? swift : swift.target.value;
-        const re = /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/;
-        const isValid = re.test(input);
-        if (typeof swift !== "string") {
-          swift.target.classList.toggle("invalid", input && !isValid);
         }
         return isValid;
       }
@@ -437,23 +370,6 @@
         window.location.href = "index.html";
       }
 
-      // Responsive Navigation Display
-      function updateNavigationDisplay() {
-        const sidebar = document.getElementById("sidebar");
-        const bankingMenu = document.getElementById("banking-menu");
-        const overlay = document.getElementById("overlay");
-
-        if (window.innerWidth <= 768) {
-          sidebar.classList.remove("active");
-          bankingMenu.classList.add("active");
-          overlay.classList.add("active");
-        } else {
-          bankingMenu.classList.remove("active");
-          sidebar.classList.add("active");
-          overlay.classList.remove("active");
-        }
-      }
-
       // Keyboard Navigation
       document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") {
@@ -463,7 +379,13 @@
 
       // Responsive Handling
       window.addEventListener("resize", function () {
-        updateNavigationDisplay();
+        closeSidebar();
+        if (
+          window.innerWidth > 768 &&
+          !document.getElementById("banking-menu").classList.contains("active")
+        ) {
+          toggleSidebar();
+        }
       });
     </script>
   </body>

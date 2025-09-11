@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SecureBank - Loan Application</title>
+    <title>SecureBank - Dashboard</title>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="Public/css/general.css" />
   </head>
   <body>
     <!-- Navigation -->
@@ -42,7 +42,9 @@
         </button>
       </div>
       <nav class="sidebar-menu">
-        <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="dashboard.html" class="active"
+          ><i class="fas fa-home"></i> Dashboard</a
+        >
         <a href="transactions.html"
           ><i class="fas fa-exchange-alt"></i> Transactions</a
         >
@@ -52,9 +54,7 @@
           ><i class="fas fa-globe"></i> International Wire</a
         >
         <a href="deposit.html"><i class="fas fa-plus-circle"></i> Deposit</a>
-        <a href="loan.html" class="active"
-          ><i class="fas fa-hand-holding-usd"></i> Loan</a
-        >
+        <a href="loan.html"><i class="fas fa-hand-holding-usd"></i> Loan</a>
         <a href="tax-refund.html"
           ><i class="fas fa-file-invoice-dollar"></i> IRS Tax Refund</a
         >
@@ -62,9 +62,7 @@
           ><i class="fas fa-history"></i> Loan History</a
         >
         <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
-        <a href="support.html"
-          ><i class="fas fa-life-ring"></i> Support Ticket</a
-        >
+        <a href="support.html"><i class="fas fa-support"></i> Support Ticket</a>
         <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
         <a href="#" onclick="logout()"
           ><i class="fas fa-sign-out-alt"></i> Logout</a
@@ -126,7 +124,7 @@
             ><i class="fas fa-cog"></i><span>Settings</span></a
           >
           <a href="support.html" class="menu-item"
-            ><i class="fas fa-life-ring"></i><span>Support Ticket</span></a
+            ><i class="fas fa-support"></i><span>Support Ticket</span></a
           >
           <a href="profile.html" class="menu-item"
             ><i class="fas fa-user"></i><span>Profile</span></a
@@ -163,71 +161,88 @@
       </div>
     </div>
 
-    <!-- Loan Application Page -->
+    <!-- Dashboard Page -->
     <div class="main-content">
       <div class="container">
+        <div class="greeting" id="dashboard-greeting">
+          <h2 id="greeting-text">Good Morning, User!</h2>
+          <p id="current-datetime"></p>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="card balance-card">
+            <h3>Available Balance</h3>
+            <div class="balance-amount" id="account-balance">$0.00</div>
+            <p>
+              Account: <span id="account-number-display">************</span>
+            </p>
+            <p>
+              Status:
+              <span class="status-badge status-active" id="account-status"
+                >Active</span
+              >
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">What would you like to do today?</h4>
+            </div>
+            <div class="quick-actions">
+              <div
+                class="action-tile"
+                onclick="window.location.href='profile.html'"
+              >
+                <i class="fas fa-user-circle"></i>
+                <h5>Account Info</h5>
+              </div>
+              <div
+                class="action-tile"
+                onclick="window.location.href='transfer.html'"
+              >
+                <i class="fas fa-paper-plane"></i>
+                <h5>Send Money</h5>
+              </div>
+              <div
+                class="action-tile"
+                onclick="window.location.href='deposit.html'"
+              >
+                <i class="fas fa-plus-circle"></i>
+                <h5>Deposit</h5>
+              </div>
+              <div
+                class="action-tile"
+                onclick="window.location.href='transactions.html'"
+              >
+                <i class="fas fa-list"></i>
+                <h5>Transactions</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="card">
           <div class="card-header">
-            <h4 class="card-title">
-              <i class="fas fa-hand-holding-usd"></i> Loan Application
-            </h4>
+            <h4 class="card-title">Account Statistics</h4>
           </div>
-          <form id="loan-form">
-            <div class="form-group">
-              <label for="loan-type">Loan Type</label>
-              <select id="loan-type" class="form-control" required>
-                <option value="">Select Loan Type</option>
-                <option value="personal">Personal Loan</option>
-                <option value="mortgage">Mortgage</option>
-                <option value="auto">Auto Loan</option>
-              </select>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-value">$500,000</div>
+              <div class="stat-label">Transaction Limit</div>
             </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="amount">Loan Amount ($)</label>
-                <input
-                  type="number"
-                  id="amount"
-                  class="form-control"
-                  placeholder="0.00"
-                  step="0.01"
-                  min="1000"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="term">Loan Term (Years)</label>
-                <select id="term" class="form-control" required>
-                  <option value="">Select Term</option>
-                  <option value="1">1 Year</option>
-                  <option value="3">3 Years</option>
-                  <option value="5">5 Years</option>
-                  <option value="10">10 Years</option>
-                </select>
-              </div>
+            <div class="stat-item">
+              <div class="stat-value" id="pending-transactions">0</div>
+              <div class="stat-label">Pending Transactions</div>
             </div>
-            <div class="form-group">
-              <label for="purpose">Purpose of Loan</label>
-              <textarea
-                id="purpose"
-                class="form-control"
-                rows="3"
-                required
-              ></textarea>
+            <div class="stat-item">
+              <div class="stat-value" id="transaction-volume">$0</div>
+              <div class="stat-label">Transaction Volume</div>
             </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary">
-                <i class="fas fa-file-alt"></i> Apply for Loan
-              </button>
-              <button
-                type="button"
-                class="btn btn-secondary"
-                onclick="resetForm()"
-              >
-                <i class="fas fa-undo"></i> Reset
-              </button>
+            <div class="stat-item">
+              <div class="stat-value" id="account-age">0 days</div>
+              <div class="stat-label">Account Age</div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -236,100 +251,33 @@
     <script>
       // Initialize App
       document.addEventListener("DOMContentLoaded", function () {
-        setupFormHandlers();
+        updateGreeting();
+        setInterval(updateGreeting, 60000);
         updateNavigationDisplay();
       });
 
-      // Form Handlers
-      function setupFormHandlers() {
-        document
-          .getElementById("loan-form")
-          .addEventListener("submit", function (e) {
-            e.preventDefault();
-            handleLoanApplication();
-          });
-
-        document
-          .getElementById("amount")
-          .addEventListener("input", validateAmount);
-      }
-
       // UI Functions
-      function handleLoanApplication() {
-        const loanType = document.getElementById("loan-type").value;
-        const amount = document.getElementById("amount").value;
-        const term = document.getElementById("term").value;
-        const purpose = document.getElementById("purpose").value;
+      function updateGreeting() {
+        const now = new Date();
+        const hour = now.getHours();
+        let greeting = "Good Evening";
+        if (hour < 12) greeting = "Good Morning";
+        else if (hour < 18) greeting = "Good Afternoon";
 
-        if (!loanType) {
-          showAlert("Please select a loan type", "danger");
-          document.getElementById("loan-type").classList.add("invalid");
-          return;
-        }
-
-        if (!amount || amount < 1000) {
-          showAlert("Please enter a loan amount of at least $1000", "danger");
-          document.getElementById("amount").classList.add("invalid");
-          return;
-        }
-
-        if (!term) {
-          showAlert("Please select a loan term", "danger");
-          document.getElementById("term").classList.add("invalid");
-          return;
-        }
-
-        if (!purpose) {
-          showAlert("Please enter the purpose of the loan", "danger");
-          document.getElementById("purpose").classList.add("invalid");
-          return;
-        }
-
-        showAlert(
-          `Loan application for $${amount} ${loanType} over ${term} years submitted!`,
-          "success"
-        );
-        document.getElementById("loan-form").reset();
+        document.getElementById(
+          "greeting-text"
+        ).textContent = `${greeting}, User!`;
+        document.getElementById("current-datetime").textContent =
+          now.toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          });
       }
 
-      function resetForm() {
-        document.getElementById("loan-form").reset();
-        document
-          .querySelectorAll(".form-control")
-          .forEach((input) => input.classList.remove("invalid"));
-        showAlert("Form reset", "success");
-      }
-
-      // Validation Functions
-      function validateAmount(e) {
-        const input = e.target;
-        const value = parseFloat(input.value);
-        input.classList.toggle(
-          "invalid",
-          input.value && (isNaN(value) || value < 1000)
-        );
-      }
-
-      // Utility Functions
-      function showAlert(message, type) {
-        const alertDiv = document.createElement("div");
-        alertDiv.className = `alert alert-${type}`;
-        alertDiv.innerHTML = `<i class="fas fa-${
-          type === "success" ? "check" : "times"
-        }-circle"></i> ${message}`;
-
-        const container = document.querySelector(".container");
-        if (container) {
-          container.insertBefore(alertDiv, container.firstChild);
-          setTimeout(() => {
-            if (alertDiv.parentNode) {
-              alertDiv.parentNode.removeChild(alertDiv);
-            }
-          }, 3000);
-        }
-      }
-
-      // Navigation Functions
       function toggleSidebar() {
         const sidebar = document.getElementById("sidebar");
         const overlay = document.getElementById("overlay");
@@ -362,6 +310,13 @@
         window.location.href = "index.html";
       }
 
+      // Keyboard navigation
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeSidebar();
+        }
+      });
+
       // Responsive Navigation Display
       function updateNavigationDisplay() {
         const sidebar = document.getElementById("sidebar");
@@ -378,13 +333,6 @@
           overlay.classList.remove("active");
         }
       }
-
-      // Keyboard Navigation
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") {
-          closeSidebar();
-        }
-      });
 
       // Responsive Handling
       window.addEventListener("resize", function () {

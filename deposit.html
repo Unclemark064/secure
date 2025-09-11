@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SecureBank - Dashboard</title>
+    <title>SecureBank - Deposit</title>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/general.css" />
+  <link rel="stylesheet" href="css/general.css" />
   </head>
   <body>
     <!-- Navigation -->
@@ -40,12 +40,12 @@
         <button class="btn-verify" onclick="verifyAccount()">Verify Account</button>
       </div>
       <nav class="sidebar-menu">
-        <a href="dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
         <a href="transactions.html"><i class="fas fa-exchange-alt"></i> Transactions</a>
         <a href="cards.html"><i class="fas fa-credit-card"></i> Cards</a>
         <a href="transfer.html"><i class="fas fa-paper-plane"></i> Transfer</a>
         <a href="international-wire.html"><i class="fas fa-globe"></i> International Wire</a>
-        <a href="deposit.html"><i class="fas fa-plus-circle"></i> Deposit</a>
+        <a href="deposit.html" class="active"><i class="fas fa-plus-circle"></i> Deposit</a>
         <a href="loan.html"><i class="fas fa-hand-holding-usd"></i> Loan</a>
         <a href="tax-refund.html"><i class="fas fa-file-invoice-dollar"></i> IRS Tax Refund</a>
         <a href="loan-history.html"><i class="fas fa-history"></i> Loan History</a>
@@ -116,86 +116,62 @@
       </div>
     </div>
 
-    <!-- Dashboard Page -->
+    <!-- Deposit Page -->
     <div class="main-content">
       <div class="container">
-        <div class="greeting" id="dashboard-greeting">
-          <h2 id="greeting-text">Good Morning, User!</h2>
-          <p id="current-datetime"></p>
-        </div>
-
-        <div class="dashboard-grid">
-          <div class="card balance-card">
-            <h3>Available Balance</h3>
-            <div class="balance-amount" id="account-balance">$0.00</div>
-            <p>Account: <span id="account-number-display">************</span></p>
-            <p>
-              Status:
-              <span class="status-badge status-active" id="account-status"
-                >Active</span
-              >
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">What would you like to do today?</h4>
-            </div>
-            <div class="quick-actions">
-              <div
-                class="action-tile"
-                onclick="window.location.href='profile.html'"
-              >
-                <i class="fas fa-user-circle"></i>
-                <h5>Account Info</h5>
-              </div>
-              <div
-                class="action-tile"
-                onclick="window.location.href='transfer.html'"
-              >
-                <i class="fas fa-paper-plane"></i>
-                <h5>Send Money</h5>
-              </div>
-              <div
-                class="action-tile"
-                onclick="window.location.href='deposit.html'"
-              >
-                <i class="fas fa-plus-circle"></i>
-                <h5>Deposit</h5>
-              </div>
-              <div
-                class="action-tile"
-                onclick="window.location.href='transactions.html'"
-              >
-                <i class="fas fa-list"></i>
-                <h5>Transactions</h5>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div class="card">
           <div class="card-header">
-            <h4 class="card-title">Account Statistics</h4>
+            <h4 class="card-title">
+              <i class="fas fa-plus-circle"></i> Deposit Funds
+            </h4>
           </div>
-          <div class="stats-grid">
-            <div class="stat-item">
-              <div class="stat-value">$500,000</div>
-              <div class="stat-label">Transaction Limit</div>
+          <form id="deposit-form">
+            <div class="form-group">
+              <label for="to-account">To Account</label>
+              <select id="to-account" class="form-control" required>
+                <option value="">Select Account</option>
+                <option value="checking">Checking (****1234)</option>
+                <option value="savings">Savings (****5678)</option>
+              </select>
             </div>
-            <div class="stat-item">
-              <div class="stat-value" id="pending-transactions">0</div>
-              <div class="stat-label">Pending Transactions</div>
+            <div class="form-group">
+              <label for="deposit-method">Deposit Method</label>
+              <select id="deposit-method" class="form-control" required>
+                <option value="">Select Method</option>
+                <option value="bank-transfer">Bank Transfer</option>
+                <option value="check">Check</option>
+                <option value="cash">Cash</option>
+              </select>
             </div>
-            <div class="stat-item">
-              <div class="stat-value" id="transaction-volume">$0</div>
-              <div class="stat-label">Transaction Volume</div>
+            <div class="form-group">
+              <label for="amount">Amount ($)</label>
+              <input
+                type="number"
+                id="amount"
+                class="form-control"
+                placeholder="0.00"
+                step="0.01"
+                min="0.01"
+                required
+              />
             </div>
-            <div class="stat-item">
-              <div class="stat-value" id="account-age">0 days</div>
-              <div class="stat-label">Account Age</div>
+            <div class="form-group">
+              <label for="memo">Memo (Optional)</label>
+              <textarea id="memo" class="form-control" rows="3"></textarea>
             </div>
-          </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Deposit
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="resetForm()"
+              >
+                <i class="fas fa-undo"></i> Reset
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -204,33 +180,96 @@
     <script>
       // Initialize App
       document.addEventListener("DOMContentLoaded", function () {
-        updateGreeting();
-        setInterval(updateGreeting, 60000);
+        setupFormHandlers();
         updateNavigationDisplay();
       });
 
-      // UI Functions
-      function updateGreeting() {
-        const now = new Date();
-        const hour = now.getHours();
-        let greeting = "Good Evening";
-        if (hour < 12) greeting = "Good Morning";
-        else if (hour < 18) greeting = "Good Afternoon";
-
-        document.getElementById(
-          "greeting-text"
-        ).textContent = `${greeting}, User!`;
-        document.getElementById("current-datetime").textContent =
-          now.toLocaleDateString("en-US", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
+      // Form Handlers
+      function setupFormHandlers() {
+        document
+          .getElementById("deposit-form")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            handleDeposit();
           });
+
+        document
+          .getElementById("amount")
+          .addEventListener("input", validateAmount);
       }
 
+      // UI Functions
+      function handleDeposit() {
+        const toAccount = document.getElementById("to-account").value;
+        const depositMethod = document.getElementById("deposit-method").value;
+        const amount = document.getElementById("amount").value;
+        const memo = document.getElementById("memo").value;
+
+        if (!toAccount) {
+          showAlert("Please select a destination account", "danger");
+          document.getElementById("to-account").classList.add("invalid");
+          return;
+        }
+
+        if (!depositMethod) {
+          showAlert("Please select a deposit method", "danger");
+          document.getElementById("deposit-method").classList.add("invalid");
+          return;
+        }
+
+        if (!amount || amount <= 0) {
+          showAlert("Please enter a valid deposit amount", "danger");
+          document.getElementById("amount").classList.add("invalid");
+          return;
+        }
+
+        showAlert(
+          `Deposit of $${amount} to ${toAccount} via ${depositMethod} initiated${
+            memo ? " with memo: " + memo : ""
+          }!`,
+          "success"
+        );
+        document.getElementById("deposit-form").reset();
+      }
+
+      function resetForm() {
+        document.getElementById("deposit-form").reset();
+        document
+          .querySelectorAll(".form-control")
+          .forEach((input) => input.classList.remove("invalid"));
+        showAlert("Form reset", "success");
+      }
+
+      // Validation Functions
+      function validateAmount(e) {
+        const input = e.target;
+        const value = parseFloat(input.value);
+        input.classList.toggle(
+          "invalid",
+          input.value && (isNaN(value) || value <= 0)
+        );
+      }
+
+      // Utility Functions
+      function showAlert(message, type) {
+        const alertDiv = document.createElement("div");
+        alertDiv.className = `alert alert-${type}`;
+        alertDiv.innerHTML = `<i class="fas fa-${
+          type === "success" ? "check" : "times"
+        }-circle"></i> ${message}`;
+
+        const container = document.querySelector(".container");
+        if (container) {
+          container.insertBefore(alertDiv, container.firstChild);
+          setTimeout(() => {
+            if (alertDiv.parentNode) {
+              alertDiv.parentNode.removeChild(alertDiv);
+            }
+          }, 3000);
+        }
+      }
+
+      // Navigation Functions
       function toggleSidebar() {
         const sidebar = document.getElementById("sidebar");
         const overlay = document.getElementById("overlay");
@@ -263,13 +302,6 @@
         window.location.href = "index.html";
       }
 
-      // Keyboard navigation
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") {
-          closeSidebar();
-        }
-      });
-
       // Responsive Navigation Display
       function updateNavigationDisplay() {
         const sidebar = document.getElementById("sidebar");
@@ -286,6 +318,13 @@
           overlay.classList.remove("active");
         }
       }
+
+      // Keyboard Navigation
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeSidebar();
+        }
+      });
 
       // Responsive Handling
       window.addEventListener("resize", function () {

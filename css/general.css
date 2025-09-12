@@ -3,6 +3,7 @@
 SECUREBANK GLOBAL STYLESHEET
 ========================================
 Use: <link rel="stylesheet" href="css/general.css">
+Description: Global styles for SecureBank with Roboto font (imported in HTML) and modern dark gradient navbar.
 */
 
 /* ========================================
@@ -34,6 +35,12 @@ Use: <link rel="stylesheet" href="css/general.css">
   --dark-gray: #6c757d;
   --white: #ffffff;
   --text-dark: #212529;
+  --light-text: #e0e0e0; /* Light gray for navbar text/icons */
+
+  /* Navbar Gradient Colors */
+  --navy-dark: #1C2526; /* Deep navy for gradient */
+  --purple-dark: #2C1B47; /* Dark purple for gradient */
+  --black-dark: #000000; /* Black for gradient */
 
   /* Layout Properties */
   --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -46,6 +53,41 @@ Use: <link rel="stylesheet" href="css/general.css">
   --font-family: 'Roboto', sans-serif;
   --font-size-base: 16px;
   --line-height-base: 1.6;
+}
+
+/* Subtle noise texture for navbar, sidebar header, and mobile menu */
+.navbar,
+.sidebar-header,
+.banking-menu .profile-header {
+  background: linear-gradient(
+    135deg,
+    var(--navy-dark) 0%,
+    var(--purple-dark) 50%,
+    var(--black-dark) 100%
+  );
+  position: relative;
+}
+
+.navbar::before,
+.sidebar-header::before,
+.banking-menu .profile-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
+  opacity: 0.1;
+  z-index: 0;
+}
+
+/* Ensure content is above texture */
+.navbar > *,
+.sidebar-header > *,
+.banking-menu .profile-header > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* ========================================
@@ -107,13 +149,8 @@ body {
 
 /* Main Navigation Bar */
 .navbar {
-  background: linear-gradient(
-    135deg,
-    var(--primary-blue) 0%,
-    var(--dark-blue) 100%
-  );
-  padding: 15px 0;
-  box-shadow: var(--shadow);
+  padding: 12px 0; /* Tighter padding for sleek look */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
   position: sticky;
   top: 0;
   z-index: 100;
@@ -125,33 +162,41 @@ body {
   align-items: center;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 15px;
 }
 
 .navbar-brand {
   color: var(--white);
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 1.6rem; /* Slightly smaller for minimalism */
+  font-weight: 500;
   text-decoration: none;
+  transition: text-shadow 0.3s ease;
+}
+
+.navbar-brand:hover {
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3); /* Soft glow */
 }
 
 .navbar-nav {
   display: flex;
   list-style: none;
-  gap: 20px;
+  gap: 15px; /* Tighter gap for sleek design */
 }
 
 .navbar-nav a {
-  color: var(--white);
+  color: var(--light-text);
   text-decoration: none;
-  padding: 8px 16px;
-  border-radius: var(--border-radius);
-  transition: background-color 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 6px; /* Smaller radius for modern look */
+  font-size: 13px; /* Smaller for fintech aesthetic */
+  font-weight: 500;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .navbar-nav a:hover,
 .navbar-nav a.active {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2); /* Soft glow */
 }
 
 /* Hamburger Menu */
@@ -160,8 +205,13 @@ body {
   background: none;
   border: none;
   color: var(--white);
-  font-size: 24px;
+  font-size: 22px;
   cursor: pointer;
+  transition: text-shadow 0.3s ease;
+}
+
+.hamburger:hover {
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
 /* ========================================
@@ -186,11 +236,6 @@ body {
 }
 
 .sidebar-header {
-  background: linear-gradient(
-    135deg,
-    var(--primary-blue) 0%,
-    var(--dark-blue) 100%
-  );
   color: var(--white);
   padding: 30px 20px;
   text-align: center;
@@ -228,11 +273,13 @@ body {
 .sidebar-header h2 {
   font-size: 1.2rem;
   margin-bottom: 5px;
+  color: var(--white);
 }
 
 .sidebar-header p {
   opacity: 0.8;
   font-size: 0.9rem;
+  color: var(--light-text);
 }
 
 .btn-verify {
@@ -249,6 +296,7 @@ body {
 
 .btn-verify:hover {
   background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
 
 .sidebar-menu {
@@ -347,7 +395,8 @@ body {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+  z-index: 1001;
+  overflow-y: auto;
   justify-content: center;
   align-items: center;
 }
@@ -358,17 +407,19 @@ body {
 
 .banking-menu-content {
   background: var(--white);
-  border-radius: var(--border-radius);
   padding: 20px;
+  margin: 20px;
+  border-radius: var(--border-radius);
+  position: relative;
   width: 90%;
   max-width: 400px;
+  max-height: 90vh;
+  overflow-y: auto;
   text-align: center;
   box-shadow: var(--card-shadow);
-  position: relative;
 }
 
 .banking-menu .profile-header {
-  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-teal) 100%);
   color: var(--white);
   padding: 20px;
   border-radius: var(--border-radius);
@@ -376,17 +427,21 @@ body {
 }
 
 .banking-menu .profile-avatar {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
   margin: 0 auto 15px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
   position: relative;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.banking-menu .profile-avatar i {
+  font-size: 40px;
+  color: var(--light-text);
 }
 
 .banking-menu .avatar-upload {
@@ -394,9 +449,9 @@ body {
   bottom: 0;
   right: 0;
   background: var(--success-green);
-  border-radius: 50%;
   width: 20px;
   height: 20px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -417,39 +472,46 @@ body {
 
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 10px;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .menu-item {
+  text-decoration: none;
+  color: var(--text-dark);
+  text-align: center;
+  padding: 15px;
+  background: var(--light-gray);
+  border-radius: var(--border-radius);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  font-size: 12px;
+  font-weight: 500;
+  min-height: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--light-blue);
-  padding: 15px 10px;
-  border-radius: var(--border-radius);
-  text-decoration: none;
-  color: var(--text-dark);
-  transition: all 0.3s ease;
-  font-size: 12px;
-  min-height: 70px;
 }
 
 .menu-item:hover {
-  background: var(--primary-blue);
+  background-color: var(--light-blue);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.menu-item.active {
+  background-color: var(--primary-blue);
   color: var(--white);
-  text-decoration: none;
 }
 
 .menu-item.logout-item {
-  background-color: #f8d7da;
-  color: #721c24;
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger-red);
 }
 
 .menu-item.logout-item:hover {
   background-color: #f1b0b7;
+  box-shadow: none;
 }
 
 .menu-item i {
@@ -458,205 +520,6 @@ body {
   margin-right: 0;
 }
 
-.banking-menu-content {
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.close-btn:hover {
-  color: #c82333; /* Darkened danger-red */
-}
-
-.menu-item.active {
-  background-color: var(--primary-blue);
-  color: var(--white);
-}
-
-.sidebar-menu a.active {
-  background-color: var(--primary-blue);
-  color: var(--white);
-  border-left-color: var(--white);
-}
-
-.main-content {
-    padding-top: 20px;
-    min-height: calc(100vh - 60px);
-    transition: margin-left 0.3s ease;
-    margin-left: 0; /* Default for mobile */
-}
-
-.main-content {
-    padding-top: 20px;
-    min-height: calc(100vh - 60px);
-    transition: margin-left 0.3s ease;
-    margin-left: 0; /* Default for mobile */
-}
-
-/* Update the DESKTOP STYLES (769px+) media query */
-@media (min-width: 769px) {
-    .sidebar {
-        transform: translateX(0);
-    }
-    .main-content {
-        margin-left: var(--sidebar-width); /* Ensure sidebar width is applied */
-    }
-    /* Hide mobile elements */
-    .banking-menu {
-        display: none !important;
-    }
-    .mobile-nav {
-        display: none;
-    }
-    .hamburger {
-        display: none;
-    }
-    .navbar-nav {
-        display: flex;
-    }
-}
-
-/* Update the MOBILE STYLES (max-width: 768px) media query */
-@media (max-width: 768px) {
-    .sidebar {
-        transform: translateX(-100%);
-    }
-    .sidebar.active {
-        transform: translateX(0); /* Slide in on mobile when active */
-    }
-    .main-content {
-        margin-left: 0; /* No margin on mobile */
-    }
-    /* Show mobile elements */
-    .hamburger {
-        display: block;
-    }
-    .navbar-nav {
-        display: none;
-    }
-    .mobile-nav {
-        display: block;
-    }
-    /* Container Adjustments */
-    .container {
-        padding: 10px;
-        margin-bottom: 80px;
-    }
-    /* Ensure form is not overlapped by mobile nav */
-    .main-content {
-        padding-bottom: 80px; /* Match mobile-nav height */
-    }
-}
-.banking-menu {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1001;
-    overflow-y: auto;
-}
-
-.banking-menu.active {
-    display: block;
-}
-
-.banking-menu-content {
-    background: var(--white);
-    padding: 20px;
-    margin: 20px;
-    border-radius: var(--border-radius);
-    position: relative;
-}
-
-.profile-avatar {
-    width: 80px;
-    height: 80px;
-    background: var(--light-gray);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 15px;
-    position: relative;
-}
-
-.profile-avatar i {
-    font-size: 40px;
-    color: var(--dark-gray);
-}
-
-.avatar-upload {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background: var(--primary-blue);
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 20px;
-    color: var(--danger-red);
-    cursor: pointer;
-}
-
-.menu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.menu-item {
-    text-decoration: none;
-    color: var(--text-dark);
-    text-align: center;
-    padding: 15px;
-    background: var(--light-gray);
-    border-radius: var(--border-radius);
-    transition: background-color 0.3s ease;
-}
-
-.menu-item:hover {
-    background-color: var(--light-blue);
-}
-
-.logout-item {
-    background-color: rgba(220, 53, 69, 0.1);
-    color: var(--danger-red);
-}
-
-.btn-verify {
-    background-color: var(--success-green);
-    color: var(--white);
-    border: none;
-    padding: 8px 16px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn-verify:hover {
-    background-color: darken(var(--success-green), 10%);
-}
-@media (max-width: 768px) {
-  .banking-menu-content {
-    margin: 10px;
-    padding: 15px;
-  }
-}
 .close-btn {
   background: none;
   border: none;
@@ -671,6 +534,7 @@ body {
 .close-btn:hover {
   color: #c82333; /* Darkened danger-red */
 }
+
 /* ========================================
    MOBILE NAVIGATION STYLES
    ======================================== */
@@ -679,8 +543,8 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: var(--white);
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  background: var(--navy-dark); /* Match navbar gradient start */
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
   display: none;
   z-index: 100;
 }
@@ -694,17 +558,18 @@ body {
 .mobile-nav-item {
   text-align: center;
   text-decoration: none;
-  color: var(--dark-gray);
+  color: var(--light-text);
   font-size: 12px;
+  font-weight: 500;
   padding: 10px;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, box-shadow 0.3s ease;
   flex: 1;
 }
 
 .mobile-nav-item:hover,
 .mobile-nav-item.active {
-  color: var(--primary-blue);
-  text-decoration: none;
+  color: var(--white);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
 
 .mobile-nav-item i {
@@ -2383,6 +2248,11 @@ input:checked + .slider:before {
     margin-bottom: 10px;
     width: 100%;
   }
+
+  .banking-menu-content {
+    margin: 10px;
+    padding: 15px;
+  }
 }
 
 /* ========================================
@@ -2415,37 +2285,6 @@ input:checked + .slider:before {
   .navbar-nav {
     display: flex;
   }
-}
-
-.banking-menu {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1001;
-    overflow-y: auto;
-}
-
-.banking-menu.active {
-    display: block;
-}
-
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-}
-
-.overlay.active {
-    display: block;
 }
 
 /* ========================================
@@ -2552,4 +2391,4 @@ input:checked + .slider:before {
 
 /* ========================================
    END OF STYLESHEET
-   ========================================
+   ======================================== */

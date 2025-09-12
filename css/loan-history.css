@@ -1,0 +1,142 @@
+/* 
+========================================
+SECUREBANK LOAN HISTORY STYLESHEET
+========================================
+Use: <link rel="stylesheet" href="css/loan-history.css">
+Description: Styles specific to the loan history page to prevent overflow on smaller screens.
+*/
+
+/* Ensure main content prevents horizontal overflow */
+.main-content {
+  overflow-x: hidden;
+}
+
+/* Table wrapper for horizontal scrolling */
+.table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 20px;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
+}
+
+/* Loan history table styles */
+#loan-table {
+  width: 100%;
+  min-width: 600px; /* Ensure table doesn't collapse too much */
+  border-collapse: collapse;
+}
+
+/* Table headers and cells */
+#loan-table th,
+#loan-table td {
+  padding: 12px 8px; /* Reduced padding for smaller screens */
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+  font-size: 14px; /* Slightly smaller font for better fit */
+}
+
+/* Table headers */
+#loan-table th {
+  background-color: var(--light-gray);
+  font-weight: 600;
+  color: var(--text-dark);
+  cursor: pointer;
+  white-space: nowrap; /* Prevent header text wrapping */
+}
+
+/* Table cells */
+#loan-table td {
+  white-space: nowrap; /* Prevent text wrapping to avoid overflow */
+}
+
+/* Status badges */
+.status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+  min-width: 80px; /* Ensure badges don't collapse */
+}
+
+.status-completed {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: var(--success-green);
+}
+
+.status-pending {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: var(--warning-orange);
+}
+
+.status-failed {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger-red);
+}
+
+/* Card container adjustments */
+.card {
+  overflow: hidden; /* Prevent content from overflowing card */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  /* Adjust container padding */
+  .container {
+    padding: 10px;
+    margin-bottom: var(--mobile-nav-height, 60px); /* Account for mobile nav */
+  }
+
+  /* Main content padding to avoid overlap with mobile nav */
+  .main-content {
+    padding-bottom: var(--mobile-nav-height, 60px);
+  }
+
+  /* Table adjustments */
+  #loan-table {
+    min-width: 500px; /* Slightly smaller min-width for very small screens */
+  }
+
+  #loan-table th,
+  #loan-table td {
+    padding: 8px 6px; /* Further reduce padding */
+    font-size: 12px; /* Smaller font for mobile */
+  }
+
+  /* Status badges on mobile */
+  .status-badge {
+    font-size: 10px;
+    padding: 3px 6px;
+    min-width: 60px;
+  }
+
+  /* Card padding */
+  .card {
+    padding: 15px;
+  }
+
+  /* Card header title */
+  .card-title {
+    font-size: 1.2rem; /* Smaller title on mobile */
+  }
+}
+
+/* Extra small screens (e.g., 320px) */
+@media (max-width: 480px) {
+  #loan-table {
+    min-width: 400px; /* Further reduce min-width for tiny screens */
+  }
+
+  #loan-table th,
+  #loan-table td {
+    padding: 6px 4px;
+    font-size: 11px;
+  }
+
+  .status-badge {
+    font-size: 9px;
+    min-width: 50px;
+    padding: 2px 4px;
+  }
+}

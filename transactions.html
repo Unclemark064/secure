@@ -9,6 +9,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/transactions.css" />
   </head>
   <body>
     <!-- Navigation -->
@@ -42,19 +43,52 @@
         </button>
       </div>
       <nav class="sidebar-menu">
-        <a href="dashboard.html" onclick="navigateAndClose('dashboard.html')"><i class="fas fa-home"></i> Dashboard</a>
-        <a href="transactions.html" class="active" onclick="navigateAndClose('transactions.html')"><i class="fas fa-exchange-alt"></i> Transactions</a>
-        <a href="cards.html" onclick="navigateAndClose('cards.html')"><i class="fas fa-credit-card"></i> Cards</a>
-        <a href="transfer.html" onclick="navigateAndClose('transfer.html')"><i class="fas fa-paper-plane"></i> Transfer</a>
-        <a href="international-wire.html" onclick="navigateAndClose('international-wire.html')"><i class="fas fa-globe"></i> International Wire</a>
-        <a href="deposit.html" onclick="navigateAndClose('deposit.html')"><i class="fas fa-plus-circle"></i> Deposit</a>
-        <a href="loan.html" onclick="navigateAndClose('loan.html')"><i class="fas fa-hand-holding-usd"></i> Loan</a>
-        <a href="tax-refund.html" onclick="navigateAndClose('tax-refund.html')"><i class="fas fa-file-invoice-dollar"></i> IRS Tax Refund</a>
-        <a href="loan-history.html" onclick="navigateAndClose('loan-history.html')"><i class="fas fa-history"></i> Loan History</a>
-        <a href="settings.html" onclick="navigateAndClose('settings.html')"><i class="fas fa-cog"></i> Settings</a>
-        <a href="support.html" onclick="navigateAndClose('support.html')"><i class="fas fa-support"></i> Support Ticket</a>
-        <a href="profile.html" onclick="navigateAndClose('profile.html')"><i class="fas fa-user"></i> Profile</a>
-        <a href="#" onclick="logoutAndClose()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        <a href="dashboard.html" onclick="navigateAndClose('dashboard.html')"
+          ><i class="fas fa-home"></i> Dashboard</a
+        >
+        <a
+          href="transactions.html"
+          class="active"
+          onclick="navigateAndClose('transactions.html')"
+          ><i class="fas fa-exchange-alt"></i> Transactions</a
+        >
+        <a href="cards.html" onclick="navigateAndClose('cards.html')"
+          ><i class="fas fa-credit-card"></i> Cards</a
+        >
+        <a href="transfer.html" onclick="navigateAndClose('transfer.html')"
+          ><i class="fas fa-paper-plane"></i> Transfer</a
+        >
+        <a
+          href="international-wire.html"
+          onclick="navigateAndClose('international-wire.html')"
+          ><i class="fas fa-globe"></i> International Wire</a
+        >
+        <a href="deposit.html" onclick="navigateAndClose('deposit.html')"
+          ><i class="fas fa-plus-circle"></i> Deposit</a
+        >
+        <a href="loan.html" onclick="navigateAndClose('loan.html')"
+          ><i class="fas fa-hand-holding-usd"></i> Loan</a
+        >
+        <a href="tax-refund.html" onclick="navigateAndClose('tax-refund.html')"
+          ><i class="fas fa-file-invoice-dollar"></i> IRS Tax Refund</a
+        >
+        <a
+          href="loan-history.html"
+          onclick="navigateAndClose('loan-history.html')"
+          ><i class="fas fa-history"></i> Loan History</a
+        >
+        <a href="settings.html" onclick="navigateAndClose('settings.html')"
+          ><i class="fas fa-cog"></i> Settings</a
+        >
+        <a href="support.html" onclick="navigateAndClose('support.html')"
+          ><i class="fas fa-life-ring"></i> Support Ticket</a
+        >
+        <a href="profile.html" onclick="navigateAndClose('profile.html')"
+          ><i class="fas fa-user"></i> Profile</a
+        >
+        <a href="#" onclick="logoutAndClose()"
+          ><i class="fas fa-sign-out-alt"></i> Logout</a
+        >
       </nav>
     </div>
 
@@ -80,19 +114,82 @@
         <h3>Banking Menu</h3>
         <p>Select an option to continue</p>
         <div class="menu-grid">
-          <a href="dashboard.html" class="menu-item" onclick="navigateAndClose('dashboard.html')"><i class="fas fa-home"></i><span>Dashboard</span></a>
-          <a href="transactions.html" class="menu-item" onclick="navigateAndClose('transactions.html')"><i class="fas fa-exchange-alt"></i><span>Transactions</span></a>
-          <a href="cards.html" class="menu-item" onclick="navigateAndClose('cards.html')"><i class="fas fa-credit-card"></i><span>Cards</span></a>
-          <a href="transfer.html" class="menu-item" onclick="navigateAndClose('transfer.html')"><i class="fas fa-paper-plane"></i><span>Transfer</span></a>
-          <a href="international-wire.html" class="menu-item" onclick="navigateAndClose('international-wire.html')"><i class="fas fa-globe"></i><span>International Wire</span></a>
-          <a href="deposit.html" class="menu-item" onclick="navigateAndClose('deposit.html')"><i class="fas fa-plus-circle"></i><span>Deposit</span></a>
-          <a href="loan.html" class="menu-item" onclick="navigateAndClose('loan.html')"><i class="fas fa-hand-holding-usd"></i><span>Loan</span></a>
-          <a href="tax-refund.html" class="menu-item" onclick="navigateAndClose('tax-refund.html')"><i class="fas fa-file-invoice-dollar"></i><span>IRS Tax Refund</span></a>
-          <a href="loan-history.html" class="menu-item" onclick="navigateAndClose('loan-history.html')"><i class="fas fa-history"></i><span>Loan History</span></a>
-          <a href="settings.html" class="menu-item" onclick="navigateAndClose('settings.html')"><i class="fas fa-cog"></i><span>Settings</span></a>
-          <a href="support.html" class="menu-item" onclick="navigateAndClose('support.html')"><i class="fas fa-support"></i><span>Support Ticket</span></a>
-          <a href="profile.html" class="menu-item" onclick="navigateAndClose('profile.html')"><i class="fas fa-user"></i><span>Profile</span></a>
-          <a href="#" class="menu-item logout-item" onclick="logoutAndClose()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+          <a
+            href="dashboard.html"
+            class="menu-item"
+            onclick="navigateAndClose('dashboard.html')"
+            ><i class="fas fa-home"></i><span>Dashboard</span></a
+          >
+          <a
+            href="transactions.html"
+            class="menu-item active"
+            onclick="navigateAndClose('transactions.html')"
+            ><i class="fas fa-exchange-alt"></i><span>Transactions</span></a
+          >
+          <a
+            href="cards.html"
+            class="menu-item"
+            onclick="navigateAndClose('cards.html')"
+            ><i class="fas fa-credit-card"></i><span>Cards</span></a
+          >
+          <a
+            href="transfer.html"
+            class="menu-item"
+            onclick="navigateAndClose('transfer.html')"
+            ><i class="fas fa-paper-plane"></i><span>Transfer</span></a
+          >
+          <a
+            href="international-wire.html"
+            class="menu-item"
+            onclick="navigateAndClose('international-wire.html')"
+            ><i class="fas fa-globe"></i><span>International Wire</span></a
+          >
+          <a
+            href="deposit.html"
+            class="menu-item"
+            onclick="navigateAndClose('deposit.html')"
+            ><i class="fas fa-plus-circle"></i><span>Deposit</span></a
+          >
+          <a
+            href="loan.html"
+            class="menu-item"
+            onclick="navigateAndClose('loan.html')"
+            ><i class="fas fa-hand-holding-usd"></i><span>Loan</span></a
+          >
+          <a
+            href="tax-refund.html"
+            class="menu-item"
+            onclick="navigateAndClose('tax-refund.html')"
+            ><i class="fas fa-file-invoice-dollar"></i
+            ><span>IRS Tax Refund</span></a
+          >
+          <a
+            href="loan-history.html"
+            class="menu-item"
+            onclick="navigateAndClose('loan-history.html')"
+            ><i class="fas fa-history"></i><span>Loan History</span></a
+          >
+          <a
+            href="settings.html"
+            class="menu-item"
+            onclick="navigateAndClose('settings.html')"
+            ><i class="fas fa-cog"></i><span>Settings</span></a
+          >
+          <a
+            href="support.html"
+            class="menu-item"
+            onclick="navigateAndClose('support.html')"
+            ><i class="fas fa-life-ring"></i><span>Support Ticket</span></a
+          >
+          <a
+            href="profile.html"
+            class="menu-item"
+            onclick="navigateAndClose('profile.html')"
+            ><i class="fas fa-user"></i><span>Profile</span></a
+          >
+          <a href="#" class="menu-item logout-item" onclick="logoutAndClose()"
+            ><i class="fas fa-sign-out-alt"></i><span>Logout</span></a
+          >
         </div>
         <button class="close-btn" onclick="closeSidebar()">
           <i class="fas fa-times"></i>
@@ -103,19 +200,35 @@
     <!-- Mobile Navigation -->
     <div class="mobile-nav">
       <div class="mobile-nav-items">
-        <a href="dashboard.html" class="mobile-nav-item" onclick="navigateAndClose('dashboard.html')">
+        <a
+          href="dashboard.html"
+          class="mobile-nav-item"
+          onclick="navigateAndClose('dashboard.html')"
+        >
           <i class="fas fa-home"></i>
           Home
         </a>
-        <a href="transactions.html" class="mobile-nav-item" onclick="navigateAndClose('transactions.html')">
+        <a
+          href="transactions.html"
+          class="mobile-nav-item active"
+          onclick="navigateAndClose('transactions.html')"
+        >
           <i class="fas fa-chart-bar"></i>
           Stats
         </a>
-        <a href="cards.html" class="mobile-nav-item" onclick="navigateAndClose('cards.html')">
+        <a
+          href="cards.html"
+          class="mobile-nav-item"
+          onclick="navigateAndClose('cards.html')"
+        >
           <i class="fas fa-credit-card"></i>
           Cards
         </a>
-        <a href="profile.html" class="mobile-nav-item" onclick="navigateAndClose('profile.html')">
+        <a
+          href="profile.html"
+          class="mobile-nav-item"
+          onclick="navigateAndClose('profile.html')"
+        >
           <i class="fas fa-user"></i>
           Profile
         </a>
@@ -149,46 +262,48 @@
               </select>
             </div>
           </div>
-          <table class="table" id="transaction-table">
-            <thead>
-              <tr>
-                <th onclick="sortTable('date')">Date</th>
-                <th onclick="sortTable('type')">Type</th>
-                <th onclick="sortTable('amount')">Amount</th>
-                <th onclick="sortTable('status')">Status</th>
-                <th>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>2025-09-07</td>
-                <td>Deposit</td>
-                <td>$1,000.00</td>
-                <td>
-                  <span class="status-badge status-completed">Completed</span>
-                </td>
-                <td><a href="#" onclick="viewTransaction('1')">View</a></td>
-              </tr>
-              <tr>
-                <td>2025-09-06</td>
-                <td>Transfer</td>
-                <td>$500.00</td>
-                <td>
-                  <span class="status-badge status-pending">Pending</span>
-                </td>
-                <td><a href="#" onclick="viewTransaction('2')">View</a></td>
-              </tr>
-              <tr>
-                <td>2025-09-05</td>
-                <td>Withdrawal</td>
-                <td>$200.00</td>
-                <td>
-                  <span class="status-badge status-completed">Completed</span>
-                </td>
-                <td><a href="#" onclick="viewTransaction('3')">View</a></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-wrapper">
+            <table class="table" id="transaction-table">
+              <thead>
+                <tr>
+                  <th onclick="sortTable('date')">Date</th>
+                  <th onclick="sortTable('type')">Type</th>
+                  <th onclick="sortTable('amount')">Amount</th>
+                  <th onclick="sortTable('status')">Status</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2025-09-07</td>
+                  <td>Deposit</td>
+                  <td>$1,000.00</td>
+                  <td>
+                    <span class="status-badge status-completed">Completed</span>
+                  </td>
+                  <td><a href="#" onclick="viewTransaction('1')">View</a></td>
+                </tr>
+                <tr>
+                  <td>2025-09-06</td>
+                  <td>Transfer</td>
+                  <td>$500.00</td>
+                  <td>
+                    <span class="status-badge status-pending">Pending</span>
+                  </td>
+                  <td><a href="#" onclick="viewTransaction('2')">View</a></td>
+                </tr>
+                <tr>
+                  <td>2025-09-05</td>
+                  <td>Withdrawal</td>
+                  <td>$200.00</td>
+                  <td>
+                    <span class="status-badge status-completed">Completed</span>
+                  </td>
+                  <td><a href="#" onclick="viewTransaction('3')">View</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -198,7 +313,7 @@
       // Initialize App
       document.addEventListener("DOMContentLoaded", function () {
         setupFilters();
-        // Removed automatic toggleSidebar() on mobile
+        showAlert("Transactions loaded", "success");
       });
 
       // Filter and Sort Handlers
@@ -335,6 +450,10 @@
         alert("Please complete the verification process.");
       }
 
+      function logout() {
+        window.location.href = "index.html";
+      }
+
       // Keyboard Navigation
       document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") {
@@ -345,12 +464,6 @@
       // Responsive Handling
       window.addEventListener("resize", function () {
         closeSidebar();
-        if (
-          window.innerWidth > 768 &&
-          !document.getElementById("banking-menu").classList.contains("active")
-        ) {
-          toggleSidebar();
-        }
       });
     </script>
   </body>

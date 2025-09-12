@@ -37,7 +37,7 @@ Description: Global styles for SecureBank with Roboto font (imported in HTML) an
   --text-dark: #212529;
   --light-text: #e0e0e0; /* Light gray for navbar text/icons */
 
-  /* Navbar Gradient Colors */
+  /* Navbar/Sidebar Gradient Colors */
   --navy-dark: #1c2526; /* Deep navy for gradient */
   --purple-dark: #2c1b47; /* Dark purple for gradient */
   --black-dark: #000000; /* Black for gradient */
@@ -55,10 +55,14 @@ Description: Global styles for SecureBank with Roboto font (imported in HTML) an
   --line-height-base: 1.6;
 }
 
-/* Subtle noise texture for navbar, sidebar header, and mobile menu */
+/* Subtle noise texture for navbar, sidebar header, banking menu, cards, modals, and headers */
 .navbar,
 .sidebar-header,
-.banking-menu .profile-header {
+.banking-menu .profile-header,
+.card,
+.modal-content,
+.greeting,
+.profile-header {
   background: linear-gradient(
     135deg,
     var(--navy-dark) 0%,
@@ -70,7 +74,11 @@ Description: Global styles for SecureBank with Roboto font (imported in HTML) an
 
 .navbar::before,
 .sidebar-header::before,
-.banking-menu .profile-header::before {
+.banking-menu .profile-header::before,
+.card::before,
+.modal-content::before,
+.greeting::before,
+.profile-header::before {
   content: "";
   position: absolute;
   top: 0;
@@ -85,9 +93,34 @@ Description: Global styles for SecureBank with Roboto font (imported in HTML) an
 /* Ensure content is above texture */
 .navbar > *,
 .sidebar-header > *,
-.banking-menu .profile-header > * {
+.banking-menu .profile-header > *,
+.card > *,
+.modal-content > *,
+.greeting > *,
+.profile-header > * {
   position: relative;
   z-index: 1;
+}
+
+/* Adjust text color for consistency */
+.card,
+.modal-content,
+.greeting,
+.profile-header {
+  color: var(--light-text);
+}
+
+.card h3,
+.card h4,
+.greeting h2,
+.profile-header h2 {
+  color: var(--white);
+}
+
+.card p,
+.greeting p,
+.profile-header p {
+  color: var(--light-text);
 }
 
 /* ========================================
@@ -584,7 +617,12 @@ body {
 
 /* Standard Cards */
 .card {
-  background: var(--white);
+  background: linear-gradient(
+    135deg,
+    var(--navy-dark) 0%,
+    var(--purple-dark) 50%,
+    var(--black-dark) 100%
+  );
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   padding: 25px;
@@ -600,13 +638,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   margin-bottom: 25px;
   padding-bottom: 15px;
 }
 
 .card-title {
-  color: var(--primary-blue);
+  color: var(--white);
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0;
@@ -616,16 +654,18 @@ body {
 .balance-card {
   background: linear-gradient(
     135deg,
-    var(--primary-blue) 0%,
-    var(--secondary-teal) 100%
+    var(--navy-dark) 0%,
+    var(--purple-dark) 50%,
+    var(--black-dark) 100%
   );
-  color: var(--white);
+  color: var(--light-text);
 }
 
 .balance-amount {
   font-size: 2.5rem;
   font-weight: 700;
   margin: 10px 0;
+  color: var(--white);
 }
 
 .account-info {
@@ -637,12 +677,23 @@ body {
 .auth-container {
   max-width: 400px;
   width: 90%;
-  background: var(--white);
+  background: linear-gradient(
+    135deg,
+    var(--navy-dark) 0%,
+    var(--purple-dark) 50%,
+    var(--black-dark) 100%
+  );
   padding: 40px;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   margin: 100px auto;
   animation: slideIn 0.5s ease-out;
+  color: var(--light-text);
+}
+
+.auth-container label,
+.auth-container .form-control {
+  color: var(--light-text);
 }
 
 /* ========================================
@@ -716,18 +767,19 @@ body {
   display: block;
   margin-bottom: 8px;
   font-weight: 600;
-  color: var(--text-dark);
+  color: var(--light-text);
 }
 
 /* Form Controls */
 .form-control {
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid #e9ecef;
+  border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--border-radius);
   font-size: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--light-text);
   transition: all 0.3s ease;
-  resize: vertical;
 }
 
 .form-control:focus {
@@ -737,7 +789,7 @@ body {
 }
 
 .form-control:disabled {
-  background-color: var(--light-gray);
+  background-color: rgba(255, 255, 255, 0.1);
   cursor: not-allowed;
 }
 
@@ -792,9 +844,16 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   min-width: 120px;
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--light-text);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Button Variants */
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
+}
+
 .btn-primary {
   background: linear-gradient(
     135deg,
@@ -810,9 +869,9 @@ body {
 }
 
 .btn-secondary {
-  background: var(--light-gray);
-  color: var(--text-dark);
-  border: 2px solid #dee2e6;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--light-text);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .btn-success {
@@ -850,7 +909,7 @@ body {
   left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--dark-gray);
+  color: var(--light-text);
   font-weight: 600;
   z-index: 1;
 }
@@ -859,6 +918,8 @@ body {
   padding-left: 35px;
   font-size: 1.2rem;
   font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--light-text);
 }
 
 /* Password Toggle */
@@ -873,7 +934,7 @@ body {
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: var(--dark-gray);
+  color: var(--light-text);
   cursor: pointer;
   font-size: 18px;
 }
@@ -892,8 +953,10 @@ body {
   text-align: center;
   font-size: 1.5rem;
   font-weight: 700;
-  border: 2px solid #e9ecef;
+  border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--border-radius);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--light-text);
   transition: all 0.3s ease;
 }
 
@@ -904,17 +967,18 @@ body {
 
 /* File Upload */
 .file-upload {
-  border: 2px dashed var(--primary-blue);
+  border: 2px dashed rgba(255, 255, 255, 0.1);
   border-radius: var(--border-radius);
   padding: 40px 20px;
   text-align: center;
-  background: var(--light-blue);
+  background: rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
   cursor: pointer;
+  color: var(--light-text);
 }
 
 .file-upload:hover {
-  background: var(--light-gray);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .file-upload input {
@@ -948,7 +1012,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: rgba(255, 255, 255, 0.1);
   transition: 0.4s;
   border-radius: 34px;
 }
@@ -960,7 +1024,7 @@ body {
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: var(--white);
   transition: 0.4s;
   border-radius: 50%;
 }
@@ -979,13 +1043,13 @@ input:checked + .slider:before {
 
 /* Action Tiles */
 .action-tile {
-  background: var(--white);
-  border: 2px solid var(--light-blue);
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--border-radius);
   padding: 20px;
   text-align: center;
   text-decoration: none;
-  color: var(--text-dark);
+  color: var(--light-text);
   transition: all 0.3s ease;
   cursor: pointer;
 }
@@ -995,7 +1059,7 @@ input:checked + .slider:before {
   transform: translateY(-2px);
   box-shadow: var(--shadow);
   text-decoration: none;
-  color: var(--text-dark);
+  color: var(--light-text);
 }
 
 .action-tile i {
@@ -1015,9 +1079,9 @@ input:checked + .slider:before {
 
 .quick-amount {
   padding: 8px 16px;
-  background: var(--light-blue);
-  color: var(--primary-blue);
-  border: 2px solid var(--light-blue);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--light-text);
+  border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--border-radius);
   cursor: pointer;
   font-weight: 600;
@@ -1049,6 +1113,13 @@ input:checked + .slider:before {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: var(--card-shadow);
+  background: linear-gradient(
+    135deg,
+    var(--navy-dark) 0%,
+    var(--purple-dark) 50%,
+    var(--black-dark) 100%
+  );
+  color: var(--light-text);
 }
 
 .credit-card:hover {
@@ -1064,29 +1135,8 @@ input:checked + .slider:before {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: var(--white);
+  color: var(--light-text);
   position: relative;
-}
-
-/* Card Themes */
-.card-classic {
-  background: linear-gradient(
-    135deg,
-    var(--primary-blue) 0%,
-    var(--dark-blue) 100%
-  );
-}
-
-.card-premium {
-  background: linear-gradient(135deg, #2c2c2c 0%, #000000 100%);
-}
-
-.card-eco {
-  background: linear-gradient(135deg, var(--success-green) 0%, #1e7e34 100%);
-}
-
-.card-debit {
-  background: linear-gradient(135deg, var(--secondary-teal) 0%, #138496 100%);
 }
 
 /* Card Elements */
@@ -1113,6 +1163,7 @@ input:checked + .slider:before {
   letter-spacing: 3px;
   margin: 20px 0;
   font-family: "Courier New", monospace;
+  color: var(--white);
 }
 
 .card-footer {
@@ -1164,7 +1215,7 @@ input:checked + .slider:before {
 .card-details {
   margin-top: 15px;
   padding-top: 15px;
-  border-top: 1px solid #e9ecef;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* ========================================
@@ -1216,30 +1267,24 @@ input:checked + .slider:before {
   margin-bottom: 20px;
   border-left: 4px solid;
   animation: slideIn 0.3s ease-out;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--light-text);
 }
 
 .alert-success {
-  background-color: rgba(40, 167, 69, 0.1);
   border-left-color: var(--success-green);
-  color: var(--success-green);
 }
 
 .alert-danger {
-  background-color: rgba(220, 53, 69, 0.1);
   border-left-color: var(--danger-red);
-  color: var(--danger-red);
 }
 
 .alert-warning {
-  background-color: rgba(255, 193, 7, 0.1);
   border-left-color: var(--warning-orange);
-  color: var(--warning-orange);
 }
 
 .alert-info {
-  background-color: rgba(23, 162, 184, 0.1);
   border-left-color: var(--secondary-teal);
-  color: var(--secondary-teal);
 }
 
 /* ========================================
@@ -1251,19 +1296,20 @@ input:checked + .slider:before {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .table th,
 .table td {
   padding: 12px;
   text-align: left;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--light-text);
 }
 
 .table th {
-  background-color: var(--light-gray);
+  background-color: rgba(255, 255, 255, 0.1);
   font-weight: 600;
-  color: var(--text-dark);
 }
 
 /* Info Table (Profile) */
@@ -1275,7 +1321,8 @@ input:checked + .slider:before {
   display: flex;
   justify-content: space-between;
   padding: 12px 0;
-  border-bottom: 1px solid #f8f9fa;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--light-text);
 }
 
 .info-row:last-child {
@@ -1284,11 +1331,9 @@ input:checked + .slider:before {
 
 .info-label {
   font-weight: 600;
-  color: var(--dark-gray);
 }
 
 .info-value {
-  color: var(--text-dark);
   text-align: right;
 }
 
@@ -1300,7 +1345,7 @@ input:checked + .slider:before {
 }
 
 .detail-label {
-  color: var(--dark-gray);
+  color: var(--light-text);
   font-size: 14px;
 }
 
@@ -1317,9 +1362,10 @@ input:checked + .slider:before {
 .stat-item {
   text-align: center;
   padding: 15px;
-  background: var(--light-gray);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: var(--border-radius);
   transition: transform 0.3s ease;
+  color: var(--light-text);
 }
 
 .stat-item:hover {
@@ -1329,21 +1375,21 @@ input:checked + .slider:before {
 .stat-value {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--primary-blue);
+  color: var(--white);
 }
 
 .stat-label {
-  color: var(--dark-gray);
   margin-top: 5px;
 }
 
 /* Summary Cards */
 .summary-card {
-  background: var(--light-gray);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: var(--border-radius);
   padding: 20px;
   text-align: center;
   transition: transform 0.3s ease;
+  color: var(--light-text);
 }
 
 .summary-card:hover {
@@ -1354,10 +1400,10 @@ input:checked + .slider:before {
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 5px;
+  color: var(--white);
 }
 
 .summary-label {
-  color: var(--dark-gray);
   font-size: 14px;
 }
 
@@ -1385,12 +1431,14 @@ input:checked + .slider:before {
   align-items: center;
   justify-content: space-between;
   padding: 15px 0;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: background-color 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--light-text);
 }
 
 .transaction-item:hover {
-  background-color: var(--light-blue);
+  background-color: rgba(255, 255, 255, 0.1);
   margin: 0 -15px;
   padding: 15px;
   border-radius: var(--border-radius);
@@ -1422,7 +1470,6 @@ input:checked + .slider:before {
 
 .transaction-subtitle {
   font-size: 14px;
-  color: var(--dark-gray);
 }
 
 .transaction-amount {
@@ -1437,7 +1484,6 @@ input:checked + .slider:before {
 
 .amount-date {
   font-size: 12px;
-  color: var(--dark-gray);
 }
 
 /* ========================================
@@ -1452,7 +1498,9 @@ input:checked + .slider:before {
   align-items: center;
   margin-bottom: 25px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--light-text);
 }
 
 .filter-group {
@@ -1464,7 +1512,6 @@ input:checked + .slider:before {
 .filter-group label {
   font-size: 14px;
   font-weight: 600;
-  color: var(--dark-gray);
 }
 
 .export-section {
@@ -1484,8 +1531,8 @@ input:checked + .slider:before {
   top: 100%;
   left: 0;
   right: 0;
-  background: var(--white);
-  border: 1px solid #e9ecef;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-top: none;
   border-radius: 0 0 var(--border-radius) var(--border-radius);
   max-height: 200px;
@@ -1497,12 +1544,13 @@ input:checked + .slider:before {
 .search-result {
   padding: 12px 16px;
   cursor: pointer;
-  border-bottom: 1px solid #f8f9fa;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--light-text);
   transition: background-color 0.3s ease;
 }
 
 .search-result:hover {
-  background-color: var(--light-blue);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .search-result:last-child {
@@ -1511,11 +1559,12 @@ input:checked + .slider:before {
 
 /* Recipient Info Display */
 .recipient-info {
-  background: var(--light-gray);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: var(--border-radius);
   padding: 15px;
   margin-top: 10px;
   display: none;
+  color: var(--light-text);
 }
 
 .recipient-info.show {
@@ -1546,13 +1595,13 @@ input:checked + .slider:before {
 
 /* Modal Content */
 .modal-content {
-  background: var(--white);
   border-radius: var(--border-radius);
   padding: 30px;
   max-width: 500px;
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
+  color: var(--light-text);
 }
 
 .modal-header {
@@ -1561,7 +1610,7 @@ input:checked + .slider:before {
   align-items: center;
   margin-bottom: 20px;
   padding-bottom: 15px;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .modal-close {
@@ -1569,7 +1618,7 @@ input:checked + .slider:before {
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: var(--dark-gray);
+  color: var(--light-text);
 }
 
 /* ========================================
@@ -1584,9 +1633,9 @@ input:checked + .slider:before {
 }
 
 .pagination button {
-  background: var(--light-gray);
-  border: 1px solid #dee2e6;
-  color: var(--text-dark);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--light-text);
   padding: 8px 12px;
   border-radius: var(--border-radius);
   cursor: pointer;
@@ -1631,12 +1680,6 @@ input:checked + .slider:before {
 
 /* Greeting Section */
 .greeting {
-  background: linear-gradient(
-    135deg,
-    var(--primary-blue) 0%,
-    var(--secondary-teal) 100%
-  );
-  color: var(--white);
   padding: 30px;
   border-radius: var(--border-radius);
   margin-bottom: 30px;
@@ -1650,12 +1693,6 @@ input:checked + .slider:before {
 
 /* Profile Header */
 .profile-header {
-  background: linear-gradient(
-    135deg,
-    var(--primary-blue) 0%,
-    var(--secondary-teal) 100%
-  );
-  color: var(--white);
   padding: 30px;
   border-radius: var(--border-radius);
   margin-bottom: 30px;
@@ -1695,11 +1732,12 @@ input:checked + .slider:before {
 
 /* Transfer Summary */
 .transfer-summary {
-  background: var(--light-blue);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: var(--border-radius);
   padding: 20px;
   margin: 20px 0;
   display: none;
+  color: var(--light-text);
 }
 
 .transfer-summary.show {
@@ -1736,9 +1774,10 @@ input:checked + .slider:before {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  background: var(--light-gray);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: var(--border-radius);
   margin-bottom: 15px;
+  color: var(--light-text);
 }
 
 .security-item:last-child {
@@ -1747,21 +1786,20 @@ input:checked + .slider:before {
 
 .security-info h5 {
   margin: 0 0 5px 0;
-  color: var(--text-dark);
 }
 
 .security-info p {
   margin: 0;
-  color: var(--dark-gray);
   font-size: 14px;
 }
 
 /* Card Benefits */
 .card-benefits {
-  background: var(--light-blue);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: var(--border-radius);
   padding: 20px;
   margin: 20px 0;
+  color: var(--light-text);
 }
 
 .benefit-item {
@@ -1785,7 +1823,8 @@ input:checked + .slider:before {
   display: flex;
   align-items: center;
   padding: 12px 0;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--light-text);
 }
 
 .verification-step:last-child {
@@ -1824,8 +1863,8 @@ input:checked + .slider:before {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #e9ecef;
-  color: var(--dark-gray);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--light-text);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1850,7 +1889,7 @@ input:checked + .slider:before {
   right: -25px;
   width: 20px;
   height: 2px;
-  background: #e9ecef;
+  background: rgba(255, 255, 255, 0.1);
   z-index: -1;
 }
 
@@ -1869,7 +1908,7 @@ input:checked + .slider:before {
 
 .strength-bar {
   height: 4px;
-  background: #e9ecef;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 2px;
   overflow: hidden;
 }
@@ -1895,6 +1934,7 @@ input:checked + .slider:before {
 .strength-text {
   font-size: 12px;
   margin-top: 2px;
+  color: var(--light-text);
 }
 
 /* Checkbox Groups */
@@ -1908,6 +1948,7 @@ input:checked + .slider:before {
 
 .checkbox-group label {
   font-weight: normal;
+  color: var(--light-text);
   cursor: pointer;
 }
 
@@ -1920,7 +1961,7 @@ input:checked + .slider:before {
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 3px solid #f3f3f3;
+  border: 3px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   border-top-color: var(--primary-blue);
   animation: spin 1s ease-in-out infinite;
@@ -1931,7 +1972,7 @@ input:checked + .slider:before {
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 3px solid var(--light-gray);
+  border: 3px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   border-top-color: var(--primary-blue);
   animation: spin 1s ease-in-out infinite;
@@ -1942,20 +1983,19 @@ input:checked + .slider:before {
 .no-cards {
   text-align: center;
   padding: 60px 20px;
-  color: var(--dark-gray);
+  color: var(--light-text);
 }
 
 .no-transactions i,
 .no-cards i {
   font-size: 4rem;
   margin-bottom: 20px;
-  color: var(--light-blue);
+  color: var(--primary-blue);
 }
 
 .no-transactions h3,
 .no-cards h3 {
   margin-bottom: 15px;
-  color: var(--text-dark);
 }
 
 /* ========================================
@@ -2066,7 +2106,7 @@ input:checked + .slider:before {
 }
 
 .text-muted {
-  color: var(--dark-gray);
+  color: var(--light-text);
 }
 
 .pulse {
@@ -2089,10 +2129,11 @@ input:checked + .slider:before {
 .currency-select {
   display: inline-block;
   padding: 8px 12px;
-  background: var(--light-blue);
-  border: 1px solid var(--primary-blue);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--border-radius);
   margin-left: 10px;
+  color: var(--light-text);
 }
 
 /* ========================================
@@ -2215,16 +2256,17 @@ input:checked + .slider:before {
   }
 
   .file-upload {
-    border: 2px dashed var(--primary-blue);
+    border: 2px dashed rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius);
     padding: 40px 20px;
     text-align: center;
-    background: var(--light-blue);
+    background: rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
     cursor: pointer;
+    color: var(--light-text);
   }
   .file-upload:hover {
-    background: var(--light-gray);
+    background: rgba(255, 255, 255, 0.1);
   }
   .file-upload input {
     display: none;
@@ -2236,11 +2278,12 @@ input:checked + .slider:before {
   }
 
   .wallet-section {
-    background: var(--light-gray);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: var(--border-radius);
     padding: 20px;
     margin: 20px 0;
     border: 2px solid var(--primary-blue);
+    color: var(--light-text);
   }
 
   .wallet-address-container {
@@ -2253,7 +2296,8 @@ input:checked + .slider:before {
     flex: 1;
     font-family: "Courier New", monospace;
     font-size: 14px;
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--light-text);
   }
 
   .copy-btn {
@@ -2287,6 +2331,7 @@ input:checked + .slider:before {
     border-radius: var(--border-radius);
     display: flex;
     gap: 15px;
+    color: var(--light-text);
   }
 
   .info-box i {
@@ -2296,7 +2341,7 @@ input:checked + .slider:before {
   }
 
   .info-box h5 {
-    color: var(--primary-blue);
+    color: var(--white);
     margin-bottom: 10px;
   }
 
@@ -2307,7 +2352,6 @@ input:checked + .slider:before {
 
   .info-box li {
     margin-bottom: 5px;
-    color: var(--text-dark);
   }
 
   .info-box span {
@@ -2316,7 +2360,7 @@ input:checked + .slider:before {
   }
 
   .form-text {
-    color: var(--dark-gray);
+    color: var(--light-text);
     font-size: 12px;
     margin-top: 5px;
     display: block;
@@ -2330,10 +2374,11 @@ input:checked + .slider:before {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: var(--light-blue);
+    background: rgba(255, 255, 255, 0.05);
     padding: 10px 15px;
     border-radius: var(--border-radius);
     border: 1px solid var(--primary-blue);
+    color: var(--light-text);
   }
 
   .uploaded-file i {
@@ -2353,6 +2398,7 @@ input:checked + .slider:before {
 
   .deposit-status {
     padding: 20px;
+    color: var(--light-text);
   }
 
   .status-item {
@@ -2378,16 +2424,15 @@ input:checked + .slider:before {
 
   .status-info h5 {
     margin-bottom: 5px;
-    color: var(--primary-blue);
+    color: var(--white);
   }
 
   .status-info p {
     margin-bottom: 5px;
-    color: var(--text-dark);
   }
 
   .status-info small {
-    color: var(--dark-gray);
+    color: var(--light-text);
   }
 
   @media (max-width: 768px) {

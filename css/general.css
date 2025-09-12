@@ -38,8 +38,8 @@ Description: Global styles for SecureBank with Roboto font (imported in HTML) an
   --light-text: #e0e0e0; /* Light gray for navbar text/icons */
 
   /* Navbar Gradient Colors */
-  --navy-dark: #1C2526; /* Deep navy for gradient */
-  --purple-dark: #2C1B47; /* Dark purple for gradient */
+  --navy-dark: #1c2526; /* Deep navy for gradient */
+  --purple-dark: #2c1b47; /* Dark purple for gradient */
   --black-dark: #000000; /* Black for gradient */
 
   /* Layout Properties */
@@ -50,7 +50,7 @@ Description: Global styles for SecureBank with Roboto font (imported in HTML) an
   --sidebar-width: 280px;
 
   /* Typography */
-  --font-family: 'Roboto', sans-serif;
+  --font-family: "Roboto", sans-serif;
   --font-size-base: 16px;
   --line-height-base: 1.6;
 }
@@ -2212,6 +2212,202 @@ input:checked + .slider:before {
     width: 40px;
     height: 40px;
     font-size: 1.2rem;
+  }
+
+  .file-upload {
+    border: 2px dashed var(--primary-blue);
+    border-radius: var(--border-radius);
+    padding: 40px 20px;
+    text-align: center;
+    background: var(--light-blue);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .file-upload:hover {
+    background: var(--light-gray);
+  }
+  .file-upload input {
+    display: none;
+  }
+  .file-upload i {
+    font-size: 3rem;
+    color: var(--primary-blue);
+    margin-bottom: 15px;
+  }
+
+  .wallet-section {
+    background: var(--light-gray);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin: 20px 0;
+    border: 2px solid var(--primary-blue);
+  }
+
+  .wallet-address-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .wallet-address-container input {
+    flex: 1;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    background: var(--white);
+  }
+
+  .copy-btn {
+    background: var(--primary-blue);
+    color: var(--white);
+    border: none;
+    padding: 12px 20px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .copy-btn:hover {
+    background: var(--dark-blue);
+    transform: translateY(-1px);
+  }
+
+  .copy-btn.copied {
+    background: var(--success-green);
+  }
+
+  .wallet-info {
+    margin-top: 15px;
+  }
+
+  .info-box {
+    background: rgba(0, 82, 204, 0.1);
+    border-left: 4px solid var(--primary-blue);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    display: flex;
+    gap: 15px;
+  }
+
+  .info-box i {
+    color: var(--primary-blue);
+    font-size: 1.5rem;
+    margin-top: 5px;
+  }
+
+  .info-box h5 {
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+  }
+
+  .info-box ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  .info-box li {
+    margin-bottom: 5px;
+    color: var(--text-dark);
+  }
+
+  .info-box span {
+    font-weight: 600;
+    color: var(--primary-blue);
+  }
+
+  .form-text {
+    color: var(--dark-gray);
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+  }
+
+  .file-info {
+    margin-top: 10px;
+  }
+
+  .uploaded-file {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--light-blue);
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--primary-blue);
+  }
+
+  .uploaded-file i {
+    color: var(--primary-blue);
+  }
+
+  .remove-file {
+    background: var(--danger-red);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  .deposit-status {
+    padding: 20px;
+  }
+
+  .status-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .status-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+
+  .status-icon.pending {
+    background: rgba(255, 193, 7, 0.1);
+    color: var(--warning-orange);
+  }
+
+  .status-info h5 {
+    margin-bottom: 5px;
+    color: var(--primary-blue);
+  }
+
+  .status-info p {
+    margin-bottom: 5px;
+    color: var(--text-dark);
+  }
+
+  .status-info small {
+    color: var(--dark-gray);
+  }
+
+  @media (max-width: 768px) {
+    .wallet-address-container {
+      flex-direction: column;
+    }
+
+    .wallet-address-container input {
+      margin-bottom: 10px;
+    }
+
+    .info-box {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .status-item {
+      flex-direction: column;
+      text-align: center;
+    }
   }
 
   /* Transaction Item Adjustments */

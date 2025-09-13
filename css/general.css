@@ -31,21 +31,24 @@ Description: Global styles for SecureBank with Roboto font (imported in HTML) an
   --danger-red: #dc3545;
 
   /* Neutral Colors */
-  --light-gray: #f8f9fa;
   --dark-gray: #6c757d;
   --white: #ffffff;
   --text-dark: #212529;
-  --light-text: #e0e0e0; /* Light gray for navbar text/icons */
+  --light-text: #e0e0e0; /* Light gray for text/icons */
 
   /* Navbar/Sidebar Gradient Colors */
   --navy-dark: #1c2526; /* Deep navy for gradient */
   --purple-dark: #2c1b47; /* Dark purple for gradient */
   --black-dark: #000000; /* Black for gradient */
 
+  /* New Background Colors */
+  --dark-bg: #2d3748; /* Darker background for body and secondary elements */
+  --darker-bg: #1a202c; /* Even darker for contrast */
+
   /* Layout Properties */
   --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  --border-radius: 8px;
+  --border-radius: 12px; /* Increased for modern look */
   --max-width: 1200px;
   --sidebar-width: 280px;
 
@@ -59,8 +62,6 @@ Description: Global styles for SecureBank with Roboto font (imported in HTML) an
 .navbar,
 .sidebar-header,
 .banking-menu .profile-header,
-.card,
-.modal-content,
 .greeting,
 .profile-header {
   background: linear-gradient(
@@ -75,8 +76,6 @@ Description: Global styles for SecureBank with Roboto font (imported in HTML) an
 .navbar::before,
 .sidebar-header::before,
 .banking-menu .profile-header::before,
-.card::before,
-.modal-content::before,
 .greeting::before,
 .profile-header::before {
   content: "";
@@ -94,8 +93,6 @@ Description: Global styles for SecureBank with Roboto font (imported in HTML) an
 .navbar > *,
 .sidebar-header > *,
 .banking-menu .profile-header > *,
-.card > *,
-.modal-content > *,
 .greeting > *,
 .profile-header > * {
   position: relative;
@@ -103,21 +100,16 @@ Description: Global styles for SecureBank with Roboto font (imported in HTML) an
 }
 
 /* Adjust text color for consistency */
-.card,
-.modal-content,
 .greeting,
 .profile-header {
   color: var(--light-text);
 }
 
-.card h3,
-.card h4,
 .greeting h2,
 .profile-header h2 {
   color: var(--white);
 }
 
-.card p,
 .greeting p,
 .profile-header p {
   color: var(--light-text);
@@ -128,9 +120,9 @@ Description: Global styles for SecureBank with Roboto font (imported in HTML) an
    ======================================== */
 body {
   font-family: var(--font-family);
-  background: linear-gradient(135deg, var(--light-blue) 0%, #f0f8ff 100%);
+  background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
   min-height: 100vh;
-  color: var(--text-dark);
+  color: var(--light-text);
   line-height: var(--line-height-base);
   font-size: var(--font-size-base);
 }
@@ -167,7 +159,7 @@ body {
 }
 
 .page-header p {
-  color: var(--dark-gray);
+  color: var(--light-text);
   font-size: 1.1rem;
 }
 
@@ -334,11 +326,12 @@ body {
 
 .sidebar-menu {
   padding: 20px 0;
+  background: rgba(26, 32, 44, 0.8); /* Semi-transparent overlay for readability */
 }
 
 .menu-section-title {
   padding: 0 20px;
-  color: var(--dark-gray);
+  color: var(--light-text);
   font-size: 0.9rem;
   font-weight: 600;
   margin-bottom: 10px;
@@ -349,36 +342,38 @@ body {
 .sidebar-menu a {
   display: block;
   padding: 12px 20px;
-  color: var(--text-dark);
+  color: var(--white); /* White text for high contrast */
   text-decoration: none;
   transition: all 0.3s ease;
   border-left: 4px solid transparent;
   font-size: 0.95rem;
+  font-weight: 500; /* Added weight for clarity */
 }
 
 .sidebar-menu a:hover,
 .sidebar-menu a.active {
-  background-color: var(--light-blue);
+  background-color: var(--darker-bg); /* Darker background for contrast */
   border-left-color: var(--primary-blue);
-  color: var(--primary-blue);
+  color: var(--white);
 }
 
 .sidebar-menu a.logout {
-  background-color: #f8d7da;
-  color: #721c24;
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger-red);
   margin: 10px 20px;
   border-radius: var(--border-radius);
   border-left: none;
 }
 
 .sidebar-menu a.logout:hover {
-  background-color: #f1b0b7;
+  background-color: rgba(241, 176, 183, 0.3);
 }
 
 .sidebar-menu i {
   width: 18px;
   margin-right: 12px;
   text-align: center;
+  color: var(--white); /* White icons for readability */
 }
 
 /* ========================================
@@ -439,7 +434,7 @@ body {
 }
 
 .banking-menu-content {
-  background: var(--white);
+  background: var(--dark-bg);
   padding: 20px;
   margin: 20px;
   border-radius: var(--border-radius);
@@ -450,6 +445,7 @@ body {
   overflow-y: auto;
   text-align: center;
   box-shadow: var(--card-shadow);
+  color: var(--light-text);
 }
 
 .banking-menu .profile-header {
@@ -499,7 +495,7 @@ body {
 }
 
 .banking-menu-content p {
-  color: var(--dark-gray);
+  color: var(--light-text);
   margin-bottom: 20px;
 }
 
@@ -512,10 +508,10 @@ body {
 
 .menu-item {
   text-decoration: none;
-  color: var(--text-dark);
+  color: var(--light-text);
   text-align: center;
   padding: 15px;
-  background: var(--light-gray);
+  background: var(--darker-bg);
   border-radius: var(--border-radius);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   font-size: 12px;
@@ -528,7 +524,7 @@ body {
 }
 
 .menu-item:hover {
-  background-color: var(--light-blue);
+  background-color: var(--dark-bg);
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
 
@@ -543,7 +539,7 @@ body {
 }
 
 .menu-item.logout-item:hover {
-  background-color: #f1b0b7;
+  background-color: rgba(241, 176, 183, 0.3);
   box-shadow: none;
 }
 
@@ -561,11 +557,11 @@ body {
   top: 10px;
   right: 10px;
   cursor: pointer;
-  color: var(--dark-gray);
+  color: var(--light-text);
 }
 
 .close-btn:hover {
-  color: #c82333; /* Darkened danger-red */
+  color: var(--danger-red);
 }
 
 /* ========================================
@@ -576,7 +572,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: var(--navy-dark); /* Match navbar gradient start */
+  background: var(--navy-dark);
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
   display: none;
   z-index: 100;
@@ -617,21 +613,20 @@ body {
 
 /* Standard Cards */
 .card {
-  background: linear-gradient(
-    135deg,
-    var(--navy-dark) 0%,
-    var(--purple-dark) 50%,
-    var(--black-dark) 100%
-  );
+  background: rgba(255, 255, 255, 0.1); /* Glassmorphism effect */
+  backdrop-filter: blur(10px); /* Modern blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  padding: 25px;
+  box-shadow: var(--card-shadow);
+  padding: 20px;
   margin-bottom: 30px;
   transition: transform 0.3s ease;
+  color: var(--light-text);
 }
 
 .card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
 .card-header {
@@ -639,7 +634,7 @@ body {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   padding-bottom: 15px;
 }
 
@@ -652,12 +647,8 @@ body {
 
 /* Special Card Types */
 .balance-card {
-  background: linear-gradient(
-    135deg,
-    var(--navy-dark) 0%,
-    var(--purple-dark) 50%,
-    var(--black-dark) 100%
-  );
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   color: var(--light-text);
 }
 
@@ -677,12 +668,8 @@ body {
 .auth-container {
   max-width: 400px;
   width: 90%;
-  background: linear-gradient(
-    135deg,
-    var(--navy-dark) 0%,
-    var(--purple-dark) 50%,
-    var(--black-dark) 100%
-  );
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   padding: 40px;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
@@ -777,7 +764,7 @@ body {
   border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--border-radius);
   font-size: 16px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   color: var(--light-text);
   transition: all 0.3s ease;
 }
@@ -918,7 +905,7 @@ body {
   padding-left: 35px;
   font-size: 1.2rem;
   font-weight: 600;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   color: var(--light-text);
 }
 
@@ -955,7 +942,7 @@ body {
   font-weight: 700;
   border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--border-radius);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   color: var(--light-text);
   transition: all 0.3s ease;
 }
@@ -971,14 +958,14 @@ body {
   border-radius: var(--border-radius);
   padding: 40px 20px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   transition: all 0.3s ease;
   cursor: pointer;
   color: var(--light-text);
 }
 
 .file-upload:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--dark-bg);
 }
 
 .file-upload input {
@@ -1043,7 +1030,7 @@ input:checked + .slider:before {
 
 /* Action Tiles */
 .action-tile {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--border-radius);
   padding: 20px;
@@ -1079,7 +1066,7 @@ input:checked + .slider:before {
 
 .quick-amount {
   padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   color: var(--light-text);
   border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--border-radius);
@@ -1113,12 +1100,8 @@ input:checked + .slider:before {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: var(--card-shadow);
-  background: linear-gradient(
-    135deg,
-    var(--navy-dark) 0%,
-    var(--purple-dark) 50%,
-    var(--black-dark) 100%
-  );
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   color: var(--light-text);
 }
 
@@ -1267,7 +1250,7 @@ input:checked + .slider:before {
   margin-bottom: 20px;
   border-left: 4px solid;
   animation: slideIn 0.3s ease-out;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   color: var(--light-text);
 }
 
@@ -1296,7 +1279,7 @@ input:checked + .slider:before {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
 }
 
 .table th,
@@ -1308,7 +1291,7 @@ input:checked + .slider:before {
 }
 
 .table th {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--dark-bg);
   font-weight: 600;
 }
 
@@ -1362,7 +1345,7 @@ input:checked + .slider:before {
 .stat-item {
   text-align: center;
   padding: 15px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   border-radius: var(--border-radius);
   transition: transform 0.3s ease;
   color: var(--light-text);
@@ -1384,7 +1367,7 @@ input:checked + .slider:before {
 
 /* Summary Cards */
 .summary-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   border-radius: var(--border-radius);
   padding: 20px;
   text-align: center;
@@ -1433,12 +1416,12 @@ input:checked + .slider:before {
   padding: 15px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: background-color 0.3s ease;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   color: var(--light-text);
 }
 
 .transaction-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--dark-bg);
   margin: 0 -15px;
   padding: 15px;
   border-radius: var(--border-radius);
@@ -1499,7 +1482,7 @@ input:checked + .slider:before {
   margin-bottom: 25px;
   padding-bottom: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   color: var(--light-text);
 }
 
@@ -1531,7 +1514,7 @@ input:checked + .slider:before {
   top: 100%;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-top: none;
   border-radius: 0 0 var(--border-radius) var(--border-radius);
@@ -1539,18 +1522,18 @@ input:checked + .slider:before {
   overflow-y: auto;
   z-index: 100;
   display: none;
+  color: var(--light-text);
 }
 
 .search-result {
   padding: 12px 16px;
   cursor: pointer;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--light-text);
   transition: background-color 0.3s ease;
 }
 
 .search-result:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--dark-bg);
 }
 
 .search-result:last-child {
@@ -1559,7 +1542,7 @@ input:checked + .slider:before {
 
 /* Recipient Info Display */
 .recipient-info {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   border-radius: var(--border-radius);
   padding: 15px;
   margin-top: 10px;
@@ -1595,6 +1578,8 @@ input:checked + .slider:before {
 
 /* Modal Content */
 .modal-content {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   border-radius: var(--border-radius);
   padding: 30px;
   max-width: 500px;
@@ -1633,7 +1618,7 @@ input:checked + .slider:before {
 }
 
 .pagination button {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--light-text);
   padding: 8px 12px;
@@ -1675,7 +1660,7 @@ input:checked + .slider:before {
 }
 
 .logo p {
-  color: var(--dark-gray);
+  color: var(--light-text);
 }
 
 /* Greeting Section */
@@ -1732,7 +1717,7 @@ input:checked + .slider:before {
 
 /* Transfer Summary */
 .transfer-summary {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   border-radius: var(--border-radius);
   padding: 20px;
   margin: 20px 0;
@@ -1774,7 +1759,7 @@ input:checked + .slider:before {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   border-radius: var(--border-radius);
   margin-bottom: 15px;
   color: var(--light-text);
@@ -1795,7 +1780,7 @@ input:checked + .slider:before {
 
 /* Card Benefits */
 .card-benefits {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   border-radius: var(--border-radius);
   padding: 20px;
   margin: 20px 0;
@@ -1863,7 +1848,7 @@ input:checked + .slider:before {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--darker-bg);
   color: var(--light-text);
   display: flex;
   align-items: center;
@@ -2129,7 +2114,7 @@ input:checked + .slider:before {
 .currency-select {
   display: inline-block;
   padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--darker-bg);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--border-radius);
   margin-left: 10px;
@@ -2215,7 +2200,7 @@ input:checked + .slider:before {
   }
 
   .card {
-    padding: 20px;
+    padding: 15px;
   }
 
   /* Typography Adjustments */
@@ -2260,13 +2245,13 @@ input:checked + .slider:before {
     border-radius: var(--border-radius);
     padding: 40px 20px;
     text-align: center;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--darker-bg);
     transition: all 0.3s ease;
     cursor: pointer;
     color: var(--light-text);
   }
   .file-upload:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--dark-bg);
   }
   .file-upload input {
     display: none;
@@ -2278,7 +2263,7 @@ input:checked + .slider:before {
   }
 
   .wallet-section {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--darker-bg);
     border-radius: var(--border-radius);
     padding: 20px;
     margin: 20px 0;
@@ -2296,7 +2281,7 @@ input:checked + .slider:before {
     flex: 1;
     font-family: "Courier New", monospace;
     font-size: 14px;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--darker-bg);
     color: var(--light-text);
   }
 
@@ -2374,7 +2359,7 @@ input:checked + .slider:before {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--darker-bg);
     padding: 10px 15px;
     border-radius: var(--border-radius);
     border: 1px solid var(--primary-blue);
@@ -2623,10 +2608,9 @@ input:checked + .slider:before {
 
 @media (prefers-color-scheme: dark) {
   .dark-mode {
-    --light-gray: #2d3748;
-    --white: #1a202c;
-    --text-dark: #e2e8f0;
-    --light-blue: #2d3748;
+    --dark-bg: #1a202c;
+    --darker-bg: #121926;
+    --light-text: #d1d5db;
   }
 }
 
